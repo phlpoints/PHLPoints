@@ -288,6 +288,23 @@ footer p { max-width: 80ch; }
 .sky .lede { display: grid; gap: 14px; max-width: 70ch; }
 .sky .lede p { margin: 0; }
 
+/* Instagram links */
+.ig-top { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: #d8e3f0; text-decoration: none; font-weight: 600; font-size: .88rem; padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; white-space: nowrap; }
+.ig-top:hover { color: #fff; background: rgba(255,255,255,.08); }
+.ig-top svg, .ig-btn svg, .ig-foot svg { width: 18px; height: 18px; flex: none; }
+@media (max-width: 960px) { .ig-top span { display: none; } .ig-top { padding: 7px; } }
+@media (max-width: 760px) { .ig-top { display: none; } }
+.ig-btn { gap: 10px; }
+.ig-banner { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; max-width: 860px; margin: 10px 0 6px; padding: 16px 20px; border-radius: 14px; background: var(--sky); color: #e5ecf5; text-decoration: none; border: 1px solid #1f3550; }
+.ig-banner:hover { border-color: var(--sun); }
+.ig-banner b { color: #fff; }
+.ig-banner .ig-ico { width: 44px; height: 44px; border-radius: 12px; background: var(--sun); color: #12223a; display: grid; place-items: center; }
+.ig-banner .ig-ico svg { width: 24px; height: 24px; }
+.ig-banner .ig-go { font-weight: 700; color: var(--sun); white-space: nowrap; }
+@media (max-width: 560px) { .ig-banner { grid-template-columns: auto 1fr; } .ig-banner .ig-go { grid-column: 2; } }
+.ig-foot { margin-bottom: 12px; }
+.ig-foot a { color: #f6c372; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+
 /* Plain page header + hotels */
 .step { align-content: start; }
 .steps.stack { grid-template-columns: 1fr; max-width: 860px; }
@@ -430,6 +447,7 @@ footer p { max-width: 80ch; }
         <li><a class="nav-link" href="#cards" data-link="cards">Cards</a></li>
       </ul>
     </nav>
+    <a class="ig-top" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener" aria-label="PHL Points on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg><span>@phlpoints</span></a>
   </div>
 </header>
 
@@ -446,7 +464,7 @@ footer p { max-width: 80ch; }
               <p>Maximizing credit card points in Philadelphia is not like any other big city, because Philadelphia is dominated by American Airlines. Unlike the other major airlines, American is not a transfer partner with any of the most popular travel cards which means that you can not turn Amex Platinum or Chase Sapphire Reserve points into AAdvantage miles. Because Philadelphia does not have a strong presence from United, Delta, Southwest etc., not having access to AAdvantage miles means you do not have access to most flights out of PHL. Therefore, if you want the best flights and the best deals, you must commit to the AAdvantage program.</p>
               <p>I have been searching for free or discounted flights out of PHL for over 20 years. It all started with a free Bank of America Travel Card and, over the last 20 years, I have analyzed every major travel credit card for use out of PHL. Throughout these next pages, I will explain how I have maximized the AAdvantage program and fly my family around the world out of PHL for free.</p>
             </div>
-            <div class="hero-cta"><a class="btn" href="#overview">Start at stop 01 →</a><a class="btn ghost" href="#hotels">Jump to AA Hotels</a></div>
+            <div class="hero-cta"><a class="btn" href="#overview">Start at stop 01 →</a><a class="btn ghost" href="#hotels">Jump to AA Hotels</a><a class="btn ghost ig-btn" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg> Follow @phlpoints</a></div>
           </div>
         </div>
       </div>
@@ -1002,6 +1020,7 @@ footer p { max-width: 80ch; }
       </header>
       <div class="page-body">
       <p class="note" id="deals-updated" style="margin:0 0 8px">Updated daily.</p>
+      <a class="ig-banner" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><span class="ig-ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></span><span><b>New deals hit Instagram first.</b> Follow @phlpoints and turn on post notifications so you see fares before they disappear.</span><span class="ig-go">Follow →</span></a>
 
       <div class="sec-head" style="margin-top:12px">
         <div><h3>AA Hotels: picks of the week</h3><p class="intro">Each week I run three sample searches on the AA Hotels portal (a week in Europe, a weekend in an American city and five days in the Caribbean) and post the hotel that earns the most miles and Loyalty Points per dollar, among hotels guests rate 8/10 or better.</p></div>
@@ -1040,6 +1059,7 @@ footer p { max-width: 80ch; }
       </header>
       <div class="page-body">
       <p class="note" id="flights-updated" style="margin:0 0 8px">Updated daily.</p>
+      <a class="ig-banner" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><span class="ig-ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></span><span><b>New deals hit Instagram first.</b> Follow @phlpoints and turn on post notifications so you see fares before they disappear.</span><span class="ig-go">Follow →</span></a>
 
       <div class="sec-head" style="margin-top:12px">
         <div><h3>PHL Points picks</h3><p class="intro">Great award fares I've found myself searching from PHL. Each one shows the day I spotted it. Award prices move fast, so search on aa.com to confirm before you book.</p></div>
@@ -1216,6 +1236,7 @@ footer p { max-width: 80ch; }
 
 <footer>
   <div class="wrap">
+    <p class="ig-foot"><a href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg> Follow PHL Points on Instagram: @phlpoints</a></p>
     <p>This is an independent guide and is not affiliated with or endorsed by American Airlines or Citi. Program rules, card fees and offers change often. Confirm details on aa.com and with the card issuer before applying or booking. Nothing here is financial advice.</p>
   </div>
 </footer>
