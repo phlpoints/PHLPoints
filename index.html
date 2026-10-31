@@ -374,7 +374,7 @@ footer p { max-width: 80ch; }
   .deals-link { margin-left: 2px; padding: 7px 9px; }
   .sub-btn svg { width: 9px; height: 9px; }
   .mainnav, .navlist > li.has-sub { position: static; }
-  .mainnav { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .mainnav { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
   .mainnav::-webkit-scrollbar { display: none; }
   .brand { flex: none; }
   .sub { left: 12px; right: 12px; width: auto; }
@@ -1322,6 +1322,19 @@ footer p { max-width: 80ch; }
   var names = pages.map(function (p) { return p.getAttribute('data-page'); });
   var nav = document.getElementById('mainnav');
   var subBtns = Array.prototype.slice.call(document.querySelectorAll('.sub-btn'));
+  // On phones the nav row scrolls sideways; iPhone Safari clips dropdowns inside it,
+  // so park the dropdown lists on the top bar itself at small widths.
+  var narrow = window.matchMedia ? window.matchMedia('(max-width: 760px)') : null;
+  function placeSubs() {
+    var bar = document.querySelector('.topbar');
+    subBtns.forEach(function (b) {
+      var s = document.getElementById(b.getAttribute('aria-controls'));
+      var target = narrow && narrow.matches ? bar : b.parentElement;
+      if (s && target && s.parentElement !== target) target.appendChild(s);
+    });
+  }
+  placeSubs();
+  if (narrow) { if (narrow.addEventListener) narrow.addEventListener('change', function () { closeSubs(); placeSubs(); }); else if (narrow.addListener) narrow.addListener(function () { closeSubs(); placeSubs(); }); }
 
   function closeSubs(except) {
     subBtns.forEach(function (b) {
@@ -1358,7 +1371,7 @@ footer p { max-width: 80ch; }
     });
   });
   document.addEventListener('click', function (e) {
-    if (!e.target.closest('.has-sub')) closeSubs();
+    if (!e.target.closest('.has-sub, .sub')) closeSubs();
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
   window.addEventListener('hashchange', route);
