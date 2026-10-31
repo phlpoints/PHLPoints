@@ -415,9 +415,17 @@ footer p { max-width: 80ch; }
   .nav-link { font-size: .82rem; padding: 7px 5px; gap: 2px; }
   .deals-link { margin: 0; padding: 7px 10px; }
 }
+.top-philly { display: none; list-style: none; margin: 0; padding: 0; }
+@media (max-width: 760px) {
+  .top-philly { display: flex; order: 2; margin: 0 auto; }
+  .top-philly .deals-link { font-size: .9rem; padding: 7px 14px; }
+  .ig-top { order: 3; margin-left: 0; }
+  .mainnav { order: 4; }
+  .navlist { justify-content: space-around; }
+  .navlist .nav-link { font-size: .9rem; padding: 7px 6px; }
+}
 @media (max-width: 400px) {
-  .nav-link { font-size: .78rem; padding: 7px 3px; }
-  .deals-link { padding: 7px 7px; }
+  .navlist .nav-link { font-size: .86rem; padding: 7px 4px; }
   .ig-top span { display: none; }
 }
 
@@ -1373,7 +1381,20 @@ footer p { max-width: 80ch; }
       if (s && target && s.parentElement !== target) target.appendChild(s);
     });
   }
+  // On phones, lift the Philly menu into the top row between the brand and Instagram.
+  var phillyLi = document.querySelector('.navlist > li.has-sub[data-group~="deals"]');
+  var topSlot = document.createElement('ul'); topSlot.className = 'top-philly';
+  var brandEl = document.querySelector('.topbar .brand');
+  if (brandEl) brandEl.parentNode.insertBefore(topSlot, brandEl.nextSibling);
+  var navUl = document.querySelector('.navlist');
+  function placePhilly() {
+    if (!phillyLi || !navUl) return;
+    if (narrow && narrow.matches) { if (phillyLi.parentElement !== topSlot) topSlot.appendChild(phillyLi); }
+    else if (phillyLi.parentElement !== navUl) navUl.insertBefore(phillyLi, navUl.firstChild);
+  }
+  placePhilly();
   placeSubs();
+  if (narrow) { if (narrow.addEventListener) narrow.addEventListener('change', placePhilly); else if (narrow.addListener) narrow.addListener(placePhilly); }
   if (narrow) { if (narrow.addEventListener) narrow.addEventListener('change', function () { closeSubs(); placeSubs(); }); else if (narrow.addListener) narrow.addListener(function () { closeSubs(); placeSubs(); }); }
 
   function closeSubs(except) {
