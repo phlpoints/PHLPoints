@@ -1508,5 +1508,13 @@ footer p { max-width: 80ch; }
   route();
 })();
 </script>
+<script>
+  // Visitor stats (GoatCounter): only on the public site, and count each page of the guide.
+  window.goatcounter = { no_onload: !/(^|\.)phlpoints\.com$/.test(location.hostname), path: function () { return location.pathname + location.hash; } };
+  window.addEventListener('hashchange', function () {
+    if (!window.goatcounter.no_onload && window.goatcounter.count) window.goatcounter.count({ path: location.pathname + location.hash });
+  });
+</script>
+<script data-goatcounter="https://phlpoints.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
