@@ -416,6 +416,21 @@ footer p { max-width: 80ch; }
   .deals-link { margin: 0; padding: 7px 10px; }
 }
 .top-philly { display: none; list-style: none; margin: 0; padding: 0; }
+/* Desktop: two-row header with the two daily-deal buttons centered on top */
+.philly-btns { display: none; }
+@media (min-width: 761px) {
+  .topbar .wrap { flex-wrap: wrap; row-gap: 0; padding-top: 12px; padding-bottom: 0; }
+  .brand { order: 1; font-size: 1.15rem; }
+  .philly-btns { order: 2; display: flex; gap: 10px; margin: 0 auto; }
+  .ig-top { order: 3; margin-left: 0; }
+  .mainnav { order: 4; flex: 1 0 100%; border-top: 1px solid rgba(255,255,255,.08); margin-top: 12px; padding: 4px 0 6px; }
+  .navlist { justify-content: center; gap: 18px; width: 100%; }
+  .navlist > li.has-sub[data-group~="deals"] { display: none; }
+}
+.pbtn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: .92rem; color: #12223a; background: var(--sun); padding: 8px 16px; border-radius: 10px; white-space: nowrap; }
+.pbtn:hover { background: #f6c372; }
+.pbtn .pk { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; opacity: .7; }
+.pbtn[aria-current="page"] { box-shadow: 0 0 0 2px #fff inset; }
 @media (max-width: 760px) {
   .top-philly { display: flex; order: 2; margin: 0 auto; }
   .top-philly .deals-link { font-size: .9rem; padding: 7px 14px; }
@@ -474,6 +489,7 @@ footer p { max-width: 80ch; }
         <li><a class="nav-link" href="#cards" data-link="cards">Cards</a></li>
       </ul>
     </nav>
+    <div class="philly-btns"><a class="pbtn" href="#deals" data-link="deals"><span class="pk">DLS</span>Today's Deals</a><a class="pbtn" href="#flights" data-link="flights"><span class="pk">AWD</span>Award Flights</a></div>
     <a class="ig-top" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener" aria-label="PHL Points on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg><span>@phlpoints</span></a>
   </div>
 </header>
@@ -1410,7 +1426,7 @@ footer p { max-width: 80ch; }
     var h = location.hash.replace('#', '');
     var name = names.indexOf(h) >= 0 ? h : 'home';
     pages.forEach(function (p) { p.hidden = p.getAttribute('data-page') !== name; });
-    document.querySelectorAll('#mainnav a[data-link]').forEach(function (a) {
+    document.querySelectorAll('.topbar a[data-link]').forEach(function (a) {
       if (a.getAttribute('data-link') === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     document.querySelectorAll('.has-sub').forEach(function (li) {
