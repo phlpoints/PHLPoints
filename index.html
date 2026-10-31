@@ -473,7 +473,22 @@ footer p { max-width: 80ch; }
 .foot-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-family: var(--font-display); font-weight: 800; font-stretch: 112%; text-transform: uppercase; color: #fff; font-size: 1.15rem; letter-spacing: .02em; }
 .foot-logo svg { width: 56px; height: 49px; }
 .foot-logo b { color: var(--sun); }
-@media (max-width: 760px) { .brand .bell-mark { display: block !important; width: 40px; height: 35px; } }
+@media (max-width: 760px) {
+  .brand .bell-mark { display: block !important; width: 34px; height: 30px; margin: -6px 0 -4px; }
+  .topbar .wrap { column-gap: 8px; }
+  .brand { gap: 6px; font-size: .95rem; letter-spacing: 0; }
+  .ig-top span { display: none; }
+  .ig-top { padding: 6px; }
+  .top-philly .deals-link { padding: 7px 12px; }
+}
+@media (max-width: 345px) {
+  .navlist .nav-link { font-size: .76rem; padding: 7px 3px; }
+}
+@media (max-width: 380px) {
+  .brand { font-size: .84rem; gap: 5px; }
+  .brand .bell-mark { width: 30px; height: 26px; }
+  .top-philly .deals-link { padding: 6px 9px; font-size: .84rem; }
+}
 </style>
 </head>
 <body>
