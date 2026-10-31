@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHL Points</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a trip through the AAdvantage program. Each page is a boarding pass out of PHL;
+   the menu is a departure board; the home page is the sky over the airport. */
+:root {
+  --cloud: #edf2f8;
+  --paper: #ffffff;
+  --ink: #12223a;
+  --muted: #5a6a80;
+  --line: #d3dce8;
+  --sky: #0e2a47;
+  --horizon: #2a67ab;
+  --sky-soft: #e2ecf7;
+  --sun: #ee9b2f;
+  --sun-soft: #fdf0dc;
+  --stamp: #c4452f;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Instrument Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cloud: #0a1522; --paper: #112135; --ink: #e5ecf5; --muted: #92a3b9; --line: #22374e;
+    --sky: #061020; --horizon: #6aa5e8; --sky-soft: #15304d; --sun: #f3b24f; --sun-soft: #3a2a12; --stamp: #e6735f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --cloud: #0a1522; --paper: #112135; --ink: #e5ecf5; --muted: #92a3b9; --line: #22374e;
+  --sky: #061020; --horizon: #6aa5e8; --sky-soft: #15304d; --sun: #f3b24f; --sun-soft: #3a2a12; --stamp: #e6735f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--cloud); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+a { color: var(--horizon); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; margin: 0; text-wrap: balance; }
+h3 { font-size: 1.22rem; font-weight: 700; font-stretch: 100%; }
+p { margin: 0; }
+.num, td { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.prose { max-width: 66ch; display: grid; gap: 12px; }
+.muted { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* Top bar + dropdown */
+.topbar { background: var(--sky); color: #fff; position: sticky; top: 0; z-index: 20; box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-family: var(--font-display); font-weight: 800; font-stretch: 112%; letter-spacing: .02em; font-size: 1.05rem; text-transform: uppercase; white-space: nowrap; }
+.brand svg { width: 26px; height: 26px; color: var(--sun); flex: none; }
+.brand span { color: var(--sun); }
+.brand .long { color: #fff; }
+.menu { position: relative; }
+.menu-btn { white-space: nowrap; font: inherit; font-weight: 600; font-size: .95rem; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 8px 16px; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; }
+.menu-btn:hover { background: rgba(255,255,255,.15); }
+.menu-btn .cur { font-family: var(--font-mono); font-size: .78rem; color: var(--sun); letter-spacing: .06em; }
+.menu-btn svg { width: 12px; height: 12px; transition: transform .2s; }
+.menu-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.menu-list { position: absolute; right: 0; top: calc(100% + 10px); width: min(360px, calc(100vw - 32px)); background: #0b1a2c; border: 1px solid #1f3550; border-radius: 12px; padding: 8px; margin: 0; list-style: none; box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+.menu-list[hidden] { display: none; }
+.menu-head { display: grid; grid-template-columns: 52px 1fr 40px; gap: 10px; padding: 6px 12px 8px; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #7f93ab; border-bottom: 1px dashed #24405f; margin-bottom: 4px; }
+.menu-list a { display: grid; grid-template-columns: 52px 1fr 40px; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 8px; color: #e5ecf5; text-decoration: none; }
+.menu-list a:hover, .menu-list a:focus-visible { background: #15304d; }
+.menu-list a[aria-current="page"] { background: var(--sun); color: #12223a; }
+.menu-list a[aria-current="page"] .m-code, .menu-list a[aria-current="page"] .m-gate { color: #12223a; }
+.m-code { font-family: var(--font-mono); font-weight: 600; color: #f3b24f; letter-spacing: .08em; }
+.m-name { font-weight: 600; }
+.m-gate { font-family: var(--font-mono); font-size: .8rem; color: #7f93ab; text-align: right; }
+.menu-list li.home-row a { border-bottom: 1px dashed #24405f; border-radius: 8px 8px 0 0; margin-bottom: 4px; }
+
+/* Pages */
+.page { padding: 36px 0 72px; }
+.page[hidden] { display: none; }
+
+/* Home hero: the sky over PHL */
+.sky { background: linear-gradient(180deg, #0b2340 0%, #17436f 52%, #3a6e9e 78%, #e7a252 118%); color: #fff; position: relative; overflow: hidden; margin-top: -36px; padding: 64px 0 56px; }
+.sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.sky .wrap { position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+.eyebrow { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sun); font-weight: 600; }
+.sky .eyebrow { color: #f6c372; }
+.sky h1 { font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; font-stretch: 115%; letter-spacing: -.01em; text-transform: uppercase; margin-top: 12px; }
+.sky h1 em { font-style: normal; color: #f6c372; }
+.sky .lede { font-size: 1.12rem; margin-top: 18px; max-width: 54ch; color: #dbe6f3; }
+.hero-cta { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; padding: 11px 20px; border-radius: 999px; background: var(--sun); color: #12223a; }
+.btn.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.4); }
+
+/* Countdown as a boarding pass */
+.cd { background: #fffdf8; color: #12223a; border-radius: 16px; display: grid; grid-template-columns: 1fr 86px; overflow: hidden; box-shadow: 0 24px 50px rgba(3,12,26,.4); }
+.cd-main { padding: 22px; display: grid; gap: 10px; }
+.cd-label { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: #6b7a8f; }
+.cd-big { font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 3.6rem; line-height: 1; color: #c4452f; }
+.cd-sub { font-size: .92rem; color: #33445c; }
+.cd-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px dashed #c9d3e0; padding-top: 12px; }
+.cd-row b { display: block; font-family: var(--font-mono); font-size: .95rem; }
+.cd-stub { border-left: 2px dashed #c9d3e0; display: grid; place-items: center; padding: 14px 0; position: relative; }
+.cd-stub .barcode { height: 120px; width: 40px; }
+
+.tags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 44px; }
+.ltag { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); border-radius: 10px 10px 10px 28px; padding: 16px 18px 16px 34px; position: relative; backdrop-filter: blur(2px); }
+.ltag::before { content: ""; position: absolute; left: 12px; top: 18px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #f6c372; }
+.ltag .v { font-family: var(--font-display); font-weight: 800; font-stretch: 112%; font-size: 1.9rem; line-height: 1; }
+.ltag .k { font-size: .85rem; color: #d3e0ef; margin-top: 6px; }
+
+.section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 48px 0 18px; flex-wrap: wrap; }
+.section-title h2 { font-size: clamp(1.7rem, 3.5vw, 2.3rem); font-weight: 800; font-stretch: 112%; text-transform: uppercase; }
+.dest { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.mini { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; text-decoration: none; color: var(--ink); display: grid; gap: 6px; position: relative; transition: transform .15s, box-shadow .15s, border-color .15s; }
+.mini:hover { transform: translateY(-2px); border-color: var(--horizon); box-shadow: 0 10px 24px rgba(14,42,71,.12); }
+.mini::after { content: ""; position: absolute; right: 64px; top: 0; bottom: 0; border-left: 2px dashed var(--line); }
+.mini-route { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 1.05rem; letter-spacing: .08em; }
+.mini-route i { font-style: normal; color: var(--sun); }
+.mini-route b:last-child { color: var(--horizon); }
+.mini-name { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; padding-right: 70px; }
+.mini-best { font-size: .88rem; color: var(--muted); padding-right: 70px; }
+.mini-stop { position: absolute; right: 14px; top: 50%; transform: translateY(-50%) rotate(90deg); font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; color: var(--muted); white-space: nowrap; }
+
+/* Boarding pass page header */
+.pass { display: grid; grid-template-columns: 1fr 120px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 14px 34px rgba(14,42,71,.10); margin-bottom: 36px; }
+.pass-main { padding: 26px 30px 24px; display: grid; gap: 14px; border-top: 8px solid var(--sky); }
+.pass-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.pass-top .stop { color: var(--stamp); font-weight: 600; }
+.route { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; }
+.iata { display: grid; }
+.iata b { font-family: var(--font-display); font-weight: 800; font-stretch: 118%; font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1; letter-spacing: .02em; }
+.iata:last-child { text-align: right; }
+.iata:last-child b { color: var(--horizon); }
+.iata span { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.flightpath { color: var(--sun); }
+.flightpath svg { width: 100%; height: 34px; display: block; }
+.pass h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; font-stretch: 108%; text-transform: uppercase; }
+.pass .intro { color: var(--muted); font-size: 1.05rem; max-width: 68ch; }
+.fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 4px 0 0; border-top: 1px dashed var(--line); padding-top: 14px; }
+.fields dt { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.fields dd { margin: 2px 0 0; font-weight: 700; }
+.pass-stub { border-left: 2px dashed var(--line); background: var(--sky-soft); display: grid; justify-items: center; align-content: space-between; padding: 22px 0; position: relative; border-top: 8px solid var(--sun); }
+.stub-code { font-family: var(--font-mono); font-weight: 600; letter-spacing: .1em; color: var(--horizon); }
+.stub-seat { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.barcode { display: block; width: 44px; height: 130px; background: repeating-linear-gradient(180deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 13px); opacity: .85; }
+.cd .barcode { background: repeating-linear-gradient(180deg, #12223a 0 2px, transparent 2px 4px, #12223a 4px 7px, transparent 7px 9px, #12223a 9px 10px, transparent 10px 13px); }
+
+/* Body components */
+.page-body { display: grid; gap: 0; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; margin: 44px 0 18px; flex-wrap: wrap; }
+.sec-head .sec-num { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--stamp); font-weight: 600; border: 1.5px solid var(--stamp); border-radius: 6px; padding: 2px 8px; transform: rotate(-2deg); }
+.sec-head h3 { font-family: var(--font-display); font-size: 1.6rem !important; font-weight: 800; font-stretch: 108%; text-transform: uppercase; }
+.sec-head .intro { color: var(--muted); margin-top: 6px; max-width: 66ch; }
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.panel { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 10px; align-content: start; }
+.panel h3 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.panel ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.tag { font-family: var(--font-mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; padding: 3px 10px 3px 18px; border-radius: 4px 999px 999px 4px; background: var(--sun-soft); color: var(--ink); font-weight: 600; white-space: nowrap; position: relative; }
+.tag::before { content: ""; position: absolute; left: 6px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--sun); }
+.note { font-size: .9rem; color: var(--muted); margin-top: 14px; max-width: 80ch; }
+
+.facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 8px; }
+.fact { background: var(--paper); border: 1px solid var(--line); border-radius: 10px 10px 10px 26px; padding: 16px 18px 16px 34px; position: relative; }
+.fact::before { content: ""; position: absolute; left: 12px; top: 20px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--sun); }
+.fact .v { font-family: var(--font-display); font-weight: 800; font-stretch: 112%; font-size: 2rem; line-height: 1; color: var(--horizon); }
+.fact .k { font-size: .86rem; color: var(--muted); margin-top: 6px; }
+
+.ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ladder3 { grid-template-columns: repeat(3, 1fr); }
+.rung { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 8px; align-content: start; position: relative; overflow: hidden; }
+.rung::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: linear-gradient(90deg, var(--horizon), var(--sun)); opacity: var(--o, .5); }
+.rung .lp { font-family: var(--font-display); font-weight: 800; font-stretch: 112%; font-size: 2.2rem; line-height: 1; }
+.rung .lp small { font-size: .95rem; color: var(--muted); font-weight: 600; }
+.rung .rate { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
+.rung ul { margin: 0; padding-left: 16px; font-size: .92rem; display: grid; gap: 4px; }
+
+.steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; counter-reset: step; }
+.step { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 20px 20px 78px; position: relative; display: grid; gap: 6px; }
+.step::before { counter-increment: step; content: "A" counter(step); position: absolute; left: 18px; top: 18px; width: 44px; height: 44px; border-radius: 10px; background: var(--sky); color: var(--sun); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 600; font-size: .95rem; }
+
+.calc { display: grid; grid-template-columns: 1fr 1.05fr; gap: 26px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 26px; position: relative; }
+.breakdown { width: 100%; border-collapse: collapse; font-size: .95rem; align-self: start; }
+.breakdown td { padding: 9px 0; border-bottom: 1px dashed var(--line); }
+.breakdown td:last-child { text-align: right; font-family: var(--font-mono); }
+.breakdown tr.sum td { font-weight: 700; border-bottom: 0; border-top: 2px solid var(--ink); }
+
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cc { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 10px; align-content: start; position: relative; overflow: hidden; }
+.cc::before { content: ""; display: block; height: 30px; width: 42px; border-radius: 6px; background: linear-gradient(135deg, #e9c27a, #c89a45); margin-bottom: 4px; }
+.cc.pick { border: 2px solid var(--sun); box-shadow: 0 10px 26px rgba(238,155,47,.18); }
+.cc .fee { font-family: var(--font-display); font-weight: 800; font-stretch: 112%; font-size: 2.1rem; line-height: 1; }
+.cc .fee small { font-size: .9rem; color: var(--muted); font-weight: 600; }
+.cc dl { margin: 0; display: grid; gap: 8px; font-size: .9rem; }
+.cc dt { font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.cc dd { margin: 0; }
+.cc .who { font-size: .9rem; border-top: 1px dashed var(--line); padding-top: 10px; }
+
+.board { background: #0b1a2c; border-radius: 14px; padding: 18px; overflow-x: auto; border: 1px solid #1f3550; }
+.board table { width: 100%; border-collapse: separate; border-spacing: 0 6px; font-family: var(--font-mono); min-width: 720px; }
+.board th { text-align: left; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: #7f93ab; font-weight: 600; padding: 4px 12px; }
+.board td { background: #132a44; color: #e5ecf5; padding: 12px; font-size: .9rem; }
+.board td:first-child { border-radius: 6px 0 0 6px; }
+.board td:last-child { border-radius: 0 6px 6px 0; }
+.board .code { color: #f3b24f; font-weight: 600; font-size: 1.15rem; letter-spacing: .08em; }
+.flap { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.flap.new { background: #f3b24f; color: #12223a; }
+.flap.on { background: #2f8a5a; color: #fff; }
+.flap.season { background: #2a4563; color: #e5ecf5; }
+
+.pitfalls { display: grid; gap: 12px; }
+.pit { display: grid; grid-template-columns: 240px 1fr; gap: 20px; padding: 18px 22px; background: var(--paper); border: 1px solid var(--line); border-left: 6px solid var(--stamp); border-radius: 12px; }
+.pit strong { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; text-transform: uppercase; line-height: 1.2; }
+
+.timeline { display: grid; }
+.tl { display: grid; grid-template-columns: 160px 28px 1fr; gap: 14px; padding-bottom: 24px; }
+.tl .when { font-family: var(--font-mono); font-size: .85rem; font-weight: 600; text-align: right; padding-top: 2px; color: var(--horizon); }
+.tl .dot { position: relative; }
+.tl .dot::before { content: "✈"; position: absolute; left: 2px; top: -2px; width: 24px; height: 24px; display: grid; place-items: center; font-size: .8rem; border-radius: 50%; background: var(--sky); color: var(--sun); }
+.tl .dot::after { content: ""; position: absolute; left: 13px; top: 26px; bottom: -24px; border-left: 2px dashed var(--line); }
+.tl:last-child .dot::after { display: none; }
+.tl.now .dot::before { background: var(--sun); color: var(--sky); }
+.tl h3 { margin-bottom: 4px; }
+
+.hops { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; }
+.hop { display: grid; gap: 2px; padding: 16px 20px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
+.hop span { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.hop.next { text-align: right; background: var(--sky); color: #fff; border-color: var(--sky); }
+.hop.next span { color: #f6c372; }
+.hop:hover { border-color: var(--horizon); }
+
+footer { background: var(--sky); color: #b9c7d8; padding: 28px 0 36px; font-size: .85rem; }
+footer p { max-width: 80ch; }
+
+@media (max-width: 960px) {
+  .hero-grid, .calc, .duo { grid-template-columns: 1fr; }
+  .ladder, .cards, .tags, .facts { grid-template-columns: repeat(2, 1fr); }
+  .grid3, .dest { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .ladder, .ladder3, .cards, .steps, .grid3, .dest, .fields { grid-template-columns: 1fr; }
+  .tags, .facts { grid-template-columns: 1fr 1fr; }
+  .pass { grid-template-columns: 1fr; }
+  .pass-stub { border-left: 0; border-top: 2px dashed var(--line); grid-auto-flow: column; align-content: center; justify-content: space-between; padding: 14px 24px; }
+  .pass-stub .barcode { width: 120px; height: 34px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 13px); }
+  .pass-main { padding: 22px 20px; }
+  .pit { grid-template-columns: 1fr; gap: 6px; }
+  .tl { grid-template-columns: 96px 28px 1fr; }
+  .hops { grid-template-columns: 1fr; }
+  .menu-btn .cur { display: none; }
+  .brand { font-size: .92rem; }
+  .menu-btn { padding: 7px 12px; }
+}
+
+/* Top-row navigation with dropdown */
+.mainnav { display: flex; align-items: center; }
+.navlist { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.navlist > li { position: relative; }
+.nav-link { font: inherit; font-size: .9rem; font-weight: 600; color: #d8e3f0; background: none; border: 0; padding: 8px 11px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; position: relative; }
+.nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
+.nav-link[aria-current="page"], .has-sub.active > .nav-link { color: #fff; }
+.nav-link[aria-current="page"]::after, .has-sub.active > .nav-link::after { content: ""; position: absolute; left: 11px; right: 11px; bottom: 1px; height: 2px; border-radius: 2px; background: var(--sun); }
+.sub-btn svg { width: 11px; height: 11px; transition: transform .2s; }
+.sub-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.deals-link { color: #12223a; background: var(--sun); margin-right: 8px; }
+.deals-link:hover { color: #12223a; background: #f6c372; }
+.deals-link[aria-current="page"]::after { display: none; }
+.deals-link[aria-current="page"] { box-shadow: 0 0 0 2px #fff inset; }
+.sub { position: absolute; left: 0; top: calc(100% + 10px); width: 300px; background: #0b1a2c; border: 1px solid #1f3550; border-radius: 12px; padding: 8px; margin: 0; list-style: none; box-shadow: 0 18px 40px rgba(0,0,0,.35); z-index: 30; }
+.sub[hidden] { display: none; }
+.sub-head { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: #7f93ab; padding: 6px 12px 8px; border-bottom: 1px dashed #24405f; margin-bottom: 4px; }
+.sub a { display: grid; grid-template-columns: 48px 1fr; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 8px; color: #e5ecf5; text-decoration: none; }
+.sub a:hover, .sub a:focus-visible { background: #15304d; }
+.sub a[aria-current="page"] { background: var(--sun); color: #12223a; }
+.sub a[aria-current="page"] .m-code { color: #12223a; }
+.burger { display: none; font: inherit; font-weight: 600; font-size: .9rem; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 14px; align-items: center; gap: 8px; cursor: pointer; }
+.burger svg { width: 16px; height: 16px; }
+/* Home */
+
+.hero-solo { grid-template-columns: 1fr; }
+.hero-solo > div { max-width: 820px; }
+.sky .lede { display: grid; gap: 14px; max-width: 70ch; }
+.sky .lede p { margin: 0; }
+
+/* Plain page header + hotels */
+.step { align-content: start; }
+.steps.stack { grid-template-columns: 1fr; max-width: 860px; }
+.steps.stack .step { padding-left: 116px; min-height: 92px; }
+.steps.stack .step::before { content: attr(data-n); width: 76px; height: 40px; font-family: var(--font-display); font-weight: 800; font-stretch: 112%; text-transform: uppercase; font-size: .95rem; letter-spacing: .04em; }
+.steps.stack.plain .step { padding-left: 24px; min-height: 0; }
+.steps.stack.plain .step::before { display: none; }
+.callout + .steps { margin-top: 22px; }
+.page-body > .callout:first-child { margin-top: 0; }
+.page-head { display: grid; gap: 12px; margin: 8px 0 32px; }
+.page-head h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; font-stretch: 112%; text-transform: uppercase; }
+.page-head .intro { font-size: 1.15rem; max-width: 68ch; color: var(--ink); }
+.step .aside { font-size: .92rem; color: var(--muted); background: var(--sun-soft); border-radius: 8px; padding: 10px 12px; margin-top: 4px; }
+.callout { margin-top: 22px; font-size: 1.1rem; font-weight: 600; max-width: 70ch; border-left: 4px solid var(--sun); padding: 4px 0 4px 16px; }
+.trips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+.trip { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; align-content: start; }
+.trip-route { background: var(--sky); color: #fff; padding: 16px 20px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.trip-route b { font-family: var(--font-display); font-weight: 800; font-stretch: 115%; font-size: 1.9rem; line-height: 1; }
+.trip-route b:nth-of-type(2) { color: #f6c372; }
+.trip-route span { color: #f6c372; }
+.trip-route em { font-style: normal; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #b9c7d8; width: 100%; }
+.trip-lines { margin: 0; padding: 14px 20px 4px; display: grid; }
+.trip-lines div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.trip-lines dt { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; white-space: nowrap; }
+.trip-lines dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.trip-lines dd small { color: var(--muted); font-weight: 400; }
+.trip-lines .total { border-bottom: 0; border-top: 2px solid var(--ink); margin-top: 4px; }
+.trip-lines .total dd { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--horizon); }
+.trip-end { padding: 4px 20px 20px; font-size: .95rem; }
+@media (max-width: 960px) { .trips { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .steps.stack .step { padding-left: 20px; padding-top: 70px; } .steps.stack.plain .step { padding-top: 20px; } }
+
+
+
+/* Status levels stacked */
+.levels { display: grid; gap: 14px; }
+.level { display: grid; grid-template-columns: 340px 1fr; gap: 24px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 24px; position: relative; overflow: hidden; }
+.level::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, var(--horizon), var(--sun)); opacity: var(--o, .5); }
+.level-head { display: grid; gap: 8px; align-content: start; }
+.level-head .tag { justify-self: start; }
+.level-head .lp { font-family: var(--font-display); font-weight: 800; font-stretch: 112%; font-size: 2.4rem; line-height: 1; }
+.level-head .lp small { display: block; font-size: .9rem; color: var(--muted); font-weight: 600; margin-top: 4px; }
+.level-head .take { font-size: .95rem; line-height: 1.55; border-left: 3px solid var(--sun); padding-left: 12px; margin: 4px 0 2px; }
+.level-head .rate { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
+.level-list { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 28px; }
+.level-list li { padding-left: 20px; position: relative; font-size: .97rem; break-inside: avoid; margin-bottom: 9px; }
+.level-list li::before { content: "✈"; position: absolute; left: 0; top: 1px; font-size: .75rem; color: var(--sun); }
+@media (max-width: 860px) { .level { grid-template-columns: 1fr; gap: 14px; } .level-list { columns: 1; } }
+
+#sub-philly { left: 0; right: auto; }
+@media (max-width: 760px) { #sub-philly { left: 12px; right: 12px; } }
+/* Deals cards */
+.hotel-picks .trip-lines dt { white-space: nowrap; }
+.hotel-picks .trip-lines dd { max-width: 72%; }
+.hotel-picks .trip-lines dd small { display: block; }
+.pick-note { font-weight: 400; color: var(--muted); }
+.has-sub > .nav-link.deals-link, .has-sub.active > .nav-link.deals-link { color: #12223a; }
+.sub-btn.deals-link svg { color: #12223a; }
+.has-sub.active > .deals-link { box-shadow: 0 0 0 2px #fff inset; }
+.has-sub.active > .deals-link::after { display: none; }
+.deal-card { max-width: 860px; }
+.deal-card .trip-lines { padding-bottom: 14px; }
+.deal-card .trip-lines dt { white-space: normal; font-family: var(--font-body); font-size: .98rem; letter-spacing: 0; text-transform: none; color: var(--ink); font-weight: 600; padding-top: 0; }
+.deal-card .trip-lines dd small { display: block; }
+.dl-note { padding: 10px 0; color: var(--muted); }
+
+/* Lounges */
+.lounges { grid-template-columns: repeat(2, 1fr); }
+.lounges .trip-route b:first-child { font-size: 1.5rem; }
+.lounges .trip-lines dd { max-width: 70%; }
+.lounges .trip-end { display: grid; gap: 10px; }
+.lounges .trip-end p { margin: 0; }
+@media (max-width: 860px) { .lounges { grid-template-columns: 1fr; } }
+
+/* One-line nav beside the brand at every width */
+.topbar .wrap { justify-content: flex-start; gap: 28px; flex-wrap: nowrap; }
+.navlist { flex-wrap: nowrap; }
+@media (max-width: 760px) {
+  .topbar .wrap { gap: 10px; padding-left: 12px; padding-right: 12px; }
+  .brand { font-size: .86rem; gap: 6px; }
+  .brand svg { width: 18px; height: 18px; }
+  .nav-link { font-size: .8rem; padding: 7px 6px; gap: 3px; }
+  .nav-link[aria-current="page"]::after, .has-sub.active > .nav-link::after { left: 6px; right: 6px; }
+  .deals-link { margin-left: 2px; padding: 7px 9px; }
+  .sub-btn svg { width: 9px; height: 9px; }
+  .mainnav, .navlist > li.has-sub { position: static; }
+  .mainnav { flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .mainnav::-webkit-scrollbar { display: none; }
+  .brand { flex: none; }
+  .sub { left: 12px; right: 12px; width: auto; }
+}
+@media (max-width: 420px) {
+  .brand svg { display: none; }
+  .deals-link .cw { display: none; }
+  .nav-link { font-size: .78rem; padding: 7px 5px; }
+}
+
+/* Deals */
+.deal-board td.when { white-space: nowrap; }
+.deal-board tr.expired td { opacity: .45; }
+.deal-board .what b { color: #fff; }
+.flap.ending { background: #e6735f; color: #fff; }
+.flap.ended { background: #2a4563; color: #9fb0c4; }
+.deal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.deal { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 10px; align-content: start; position: relative; }
+.deal.expired { opacity: .55; }
+.deal .deal-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.deal .big { font-family: var(--font-display); font-weight: 800; font-stretch: 112%; font-size: 2.2rem; line-height: 1; color: var(--horizon); }
+.deal .big small { font-size: 1rem; color: var(--muted); font-weight: 600; }
+.deal .ends { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.deal .verdict { font-size: .92rem; border-top: 1px dashed var(--line); padding-top: 10px; }
+.deal .verdict b { color: var(--stamp); }
+.stamp { font-family: var(--font-mono); font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border: 1.5px solid currentColor; border-radius: 6px; padding: 2px 8px; transform: rotate(-3deg); display: inline-block; }
+.stamp.live { color: #2f8a5a; }
+.stamp.ending { color: var(--stamp); }
+.stamp.ended { color: var(--muted); }
+@media (max-width: 760px) { .deal-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#home"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg><span class="long">PHL</span>&nbsp;<span>Points</span></a>
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="navlist">
+        <li class="has-sub" data-group="deals flights">
+          <button class="nav-link sub-btn deals-link" type="button" aria-expanded="false" aria-controls="sub-philly">Philly<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-philly" hidden><li class="sub-head" aria-hidden="true">Updated every day</li><li><a href="#deals" data-link="deals"><span class="m-code">DLS</span><span class="m-name">Today's Deals</span></a></li><li><a href="#flights" data-link="flights"><span class="m-code">AWD</span><span class="m-name">Award Flights</span></a></li></ul>
+        </li>
+        <li class="has-sub" data-group="overview hotels shopping dining">
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn">Earn<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-earn" hidden><li class="sub-head" aria-hidden="true">Ways to earn miles and Loyalty Points</li><li><a href="#overview" data-link="overview"><span class="m-code">OVR</span><span class="m-name">Overview</span></a></li><li><a href="#hotels" data-link="hotels"><span class="m-code">HTL</span><span class="m-name">AA Hotels</span></a></li><li><a href="#shopping" data-link="shopping"><span class="m-code">SHP</span><span class="m-name">AA Shopping</span></a></li><li><a href="#dining" data-link="dining"><span class="m-code">DIN</span><span class="m-name">AA Dining</span></a></li></ul>
+        </li>
+        <li class="has-sub" data-group="fly other">
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-redeem">Redeem<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-redeem" hidden><li class="sub-head" aria-hidden="true">Using your miles from PHL</li><li><a href="#fly" data-link="fly"><span class="m-code">RDM</span><span class="m-name">AA Miles</span></a></li><li><a href="#other" data-link="other"><span class="m-code">AVS</span><span class="m-name">BA Avios</span></a></li></ul>
+        </li>
+        <li><a class="nav-link" href="#status" data-link="status">Status</a></li>
+        <li><a class="nav-link" href="#lounges" data-link="lounges"><span class="cw">Philly </span>Lounges</a></li>
+        <li><a class="nav-link" href="#cards" data-link="cards">Cards</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page" data-page="home">
+    <div class="sky">
+      <canvas id="sky-canvas" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <div class="hero-grid hero-solo">
+          <div>
+            <div class="eyebrow">An independent guide for PHL-based flyers · Updated Oct 30, 2026</div>
+            <h1>Maximize your miles <em>at PHL</em></h1>
+            <div class="lede">
+              <p>Maximizing credit card points in Philadelphia is not like any other big city, because Philadelphia is dominated by American Airlines. Unlike the other major airlines, American is not a transfer partner with any of the most popular travel cards which means that you can not turn Amex Platinum or Chase Sapphire Reserve points into AAdvantage miles. Because Philadelphia does not have a strong presence from United, Delta, Southwest etc., not having access to AAdvantage miles means you do not have access to most flights out of PHL. Therefore, if you want the best flights and the best deals, you must commit to the AAdvantage program.</p>
+              <p>I have been searching for free or discounted flights out of PHL for over 20 years. It all started with a free Bank of America Travel Card and, over the last 20 years, I have analyzed every major travel credit card for use out of PHL. Throughout these next pages, I will explain how I have maximized the AAdvantage program and fly my family around the world out of PHL for free.</p>
+            </div>
+            <div class="hero-cta"><a class="btn" href="#overview">Start at stop 01 →</a><a class="btn ghost" href="#hotels">Jump to AA Hotels</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="section-title"><h2>Choose your destination</h2><span class="muted">11 stops. Go in order, or jump to any one.</span></div>
+      <div class="dest"><a class="mini" href="#overview"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>OVR</b></span><span class="mini-name">Overview</span><span class="mini-best">Everyone. Start here</span><span class="mini-stop">Stop 01</span></a><a class="mini" href="#hotels"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>HTL</b></span><span class="mini-name">AA Hotels</span><span class="mini-best">Closing a status gap</span><span class="mini-stop">Stop 02</span></a><a class="mini" href="#shopping"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>SHP</b></span><span class="mini-name">AA Shopping</span><span class="mini-best">Online shoppers</span><span class="mini-stop">Stop 03</span></a><a class="mini" href="#dining"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>DIN</b></span><span class="mini-name">AA Dining</span><span class="mini-best">Eating out in Philly</span><span class="mini-stop">Stop 04</span></a><a class="mini" href="#fly"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>RDM</b></span><span class="mini-name">AA Miles</span><span class="mini-best">Booking awards from PHL</span><span class="mini-stop">Stop 05</span></a><a class="mini" href="#other"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>AVS</b></span><span class="mini-name">BA Avios</span><span class="mini-best">Amex, Chase and other cards</span><span class="mini-stop">Stop 06</span></a><a class="mini" href="#status"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>STS</b></span><span class="mini-name">Status</span><span class="mini-best">Status chasers</span><span class="mini-stop">Stop 07</span></a><a class="mini" href="#lounges"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>LNG</b></span><span class="mini-name">Philly Lounges</span><span class="mini-best">Early arrivals and layovers</span><span class="mini-stop">Stop 08</span></a><a class="mini" href="#cards"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>CRD</b></span><span class="mini-name">Cards</span><span class="mini-best">Choosing a card</span><span class="mini-stop">Stop 09</span></a><a class="mini" href="#deals"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>DLS</b></span><span class="mini-name">Today's Deals</span><span class="mini-best">Checking in every day</span><span class="mini-stop">Stop 10</span></a><a class="mini" href="#flights"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>AWD</b></span><span class="mini-name">Award Flights</span><span class="mini-best">Checking in every day</span><span class="mini-stop">Stop 11</span></a></div>
+    </div>
+  </section>
+
+  <section class="page" data-page="overview" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Earn · Stop 01 of 11</div>
+        <h1>Overview</h1>
+        <p class="intro">Understanding the difference between bonus miles and Loyalty Points is necessary to maximize your miles. It is slightly confusing, but the simple answer is that Loyalty Points earn you status with the airline, while bonus miles are what you use to book your award flights. You need both to get free flights and the highest level of service from American Airlines.</p>
+      </header>
+      <div class="page-body">
+      <div class="steps stack plain">
+        <div class="step">
+          <h3>Bonus miles</h3>
+          <p>Bonus miles accrue as bonuses provided by American Airlines that can be used for award flights but do not go toward your status with the airline. For example, the sign-up bonus on a credit card will give you bonus miles to spend on flights, but that extra does not go toward your status.</p>
+        </div>
+        <div class="step">
+          <h3>Loyalty Points</h3>
+          <p>Loyalty Points are probably the most important of the two, because each Loyalty Point you earn also comes with a mile you can spend on a future flight, but it also earns you status with the airline. As further outlined in the <a href="#status">Status</a> section, status provides you with perks that improve your experience. The most valuable perk provided by status is free seat upgrades within the Main Cabin.</p>
+        </div>
+        <div class="step">
+          <h3>AA Earning System</h3>
+          <p>Unlike the other major credit cards who offer multipliers by specific category (for example, 3x points on all restaurant purchases), the AA system offers smaller multipliers by category but provides large multipliers by store. Their system works by pushing users to the AA specific websites where you can earn large multipliers by specific store. Continue on to the next three sections on <a href="#hotels">AA Hotels</a>, <a href="#shopping">AA Shopping</a>, and <a href="#dining">AA Dining</a> to learn more.</p>
+        </div>
+      </div>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#home"><span>Back to</span>Home</a><a class="hop next" href="#hotels"><span>Next stop</span>AA Hotels</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="hotels" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Earn · Stop 02 of 11</div>
+        <h1>The AA Hotels portal</h1>
+        <p class="intro">The AA Hotels portal is where you will maximize your points. This is where I turn a single hotel stay into a round-trip flight. If you follow the steps below, you can earn both Loyalty Points and bonus miles that will let you fly for free, with the perks that come with American's highest status levels.</p>
+        <p class="intro">If you follow these steps, you'll earn an outrageously high number of bonus miles and Loyalty Points. Below are a few examples of how I've used the AA Hotels portal to get free flights for years.</p>
+      </header>
+      <div class="page-body">
+      <div class="steps stack">
+        <div class="step" data-n="One">
+          <h3>Book on the AA Hotels portal</h3>
+          <p>Search for and choose your hotels on the AAdvantage Hotels website. This portal does not offer the cheapest rooms and is usually slightly more expensive than other sites, but you must use this site to receive the maximum return.</p>
+        </div>
+        <div class="step" data-n="Two">
+          <h3>Pay with your AA Executive card</h3>
+          <p>Paying with the Citi AAdvantage Executive card earns 12x miles per dollar. The Globe card earns 6x. The Platinum Select card earns 3x starting Jan 24, 2027.</p>
+        </div>
+        <div class="step" data-n="Three">
+          <h3>Maximize your Loyalty Point award</h3>
+          <p>This is what makes the AA Hotels portal worth it. On top of the 12x bonus miles, you're awarded Loyalty Points once your hotel stay is complete. If you log in and pay with an AA credit card, the award is usually 15,000 Loyalty Points, and you can often pay a slight upcharge for a larger award.</p>
+        </div>
+      </div>
+
+
+      <div class="sec-head">
+        <div class="sec-num">Trip log</div>
+        <div><h3>Real trips, real numbers</h3></div>
+      </div>
+      <div class="trips">
+        <article class="trip">
+          <div class="trip-route"><b>PHL</b><span aria-hidden="true">✈</span><b>FCO</b><em>Rome · 5 nights</em></div>
+          <dl class="trip-lines">
+            <div><dt>Flight cost</dt><dd>35,000 miles for two round-trip tickets</dd></div>
+            <div><dt>Hotel cost</dt><dd>$4,000 for 5 nights in Rome</dd></div>
+            <div><dt>Bonus miles</dt><dd>48,000 <small>($4,000 × 12)</small></dd></div>
+            <div><dt>Loyalty Point award</dt><dd>23,000</dd></div>
+            <div class="total"><dt>Total earned</dt><dd>71,000</dd></div>
+          </dl>
+          <p class="trip-end">$4,000 paid for two round-trip tickets to Rome plus the hotel, with miles left over for the next trip. With Executive Platinum status, we got the larger front-row Main Cabin seats, and my wife was upgraded to Premium Economy on the flight home.</p>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>PHL</b><span aria-hidden="true">✈</span><b>BCN</b><em>Barcelona · 7 nights</em></div>
+          <dl class="trip-lines">
+            <div><dt>Flight cost</dt><dd>110,000 miles for four round-trip tickets</dd></div>
+            <div><dt>Hotel cost</dt><dd>$7,000 for 7 nights in Barcelona</dd></div>
+            <div><dt>Bonus miles</dt><dd>84,000 <small>($7,000 × 12)</small></dd></div>
+            <div><dt>Loyalty Point award</dt><dd>23,000</dd></div>
+            <div class="total"><dt>Total earned</dt><dd>107,000</dd></div>
+          </dl>
+          <p class="trip-end">$7,000 paid for a family vacation that included four round-trip tickets and the hotel in Barcelona. With Executive Platinum status, we got the larger front-row Main Cabin seats.</p>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>PHL</b><span aria-hidden="true">✈</span><b>NAP</b><em>Naples &amp; Sorrento · 8 nights</em></div>
+          <dl class="trip-lines">
+            <div><dt>Flight cost</dt><dd>135,000 miles for four round-trip tickets</dd></div>
+            <div><dt>Hotel cost</dt><dd>$7,000 for 8 nights in Naples and Sorrento</dd></div>
+            <div><dt>Bonus miles</dt><dd>84,000 <small>($7,000 × 12)</small></dd></div>
+            <div><dt>Loyalty Point awards</dt><dd>46,000 <small>(2 hotels)</small></dd></div>
+            <div class="total"><dt>Total earned</dt><dd>130,000</dd></div>
+          </dl>
+          <p class="trip-end">$7,000 paid for a family vacation that included four round-trip tickets and hotels in Naples and Sorrento. Splitting the trip across two hotels earned two Loyalty Point awards. With Executive Platinum status, we got the larger front-row Main Cabin seats.</p>
+        </article>
+      </div>
+
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#overview"><span>Previous</span>Overview</a><a class="hop next" href="#shopping"><span>Next stop</span>AA Shopping</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="shopping" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Earn · Stop 03 of 11</div>
+        <h1>The AA Shopping portal</h1>
+        <p class="intro">AA Shopping is American's online shopping portal. Click through it before you buy from a store you already use, and the store pays you miles and Loyalty Points on top of whatever your credit card earns.</p>
+        <p class="intro">If you follow the steps below, everyday online purchases turn into a steady stream of miles and Loyalty Points.</p>
+      </header>
+      <div class="page-body">
+      <div class="steps stack">
+        <div class="step" data-n="One">
+          <h3>Log in to the AA Shopping portal</h3>
+          <p>Go to the AAdvantage eShopping website and sign in with your AAdvantage number. More than 1,200 online stores take part, from department stores to Apple and travel sites. The free Chrome browser button can remind you when a site you're on pays miles.</p>
+        </div>
+        <div class="step" data-n="Two">
+          <h3>Click through to the store</h3>
+          <p>Find the store and check its rate, typically 1 to 10 miles per dollar. Clicking through sends you to the store's own site with a tracking link. Start every order from the portal, and avoid coupon codes the store doesn't list, or the order may not track.</p>
+        </div>
+        <div class="step" data-n="Three">
+          <h3>Pay with your AA credit card</h3>
+          <p>Check out as usual in the same browser session. Paying with an AAdvantage card adds the card's miles and 1 Loyalty Point per dollar on top of the portal miles. If SimplyMiles has a matching offer, activate it first and the same purchase pays a third time.</p>
+        </div>
+        <div class="step" data-n="Four">
+          <h3>Watch for the confirmation emails</h3>
+          <p>The portal emails you when it tracks the order. Miles usually post within a few days but can take up to 15 business days. If they're still missing after that, file a claim with eShopping customer service.</p>
+        </div>
+      </div>
+
+      <div class="sec-head">
+        <div class="sec-num">Example</div>
+        <div><h3>One order, three layers</h3></div>
+      </div>
+      <div class="trips">
+        <article class="trip">
+          <div class="trip-route"><b>$100</b><span aria-hidden="true">→</span><b>600</b><em>Online order · store paying 5x</em></div>
+          <dl class="trip-lines">
+            <div><dt>Portal miles</dt><dd>500 <small>($100 × 5)</small></dd></div>
+            <div><dt>AA card</dt><dd>100 <small>($100 × 1)</small></dd></div>
+            <div class="total"><dt>Miles + LP earned</dt><dd>600</dd></div>
+          </dl>
+          <p class="trip-end">Every portal mile also counts as a Loyalty Point. The lump-sum "spend $200, get 500 bonus miles" promotions add award miles only, not Loyalty Points. Once you pass 60,000 Loyalty Points, portal miles also get a 25% Loyalty Point bonus.</p>
+        </article>
+      </div>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#hotels"><span>Previous</span>AA Hotels</a><a class="hop next" href="#dining"><span>Next stop</span>AA Dining</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="dining" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Earn · Stop 04 of 11</div>
+        <h1>AA Dining</h1>
+        <p class="intro">AA Dining pays you miles and Loyalty Points for eating out. Register a card once, then eat at participating restaurants as usual, and the miles post automatically.</p>
+        <p class="intro">If you follow the steps below, the meals you're already eating in Philly earn you up to 5 miles and 5 Loyalty Points per dollar.</p>
+      </header>
+      <div class="page-body">
+      <div class="steps stack">
+        <div class="step" data-n="One">
+          <h3>Join and link your cards</h3>
+          <p>Sign up on the AAdvantage Dining website with your AAdvantage number and register the credit and debit cards you use to eat out. Any card works, not just AA cards. A meal only tracks if you pay with a registered card, so add your partner's cards too and re-register any card that gets replaced.</p>
+        </div>
+        <div class="step" data-n="Two">
+          <h3>Opt in to emails</h3>
+          <p>This one setting triples what you earn, from 1 to 3 miles per dollar. There's no reason to skip it.</p>
+        </div>
+        <div class="step" data-n="Three">
+          <h3>Eat at participating restaurants</h3>
+          <p>Search the site or app for participating places near you, from Center City to the suburbs. Pay with a registered card and the visit tracks on its own, with nothing to show the server. Paying with the Platinum Select or Globe card adds another 2 miles per dollar at restaurants.</p>
+        </div>
+        <div class="step" data-n="Four">
+          <h3>Reach VIP</h3>
+          <p>After 11 qualifying visits in a calendar year, you become VIP and earn 5 miles per dollar starting with your 12th. VIP counts visits, not dollars, so a few cheap lunches or coffees early in the year unlock 5x for every bigger dinner after. VIP lasts through the next full calendar year.</p>
+        </div>
+      </div>
+
+      <div class="sec-head">
+        <div class="sec-num">Levels</div>
+        <div><h3>What you earn at each level</h3></div>
+      </div>
+      <div class="trips">
+        <article class="trip">
+          <div class="trip-route"><b>Basic</b><em>No email opt-in</em></div>
+          <dl class="trip-lines">
+            <div><dt>Requirement</dt><dd>Join and register a card</dd></div>
+            <div class="total"><dt>Miles + LP per $1</dt><dd>1</dd></div>
+          </dl>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>Select</b><em>Opted in to emails</em></div>
+          <dl class="trip-lines">
+            <div><dt>Requirement</dt><dd>Opt in to emails</dd></div>
+            <div class="total"><dt>Miles + LP per $1</dt><dd>3</dd></div>
+          </dl>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>VIP</b><em>Emails + 11 visits in a year</em></div>
+          <dl class="trip-lines">
+            <div><dt>Requirement</dt><dd>11 visits in a calendar year</dd></div>
+            <div class="total"><dt>Miles + LP per $1</dt><dd>5</dd></div>
+          </dl>
+          <p class="trip-end">A VIP diner paying with the Platinum Select or Globe card earns 7 miles and 6 Loyalty Points per dollar.</p>
+        </article>
+      </div>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#shopping"><span>Previous</span>AA Shopping</a><a class="hop next" href="#fly"><span>Next stop</span>AA Miles</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="fly" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Redeem · Stop 05 of 11</div>
+        <h1>American Airlines Miles</h1>
+        <p class="intro">If you have read this far and followed the program, you have amassed tens or hundreds of thousands of AA miles. But if you do not use your points wisely, you will waste them on expensive award flights that undermine all of the work you put in. To avoid that fate, follow these tips.</p>
+      </header>
+      <div class="page-body">
+      <div class="steps stack plain">
+        <div class="step">
+          <h3>Book early</h3>
+          <p>It may sound crazy, but the best deals for flights to desirable destinations occur 11 months in advance. Every example I provided in the AA Hotels section was booked the first day the flights were available. While this may not be practical for some, award flights are usually fully refundable, so you have the freedom to lock in the flight at a great rate with the ability to cancel later on.</p>
+        </div>
+        <div class="step">
+          <h3>Flexible dates</h3>
+          <p>The best fares are not always on the exact dates you need. When searching for award fares, the American app gives you the option to check flights on dates surrounding your preferred flight. Many times, you will see a Thursday flight being thousands of points less than a Friday flight.</p>
+        </div>
+        <div class="step">
+          <h3>Flexible routes</h3>
+          <p>The best fares are available in cities you may not expect. If you try to force an exact destination, you may find the award fare is expensive. To avoid that, be willing to fly into or out of another city, as the difference in price could be 100,000 or more miles. For example, when looking for an award flight for my family next year, we wanted to visit Northern Italy, but flights into Venice were 250,000 miles for one round-trip fare while flights into Milan were 35,000 miles for one round-trip fare. While it's a different trip, you can get within a few hours' train ride of Venice for over 200,000 miles less just by checking a similar city.</p>
+        </div>
+        <div class="step">
+          <h3>Put it into practice</h3>
+          <p>After you have a good plan, check my daily <a href="#flights">Philly deals</a> to put these principles into practice.</p>
+        </div>
+      </div>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#dining"><span>Previous</span>AA Dining</a><a class="hop next" href="#other"><span>Next stop</span>BA Avios</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="other" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Redeem · Stop 06 of 11</div>
+        <h1>British Airways Avios</h1>
+        <p class="intro">If you are insistent that you do not want to access the AAdvantage system or any of the associated credit cards, there is a complicated end around with the other major credit cards that can allow you to transfer miles to British Airways which is partnered with American Airlines. This can work and I used this system for years but it is not as strong as the AAdvantage system for a few reasons.</p>
+      </header>
+      <div class="page-body">
+      <div class="steps stack plain">
+        <div class="step">
+          <h3>Limited Flights</h3>
+          <p>Not every American Airlines flight is offered as a reward flight by British Airways. If the cost of the flight is more than the British Airways system allows, they will not even offer you the flight.</p>
+        </div>
+        <div class="step">
+          <h3>High International Fees and Taxes</h3>
+          <p>British Airways charges large fees for international flights from the US to most places in Europe. So even if you do find an available British Airways flight from PHL, it will likely come with a large fee that will make the cost of the flight more considering the amount of miles required. I have seen reward flights to Europe with over $1,000 in fees when the cost of the flight is around that price. That being said, this system does not charge these large fees for domestic flights and flights to London.</p>
+        </div>
+        <div class="step">
+          <h3>No Status</h3>
+          <p>Transferring points from other major credit cards does not provide any status with the airline. In short, this system will get you on the plane but you will be boarding late and be in the back of the plane. Granted, if you chose a credit card with a great airport lounge, it offsets some of that. But I prefer the combination of free flights and the perks of status with the airline.</p>
+        </div>
+        <div class="step">
+          <h3>Conclusion</h3>
+          <p>This system can work in limited areas but you will miss out on many flights and will certainly not be able to access highly desired timeframes and destinations where no flights are awarded. I use this system to target first class fares to London. If you do not want to switch to the AAdvantage program, below is how to access flights out of PHL.</p>
+        </div>
+      </div>
+
+      <div class="sec-head" style="margin-top:40px">
+        <div><h3 style="white-space:nowrap;font-size:clamp(.78rem,3.4vw,1.6rem) !important">How to book American flights with Avios</h3></div>
+      </div>
+      <div class="steps stack plain">
+        <div class="step">
+          <h3>Use a Card that Transfers Points to British Airways</h3>
+          <p>In order to utilize this system, you need to utilize a credit card that is a transfer partner with British Airways. For example, Amex Membership Rewards, Chase Ultimate Rewards, Capital One, and Wells Fargo points all transfer to Avios one-to-one. You can use their earning systems (which are simple and plentiful) to amass a large amount of points as outlined by those companies.</p>
+        </div>
+        <div class="step">
+          <h3>Open a Free British Airways Executive Club Account</h3>
+          <p>You need to open a British Airways Executive Club Account and have access to your membership number. This is the account that the credit card points will be transferred to. It is typically fast and easy to transfer points to your Executive Club Account from your credit card account but, be warned, the BA.com website is weirdly glitchy at times.</p>
+        </div>
+        <div class="step">
+          <h3>Search For Avios Flights</h3>
+          <p>On BA.com, you need to search for flights under a separate search dedicated to an Avios Flight. Avios are what BA calls their miles. As noted above, you will be able to access American Airlines flights out of PHL on this system if they are low enough in price but there will be limitations. Check the miles and the taxes and fees before you book anything to make sure it is not a trap fare that is actually more expensive than buying the fare with money.</p>
+        </div>
+        <div class="step">
+          <h3>Check the Cost for First Class Fares</h3>
+          <p>One of the best perks of British Airways system is that it can be the cheapest award fare for First Class fares. Recently, I booked four First Class tickets for my family to London for around 320,000 Avios total while coach was 100,000 Avios. This was a screaming deal, as they say, so I recommend checking First Class if you follow this system to see the price difference. Please be mindful that the First Class seats are targeted early and they are limited, so you will need to book those 12 months out (British releases their flights a month earlier for some reason) in order to access them.</p>
+        </div>
+      </div>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#fly"><span>Previous</span>AA Miles</a><a class="hop next" href="#status"><span>Next stop</span>Status</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="status" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Status · Stop 07 of 11</div>
+        <h1>Status</h1>
+        <p class="intro">Loyalty Points decide your AAdvantage status. Here is what each level takes this year, plus the extra Loyalty Points that stack on top of everything you already earn and move you up the ladder faster.</p>
+      </header>
+      <div class="page-body">
+      <div class="levels">
+        <article class="level" style="--o:.35">
+          <div class="level-head">
+            <span class="tag">Gold</span>
+            <div class="lp num">40,000 <small>Loyalty Points</small></div>
+            <p class="take">This is a nice start to your status. It does not move the needle very far because there are many other people with higher levels of status, but it does get you an earlier boarding group and preferred seats.</p>
+            <div class="rate">oneworld Ruby · 7 miles per $1 on AA flights</div>
+          </div>
+          <ul class="level-list">
+            <li><b>40% mileage bonus</b> on American flights</li>
+            <li><b>1 free checked bag</b></li>
+            <li><b>Group 4</b> boarding</li>
+            <li><b>Priority</b> check-in, security and boarding</li>
+            <li><b>Complimentary upgrades</b> within North America, clearing up to 24 hours before departure</li>
+            <li><b>Main Cabin Extra and preferred seats</b> free at check-in, when available</li>
+            <li><b>Same-day standby</b> at no charge</li>
+            <li><b>Discounted Admirals Club</b> membership</li>
+          </ul>
+        </article>
+        <article class="level" style="--o:.55">
+          <div class="level-head">
+            <span class="tag">Platinum</span>
+            <div class="lp num">75,000 <small>Loyalty Points</small></div>
+            <p class="take">This is probably the most important level of status, as it gets you free Main Cabin Extra seats, which come with extra legroom, free drinks and earlier boarding. When flying internationally, this status level gives you access to the Admirals Club and oneworld business class lounges.</p>
+            <div class="rate">oneworld Sapphire · 8 miles per $1 on AA flights</div>
+          </div>
+          <ul class="level-list">
+            <li><b>60% mileage bonus</b> on American flights</li>
+            <li><b>2 free checked bags</b></li>
+            <li><b>Group 3</b> boarding</li>
+            <li><b>Complimentary upgrades</b> clearing up to 48 hours before departure</li>
+            <li><b>Main Cabin Extra and preferred seats</b> free at booking</li>
+            <li><b>oneworld business class lounges</b> when flying internationally</li>
+            <li><b>Priority baggage</b> delivery</li>
+            <li><b>Same-day standby</b> with priority</li>
+          </ul>
+        </article>
+        <article class="level" style="--o:.75">
+          <div class="level-head">
+            <span class="tag">Platinum Pro</span>
+            <div class="lp num">125,000 <small>Loyalty Points</small></div>
+            <p class="take">I will be honest: I am not sure of the purpose of this status level, other than to set you apart from people who level off at Platinum for upgrade purposes. The rest of the perks are underwhelming.</p>
+            <div class="rate">oneworld Emerald · 9 miles per $1 on AA flights</div>
+          </div>
+          <ul class="level-list">
+            <li><b>80% mileage bonus</b> on American flights</li>
+            <li><b>3 free checked bags</b></li>
+            <li><b>Group 2</b> boarding</li>
+            <li><b>Complimentary upgrades</b> on American and Alaska, clearing up to 72 hours before departure</li>
+            <li><b>Free same-day flight changes</b>, confirmed, not just standby</li>
+            <li><b>Main Cabin Extra</b> at booking for you and up to 8 companions on the same reservation</li>
+            <li><b>Flagship Lounges and oneworld first class lounges</b> when flying internationally</li>
+          </ul>
+        </article>
+        <article class="level" style="--o:1">
+          <div class="level-head">
+            <span class="tag">Executive Platinum</span>
+            <div class="lp num">200,000 <small>Loyalty Points</small></div>
+            <p class="take">The highest level of status with the airline is also only incrementally better than Platinum. The main perks of this level are boarding group 1 and priority on upgrades.</p>
+            <div class="rate">oneworld Emerald · 11 miles per $1 on AA flights</div>
+          </div>
+          <ul class="level-list">
+            <li><b>120% mileage bonus</b> on American flights</li>
+            <li><b>3 free checked bags</b></li>
+            <li><b>Group 1</b> boarding</li>
+            <li><b>Complimentary upgrades</b> clearing up to 100 hours before departure, with top priority on the list</li>
+            <li><b>Complimentary upgrades on award tickets</b></li>
+            <li><b>Free same-day flight changes</b></li>
+            <li><b>Complimentary snack and drink</b> in the Main Cabin</li>
+            <li><b>Guaranteed Main Cabin seat</b> when buying a ticket on a sold-out flight</li>
+            <li><b>Waitlist priority</b> when buying First or Business</li>
+            <li><b>Dedicated Executive Platinum</b> service desk</li>
+          </ul>
+        </article>
+      </div>
+      <p class="note">Members without status earn 5 miles per dollar on American flights. Status earned this year lasts through March 31, 2028. Benefits can vary by route and fare, so confirm details on aa.com before you rely on one.</p>
+
+      <div class="sec-head">
+        <div class="sec-num">Bonus</div>
+        <div><h3>Extra Loyalty Points on top</h3></div>
+      </div>
+      <div class="duo">
+        <div class="panel">
+          <h3>Partner bonus <span class="tag">+25% LP</span></h3>
+          <p>Once you pass 60,000 Loyalty Points in the year, everything you earn through AA Hotels, AA Shopping, AA Dining, SimplyMiles and AA Vacations for the next six months gets a 25% Loyalty Point bonus. The bonus is capped at 25,000 Loyalty Points per six-month window.</p>
+        </div>
+        <div class="panel">
+          <h3>Executive card milestones <span class="tag">+10,000 LP each</span></h3>
+          <p>With the Citi AAdvantage Executive card, crossing 50,000, 90,000, 165,000 and 240,000 Loyalty Points in the year each adds another 10,000 Loyalty Points, up to 40,000. Any activity counts toward the milestones, including a big hotel stay.</p>
+        </div>
+      </div>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#other"><span>Previous</span>BA Avios</a><a class="hop next" href="#lounges"><span>Next stop</span>Philly Lounges</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="lounges" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Philly Lounges · Stop 08 of 11</div>
+        <h1>Philly Lounges</h1>
+        <p class="intro">American runs four lounges at PHL: a Flagship Lounge for international premium travelers and three Admirals Clubs spread across the airport. Here's where each one is, who can get in, and what to expect for food and amenities.</p>
+        <p class="intro">The A-West lounges are the newest and best, and the food and drinks at the Flagship Lounge are fantastic. The Admirals Clubs at the B/C and F gates are more than serviceable, offer free drinks and food, and save you a long walk on domestic and regional flights.</p>
+      </header>
+      <div class="page-body">
+      <div class="trips lounges">
+        <article class="trip">
+          <div class="trip-route"><b>A-WEST</b><span aria-hidden="true">·</span><b>Flagship</b><em>Flagship Lounge · opened May 2025</em></div>
+          <dl class="trip-lines">
+            <div><dt>Location</dt><dd>Mezzanine above gates A15–A16</dd></div>
+            <div><dt>Opens</dt><dd>4:30 a.m.</dd></div>
+            <div><dt>Who gets in</dt><dd>Business or first class on eligible international and transcontinental flights; Platinum Pro and Executive Platinum on international trips</dd></div>
+          </dl>
+          <div class="trip-end">
+            <p><b>Food and drink:</b> The menu is designed with Philly chef Randy Rucker of River Twice and Little Water. Mornings bring an omelet station and breakfast menu until 11 a.m., then an all-day menu with a roast pork sandwich, a cheesesteak and a rotating Rucker dish. There's a Reading Terminal-inspired candy bar, a water ice and gelati station, Champagne on arrival, bartender-made cocktails and draft beer, all complimentary.</p>
+            <p><b>Amenities:</b> Seated, order-from-your-table dining room, shower suites, and a fireplace lounge. It's about 12,500 square feet and gets crowded during the evening Europe departure bank, so arrive early.</p>
+          </div>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>A-WEST</b><span aria-hidden="true">·</span><b>Admirals</b><em>Admirals Club · opened May 2025</em></div>
+          <dl class="trip-lines">
+            <div><dt>Location</dt><dd>Mezzanine above gates A15–A16, sharing an entrance with the Flagship Lounge</dd></div>
+            <div><dt>Hours</dt><dd>About 5 a.m.–10 p.m.</dd></div>
+            <div><dt>Who gets in</dt><dd>Admirals Club members, Executive cardholders, Globe card passes, and oneworld Sapphire or Emerald on international trips</dd></div>
+          </dl>
+          <div class="trip-end">
+            <p><b>Food and drink:</b> A complimentary buffet with a hot dish, salads, fruit and snacks, plus a full-service bar with house beer, wine and spirits. Premium drinks and some dishes are available for purchase.</p>
+            <p><b>Amenities:</b> The newest and nicest Admirals Club at PHL, about 11,000 square feet with seating for around 180, showers, phone booths, a children's area and plenty of outlets. The best pick if you're flying from the A gates.</p>
+          </div>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>B/C</b><span aria-hidden="true">·</span><b>Admirals</b><em>Admirals Club · B/C connector</em></div>
+          <dl class="trip-lines">
+            <div><dt>Location</dt><dd>Third floor between Terminals B and C. Take the escalator in the middle of the food court or the elevator on the B side</dd></div>
+            <div><dt>Hours</dt><dd>About 4:30 a.m.–10 p.m.</dd></div>
+            <div><dt>Who gets in</dt><dd>Admirals Club members, Executive cardholders and Globe card passes</dd></div>
+          </dl>
+          <div class="trip-end">
+            <p><b>Food and drink:</b> The standard Admirals Club spread: a complimentary buffet with snacks and light hot food, and a full-service bar.</p>
+            <p><b>Amenities:</b> Older but convenient for most domestic flights, which leave from B and C. Wi-Fi and work seating, and it opens at 4:30 a.m. for the first morning departures.</p>
+          </div>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>F</b><span aria-hidden="true">·</span><b>Admirals</b><em>Admirals Club · Terminal F</em></div>
+          <dl class="trip-lines">
+            <div><dt>Location</dt><dd>Level 2, above the Terminal F food court</dd></div>
+            <div><dt>Hours</dt><dd>About 6:30 a.m.–10 p.m.</dd></div>
+            <div><dt>Who gets in</dt><dd>Admirals Club members, Executive cardholders and Globe card passes</dd></div>
+          </dl>
+          <div class="trip-end">
+            <p><b>Food and drink:</b> Complimentary snacks and drinks with a full-service bar, on a smaller scale than the A and B/C clubs.</p>
+            <p><b>Amenities:</b> The smallest of the four. Terminal F handles American Eagle regional flights, so this club is the one to use for short regional hops like Pittsburgh or Washington, where walking to another terminal isn't worth it.</p>
+          </div>
+        </article>
+        <article class="trip">
+          <div class="trip-route"><b>A-WEST</b><span aria-hidden="true">·</span><b>British Airways</b><em>Galleries Club · run by British Airways</em></div>
+          <dl class="trip-lines">
+            <div><dt>Location</dt><dd>Terminal A-West, after security, near gate A14</dd></div>
+            <div><dt>Hours</dt><dd>Afternoons and evenings only, about 3:15–8 p.m., around the London departure</dd></div>
+            <div><dt>Who gets in</dt><dd>Platinum, Platinum Pro and Executive Platinum (oneworld Sapphire and Emerald) flying a oneworld international itinerary, plus British Airways business and first class</dd></div>
+          </dl>
+          <div class="trip-end">
+            <p><b>Status access through oneworld:</b> British Airways and American are both in the oneworld alliance, so higher AAdvantage status gets you in even if you're flying American, not British Airways, as long as your trip is international. Gold (oneworld Ruby) and Admirals Club membership alone don't qualify.</p>
+            <p><b>Food and drink:</b> A hot and cold buffet with a full bar, wine and Champagne.</p>
+            <p><b>Amenities:</b> Usually quieter than the A-West Admirals Club, which makes it a good escape when the Admirals Club is packed before the evening Europe flights. It's also Aer Lingus's lounge at PHL.</p>
+          </div>
+        </article>
+      </div>
+      <p class="note">Hours change seasonally. Check the American app for today's hours and access rules before you go.</p>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#status"><span>Previous</span>Status</a><a class="hop next" href="#cards"><span>Next stop</span>Cards</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="cards" hidden>
+    <div class="wrap">
+      <div class="pass">
+        <div class="pass-main">
+          <div class="pass-top">
+            <span class="airline">PHL Points · Boarding pass</span>
+            <span class="stop">Stop 09 of 11</span>
+          </div>
+          <div class="route">
+            <div class="iata"><b>PHL</b><span>Philadelphia</span></div>
+            <div class="flightpath" aria-hidden="true"><svg viewBox="0 0 300 30" preserveAspectRatio="none"><path d="M4 26 Q150 -8 296 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 5" vector-effect="non-scaling-stroke"/><path d="M150 6.5 l9 3.4 -9 3.4 2 -3.4z" fill="currentColor"/></svg></div>
+            <div class="iata"><b>CRD</b><span>Cards</span></div>
+          </div>
+          <h1>Pick the right card</h1>
+          <p class="intro">Citi became the sole issuer of AAdvantage consumer cards in 2026, and Barclays Aviator accounts were moved to the Citi Platinum Select starting April 24. These are the four personal cards worth knowing.</p>
+          <dl class="fields">
+            <div><dt>Earns</dt><dd>Miles + LP</dd></div>
+            <div><dt>Best for</dt><dd>Choosing a card</dd></div>
+            <div><dt>Next stop</dt><dd>Today's Deals</dd></div>
+          </dl>
+        </div>
+        <div class="pass-stub" aria-hidden="true">
+          <span class="stub-code">CRD</span>
+          <span class="barcode"></span>
+          <span class="stub-seat">Stop 09</span>
+        </div>
+      </div>
+      <div class="page-body">
+      <div class="cards">
+        <article class="cc">
+          <h3>MileUp</h3>
+          <div class="fee num">$0 <small>/ yr</small></div>
+          <dl>
+            <dt>Earns</dt><dd>2x at grocery stores and on AA; 1x elsewhere</dd>
+            <dt>Status</dt><dd>1 LP per $1</dd>
+          </dl>
+          <p class="who">For: anyone starting out who wants LP from grocery runs with no fee.</p>
+        </article>
+        <article class="cc pick">
+          <span class="tag" style="justify-self:start">Best start for most</span>
+          <h3>Platinum Select</h3>
+          <div class="fee num">$99 <small>→ $150 Jan 24, 2027</small></div>
+          <dl>
+            <dt>Earns</dt><dd>2x on AA, gas and restaurants. From Jan 2027 adds 2x on transit and streaming, 3x on AAdvantage Hotels and Cars</dd>
+            <dt>Perks</dt><dd>Free first checked bag. From 2027: up to $100/yr inflight credit, Global Entry / PreCheck credit, Walmart+</dd>
+          </dl>
+          <p class="who">For: two or more round trips a year with a checked bag. The bag benefit alone covers the fee.</p>
+        </article>
+        <article class="cc">
+          <h3>Globe</h3>
+          <div class="fee num">$350 <small>/ yr</small></div>
+          <dl>
+            <dt>Earns</dt><dd>6x AAdvantage Hotels, 3x AA, 2x restaurants and Rides &amp; Rails (SEPTA counts as public transit)</dd>
+            <dt>Perks</dt><dd>4 Admirals Club passes, $99 domestic companion fare from year two, Flight Streak: 5,000 LP per 4 flights (max 15,000)</dd>
+          </dl>
+          <p class="who">For: 8 to 12 AA flights a year out of PHL, a few lounge visits, and a travel partner for the companion fare.</p>
+        </article>
+        <article class="cc">
+          <h3>Executive</h3>
+          <div class="fee num">$695 <small>/ yr new</small></div>
+          <dl>
+            <dt>Earns</dt><dd>4x on AA, 12x on AAdvantage Hotels and Cars</dd>
+            <dt>Perks</dt><dd>Full Admirals Club membership. 10,000 bonus LP at each of 50K, 90K, 165K and 240K LP (up to 40,000)</dd>
+          </dl>
+          <p class="who">For: chasing Platinum Pro or Executive Platinum, or using the PHL clubs every month.</p>
+        </article>
+      </div>
+      <p class="note">Card details and fees as published by Citi and American; offers change often. The Globe's welcome bonus is unavailable if you earned a bonus on certain other Citi AAdvantage cards in the past 48 months, so read the terms before you sequence applications.</p>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#lounges"><span>Previous</span>Philly Lounges</a><a class="hop next" href="#deals"><span>Next stop</span>Today's Deals</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="deals" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Philly · Stop 10 of 11</div>
+        <h1>Today's deals</h1>
+        <p class="intro">Check back every day for the best deals on the AA websites. Below I outline this week's best AA Hotels finds, plus today's best AA Shopping rates at the most popular stores, and ten of the best Philly restaurants on AA Dining, refreshed every evening. Utilizing these services with an AA credit card will help grow your miles accounts.</p>
+      </header>
+      <div class="page-body">
+      <p class="note" id="deals-updated" style="margin:0 0 8px">Updated daily.</p>
+
+      <div class="sec-head" style="margin-top:12px">
+        <div><h3>AA Hotels: picks of the week</h3><p class="intro">Each week I run three sample searches on the AA Hotels portal (a week in Europe, a weekend in an American city and five days in the Caribbean) and post the hotel that earns the most miles and Loyalty Points per dollar, among hotels guests rate 8/10 or better.</p></div>
+      </div>
+      <div class="trips hotel-picks" id="hotel-picks"></div>
+      <p class="note" id="hotel-note">Miles shown are the booking award for AAdvantage credit cardmembers with status, before your card's own miles (12x with the Executive card). Members without status or a card earn less. Prices and awards change daily, so search the AA Hotels portal to confirm.</p>
+
+
+      <div class="sec-head">
+        <div><h3>AA Shopping: top 10 popular stores</h3><p class="intro">Today's AA Shopping rates at the big-name stores most people actually shop, highest rate first. Every portal mile is also a Loyalty Point. Amazon, Walmart and Target aren't on the portal.</p></div>
+      </div>
+      <article class="trip deal-card">
+        <div class="trip-route"><b>Top 10</b><span aria-hidden="true">·</span><b>AA Shopping</b><em>Rates change daily, so confirm on the portal before you buy</em></div>
+        <dl class="trip-lines" id="shop-list"></dl>
+        <p class="trip-end" id="shop-top"></p>
+      </article>
+
+      <div class="sec-head">
+        <div><h3>AA Dining: top 10 Philly restaurants</h3><p class="intro">Ten of the best-reviewed participating restaurants in Philadelphia on AA Dining, based on diner ratings and number of reviews. Pay with a registered card to earn up to 5 miles and 5 Loyalty Points per dollar.</p></div>
+      </div>
+      <article class="trip deal-card">
+        <div class="trip-route"><b>Top 10</b><span aria-hidden="true">·</span><b>AA Dining</b><em>Philadelphia · from 527 participating restaurants within 30 miles</em></div>
+        <dl class="trip-lines" id="dine-list"></dl>
+      </article>
+
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#cards"><span>Previous</span>Cards</a><a class="hop next" href="#flights"><span>Next stop</span>Award Flights</a></nav>
+    </div>
+  </section>
+  <section class="page" data-page="flights" hidden>
+    <div class="wrap">
+      <header class="page-head">
+        <div class="eyebrow">Philly · Stop 11 of 11</div>
+        <h1>Award flights</h1>
+        <p class="intro">Check back every day. The award fares American is advertising from PHL to Europe, refreshed every morning, plus great fares I've found myself.</p>
+      </header>
+      <div class="page-body">
+      <p class="note" id="flights-updated" style="margin:0 0 8px">Updated daily.</p>
+
+      <div class="sec-head" style="margin-top:12px">
+        <div><h3>PHL Points picks</h3><p class="intro">Great award fares I've found myself searching from PHL. Each one shows the day I spotted it. Award prices move fast, so search on aa.com to confirm before you book.</p></div>
+      </div>
+      <article class="trip deal-card">
+        <div class="trip-route"><b>Picks</b><span aria-hidden="true">·</span><b>Spotted by me</b><em>Fares from my own searches · newest first</em></div>
+        <dl class="trip-lines" id="picks-list"></dl>
+      </article>
+      <p class="note"><b>About these picks:</b> Each fare was available on aa.com when I found it, on the date shown. Award seats are limited and prices change constantly, sometimes within hours, so a fare may already be gone or cost more by the time you search. Always confirm the price on aa.com or the American app before transferring points or booking. PHL Points isn't affiliated with American Airlines and can't guarantee availability or pricing.</p>
+
+      <div class="sec-head">
+        <div><h3>Current advertised award flights</h3><p class="intro">American opens award seats about 11 months before departure, and that's when the best fares appear. Here's a sampling of the three best round-trip award fares from PHL to Europe that American is advertising for travel 9 to 11 months out, around <span id="eu-window">late 2027</span>.</p></div>
+      </div>
+      <article class="trip deal-card">
+        <div class="trip-route"><b>PHL</b><span aria-hidden="true">✈</span><b>Europe</b><em>Book on day one · award tickets are fully refundable</em></div>
+        <dl class="trip-lines" id="eu-list"></dl>
+      </article>
+      <p class="note">Award prices are dynamic and can change within hours. Search on aa.com with "Redeem miles" checked to confirm before you book.</p>
+      </div>
+      <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#deals"><span>Previous</span>Today's Deals</a><a class="hop next" href="#home"><span>Return to</span>Home</a></nav>
+    </div>
+  </section>
+<script type="application/json" id="deals-data">
+{
+ "updated": "2026-10-31",
+ "shopping": [
+  {
+   "store": "Best Buy",
+   "rate": "Up to 5.5 miles/$",
+   "note": "Was up to 5 miles/$"
+  },
+  {
+   "store": "adidas",
+   "rate": "3.5 miles/$",
+   "note": "Was 1 mile/$"
+  },
+  {
+   "store": "Lenovo",
+   "rate": "3.5 miles/$",
+   "note": "Was 2 miles/$"
+  },
+  {
+   "store": "Macy's",
+   "rate": "Up to 3 miles/$",
+   "note": "Was up to 2.5 miles/$"
+  },
+  {
+   "store": "Nike",
+   "rate": "3 miles/$",
+   "note": "Was 2 miles/$"
+  },
+  {
+   "store": "Ulta Beauty",
+   "rate": "3 miles/$",
+   "note": "Was 1.5 miles/$"
+  },
+  {
+   "store": "Expedia",
+   "rate": "Up to 3 miles/$",
+   "note": "Was up to 2 miles/$"
+  },
+  {
+   "store": "Home Depot",
+   "rate": "Up to 3 miles/$",
+   "note": "Varies by category"
+  },
+  {
+   "store": "Kohl's",
+   "rate": "2 miles/$",
+   "note": ""
+  },
+  {
+   "store": "Sephora",
+   "rate": "2 miles/$",
+   "note": ""
+  }
+ ],
+ "dining": [
+  {
+   "name": "Rittenhouse Grill",
+   "cuisine": "Steakhouse · Acclaimed",
+   "area": "4.9★ (189 reviews) · 50 bonus miles with reservation"
+  },
+  {
+   "name": "Del Rossi's Cheesesteak Co.",
+   "cuisine": "Cheesesteaks & pizza",
+   "area": "Old City / Northern Liberties · 4.9★ (169 reviews)"
+  },
+  {
+   "name": "Con Murphy's Irish Pub",
+   "cuisine": "Irish pub",
+   "area": "4.8★ (279 reviews) · 50 bonus miles with reservation"
+  },
+  {
+   "name": "La Famiglia",
+   "cuisine": "Italian, seafood & steak · Acclaimed",
+   "area": "Old City / Society Hill · 4.9★ (50 reviews)"
+  },
+  {
+   "name": "Honeysuckle",
+   "cuisine": "New American · Acclaimed",
+   "area": "4.9★ (54 reviews) · 50 bonus miles with reservation"
+  },
+  {
+   "name": "KINTO",
+   "cuisine": "Georgian",
+   "area": "Manayunk / NW Philly · 4.8★ (62 reviews)"
+  },
+  {
+   "name": "Starbolt",
+   "cuisine": "New American & cocktails",
+   "area": "4.9★ (51 reviews)"
+  },
+  {
+   "name": "Urban Village Brewing Company",
+   "cuisine": "Brewpub & pizza",
+   "area": "5.0★ (44 reviews) · 50 bonus miles with reservation"
+  },
+  {
+   "name": "Gouldsburger's",
+   "cuisine": "Burgers & cheesesteaks",
+   "area": "4.9★ (35 reviews)"
+  },
+  {
+   "name": "Philly Style Bagels",
+   "cuisine": "Bagels & bakery",
+   "area": "5.0★ (35 reviews)"
+  }
+ ],
+ "dining_note": "",
+ "europe": [
+  {
+   "route": "PHL → LHR",
+   "city": "London",
+   "dates": "Sep 1–8, 2027",
+   "miles": "42,000 miles",
+   "cash": "+ $237",
+   "cabin": "Economy, round trip · 10 months out"
+  },
+  {
+   "route": "PHL → LHR",
+   "city": "London",
+   "dates": "Sep 18–22, 2027",
+   "miles": "42,000 miles",
+   "cash": "+ $237",
+   "cabin": "Economy, round trip · 11 months out"
+  }
+ ],
+ "shopping_top": {
+  "store": "Magazines.com",
+  "rate": "17 miles/$",
+  "note": "Was 11 miles/$"
+ }
+}
+</script>
+<script type="application/json" id="picks-data">
+[
+  {"route": "PHL → AMS", "city": "Amsterdam", "dates": "Sep 1–7, 2027", "depart": "2027-09-01", "miles": "42,000 miles", "cash": "+ $160.79", "cabin": "Main Cabin, round trip", "spotted": "2026-10-30", "note": "Nonstop both ways"},
+  {"route": "PHL → CDG", "city": "Paris", "dates": "Sep 11–17, 2027", "depart": "2027-09-11", "miles": "42,000 miles", "cash": "+ $131.49", "cabin": "Main Cabin, round trip", "spotted": "2026-10-30", "note": "Nonstop both ways"},
+  {"route": "PHL → NCE", "city": "Nice", "dates": "Sep 12–17, 2027", "depart": "2027-09-12", "miles": "42,000 miles", "cash": "+ $106.09", "cabin": "Main Cabin, round trip", "spotted": "2026-10-30", "note": "Nonstop both ways · lowest taxes of the three"}
+]
+</script>
+<script type="application/json" id="hotels-data">
+{
+  "updated": "2026-10-30",
+  "picks": [
+    {"trip": "One week in Europe", "city": "London", "dates": "Jan 15–22, 2027 · 7 nights", "hotel": "Millennium Hotel and Conference Centre Gloucester", "area": "South Kensington · 4★ · 8.1/10 (12,717 reviews)", "miles": 12500, "usd": 1249},
+    {"trip": "Weekend in an American city", "city": "New York", "dates": "Jan 8–10, 2027 · 2 nights", "hotel": "Tempo by Hilton Times Square", "area": "Times Square · 3★ · 8.8/10 (2,703 reviews)", "miles": 14700, "usd": 1038},
+    {"trip": "Five days in the Caribbean", "city": "Punta Cana", "dates": "Jan 20–25, 2027 · 5 nights", "hotel": "Caribe Deluxe Princess, All Inclusive", "area": "Bávaro · 5★ · 8.5/10 (186 reviews)", "miles": 15000, "usd": 1517}
+  ]
+}
+</script>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>This is an independent guide and is not affiliated with or endorsed by American Airlines or Citi. Program rules, card fees and offers change often. Confirm details on aa.com and with the card issuer before applying or booking. Nothing here is financial advice.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  try {
+    var end = new Date(2027, 1, 28, 23, 59, 59);
+    var days = Math.ceil((end - new Date()) / 86400000);
+    var dl = document.getElementById('days-left'); if (dl) dl.textContent = days > 0 ? days + (days === 1 ? ' day' : ' days') : 'Closed';
+  } catch (e) {}
+
+  // Mark deals as ending soon or ended based on today's date
+  (function () {
+    var now = new Date();
+    document.querySelectorAll('[data-ends]').forEach(function (el) {
+      var v = el.getAttribute('data-ends');
+      if (!v) return;
+      var p = v.split('-');
+      var end = new Date(+p[0], +p[1] - 1, +p[2], 23, 59, 59);
+      var left = (end - now) / 86400000;
+      var badge = el.querySelector('.status');
+      if (left < 0) {
+        el.classList.add('expired');
+        if (badge) { badge.className = badge.className.replace(/\b(live|ending|new|on)\b/g, '') + ' ended status'; badge.textContent = 'Ended'; }
+      } else if (left <= 7 && badge) {
+        badge.className = badge.className.replace(/\b(live|new|on)\b/g, '') + ' ending status';
+        badge.textContent = left < 1 ? 'Ends today' : 'Ending soon';
+      }
+    });
+  })();
+
+  // Philly Deals: render the daily data block
+  (function () {
+    var el = document.getElementById('deals-data');
+    if (!el) return;
+    var d; try { d = JSON.parse(el.textContent); } catch (e) { return; }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    function row(k, v, small) { return '<div><dt>' + esc(k) + '</dt><dd>' + esc(v) + (small ? ' <small>' + esc(small) + '</small>' : '') + '</dd></div>'; }
+    if (d.updated) {
+      var p = d.updated.split('-'), dt = new Date(+p[0], +p[1] - 1, +p[2]);
+      var ut = 'Last updated ' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) + '.';
+      ['deals-updated', 'flights-updated'].forEach(function (id) { var u = document.getElementById(id); if (u) u.textContent = ut; });
+    }
+    var shop = (d.shopping || []).slice(0, 10);
+    document.getElementById('shop-list').innerHTML = shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal');
+    var top = d.shopping_top, st = document.getElementById('shop-top');
+    if (top && top.store) st.innerHTML = '<b>Best rate anywhere on the portal today:</b> ' + esc(top.store) + ', ' + esc(top.rate) + '.'; else st.remove();
+    var dine = d.dining || [], dl = document.getElementById('dine-list');
+    if (dine.length) {
+      dl.innerHTML = dine.slice(0, 10).map(function (r, i) { return row((i + 1) + '. ' + r.name, r.cuisine, r.area); }).join('');
+    } else {
+      dl.innerHTML = '<div class="dl-note">' + esc(d.dining_note || 'Restaurant list coming soon.') + '</div>';
+    }
+    var eu = (d.europe || []).slice(0, 3);
+    try { var o = { month: 'long' }, a = new Date(Date.now() + 270 * 86400000), z = new Date(Date.now() + 331 * 86400000); document.getElementById('eu-window').textContent = (a.getMonth() === z.getMonth() ? '' : a.toLocaleDateString('en-US', o) + ' to ') + z.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }); } catch (e) {}
+    document.getElementById('eu-list').innerHTML = eu.length ? eu.map(function (f) { return row(f.route + ' · ' + f.dates, f.miles + ' ' + (f.cash || ''), f.cabin); }).join('') + (eu.length < 3 ? '<div class="dl-note">American is only advertising ' + eu.length + ' PHL award fare' + (eu.length === 1 ? '' : 's') + ' to Europe for these dates today. Search aa.com with the calendar view to price other cities like Rome, Dublin or Barcelona.</div>' : '') : row('No fares confirmed today', 'Search aa.com with the calendar view');
+  })();
+
+  // Today's Deals: weekly AA Hotels sample searches
+  (function () {
+    var el = document.getElementById('hotels-data'), box = document.getElementById('hotel-picks');
+    if (!el || !box) return;
+    var d; try { d = JSON.parse(el.textContent); } catch (e) { return; }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    function n(x) { return Number(x).toLocaleString('en-US'); }
+    var picks = d.picks || [];
+    if (!picks.length) { box.outerHTML = '<div class="dl-note">This week\'s hotel picks are on the way.</div>'; return; }
+    box.innerHTML = picks.map(function (p) {
+      var mpd = p.usd ? (p.miles / p.usd).toFixed(1) : '';
+      return '<article class="trip"><div class="trip-route"><b>' + esc(p.city) + '</b><em>' + esc(p.trip) + '</em></div>' +
+        '<dl class="trip-lines"><div><dt>Hotel</dt><dd>' + esc(p.hotel) + ' <small>' + esc(p.area) + '</small></dd></div>' +
+        '<div><dt>Dates</dt><dd>' + esc(p.dates) + '</dd></div>' +
+        '<div><dt>Total cost</dt><dd>$' + n(p.usd) + '</dd></div>' +
+        '<div class="total"><dt>Miles + LP</dt><dd>' + n(p.miles) + ' <small>' + mpd + ' per $1</small></dd></div></dl></article>';
+    }).join('');
+    if (d.updated) { var q = d.updated.split('-'), dt = new Date(+q[0], +q[1] - 1, +q[2]); var note = document.getElementById('hotel-note'); if (note) note.textContent = 'Searched ' + dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) + '. ' + note.textContent; }
+  })();
+
+  // Award Flights: my own picks, which age out automatically
+  (function () {
+    var el = document.getElementById('picks-data'), list = document.getElementById('picks-list');
+    if (!el || !list) return;
+    var picks; try { picks = JSON.parse(el.textContent) || []; } catch (e) { picks = []; }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    function day(s) { var p = String(s || '').split('-'); return p.length === 3 ? new Date(+p[0], +p[1] - 1, +p[2]) : null; }
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var live = picks.filter(function (k) {
+      var sp = day(k.spotted), dep = day(k.depart);
+      if (dep && dep < today) return false;
+      if (sp && (today - sp) / 86400000 > 21) return false;
+      return true;
+    }).sort(function (a, b) { return (day(b.spotted) || 0) - (day(a.spotted) || 0); });
+    if (!live.length) { list.innerHTML = '<div class="dl-note">No picks right now. New finds are posted here as soon as I spot them, so check back soon.</div>'; return; }
+    list.innerHTML = live.map(function (k) {
+      var sp = day(k.spotted), age = sp ? Math.round((today - sp) / 86400000) : 0;
+      var when = sp ? 'Spotted ' + sp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+      var stale = age > 7 ? ' · may no longer be available, search to confirm' : '';
+      return '<div><dt>' + esc(k.route + ' · ' + k.dates) + (k.note ? '<br><small class="pick-note">' + esc(k.note) + '</small>' : '') + '</dt><dd>' + esc(k.miles + ' ' + (k.cash || '')) + ' <small>' + esc((k.cabin || '') + (when ? ' · ' + when : '') + stale) + '</small></dd></div>';
+    }).join('');
+  })();
+
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var names = pages.map(function (p) { return p.getAttribute('data-page'); });
+  var nav = document.getElementById('mainnav');
+  var subBtns = Array.prototype.slice.call(document.querySelectorAll('.sub-btn'));
+
+  function closeSubs(except) {
+    subBtns.forEach(function (b) {
+      if (b === except) return;
+      b.setAttribute('aria-expanded', 'false');
+      document.getElementById(b.getAttribute('aria-controls')).hidden = true;
+    });
+  }
+  function closeAll() { closeSubs(); }
+
+  function route() {
+    var h = location.hash.replace('#', '');
+    var name = names.indexOf(h) >= 0 ? h : 'home';
+    pages.forEach(function (p) { p.hidden = p.getAttribute('data-page') !== name; });
+    document.querySelectorAll('#mainnav a[data-link]').forEach(function (a) {
+      if (a.getAttribute('data-link') === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    document.querySelectorAll('.has-sub').forEach(function (li) {
+      li.classList.toggle('active', li.getAttribute('data-group').split(' ').indexOf(name) >= 0);
+    });
+    closeAll();
+    window.scrollTo(0, 0);
+    if (name === 'home') drawSky();
+  }
+
+  subBtns.forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var menu = document.getElementById(b.getAttribute('aria-controls'));
+      var open = menu.hidden;
+      closeSubs(b);
+      menu.hidden = !open;
+      b.setAttribute('aria-expanded', String(open));
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.has-sub')) closeSubs();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+  window.addEventListener('hashchange', route);
+
+  function drawSky() {
+    var c = document.getElementById('sky-canvas');
+    if (!c || !c.getContext) return;
+    var r = c.getBoundingClientRect();
+    if (!r.width) return;
+    var dpr = window.devicePixelRatio || 1;
+    c.width = r.width * dpr; c.height = r.height * dpr;
+    var x = c.getContext('2d'); x.scale(dpr, dpr);
+    var w = r.width, h = r.height;
+    var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    for (var i = 0; i < 70; i++) {
+      x.fillStyle = 'rgba(255,255,255,' + (0.15 + rnd() * 0.45) + ')';
+      x.beginPath(); x.arc(rnd() * w, rnd() * h * 0.55, rnd() * 1.3 + 0.3, 0, 7); x.fill();
+    }
+    var ox = w * 0.06, oy = h * 0.92;
+    var dests = [[0.55, 0.30], [0.68, 0.22], [0.80, 0.34], [0.92, 0.18], [0.98, 0.42]];
+    x.setLineDash([2, 7]); x.lineWidth = 1.4; x.strokeStyle = 'rgba(246,195,114,0.55)';
+    dests.forEach(function (d) {
+      var tx = w * d[0], ty = h * d[1];
+      x.beginPath(); x.moveTo(ox, oy); x.quadraticCurveTo((ox + tx) / 2, Math.min(oy, ty) - h * 0.35, tx, ty); x.stroke();
+      x.setLineDash([]); x.fillStyle = 'rgba(246,195,114,0.8)'; x.beginPath(); x.arc(tx, ty, 2.5, 0, 7); x.fill(); x.setLineDash([2, 7]);
+    });
+    x.setLineDash([]); x.fillStyle = '#f6c372'; x.beginPath(); x.arc(ox, oy, 4, 0, 7); x.fill();
+  }
+  window.addEventListener('resize', function () { if (!document.querySelector('[data-page="home"]').hidden) drawSky(); });
+  route();
+})();
+</script>
+</body>
+</html>
