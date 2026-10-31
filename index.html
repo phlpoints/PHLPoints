@@ -401,6 +401,25 @@ footer p { max-width: 80ch; }
   .deals-link .cw { display: none; }
   .nav-link { font-size: .78rem; padding: 7px 5px; }
 }
+/* Phones: two-row top bar. Row 1 = brand + Instagram, row 2 = full nav, no sideways scroll */
+@media (max-width: 760px) {
+  .topbar .wrap { flex-wrap: wrap; row-gap: 4px; column-gap: 10px; padding-top: 10px; padding-bottom: 8px; }
+  .brand { order: 1; font-size: 1rem; }
+  .brand svg { display: block; width: 22px; height: 22px; }
+  .ig-top { display: inline-flex; order: 2; margin-left: auto; padding: 6px 10px; font-size: .8rem; }
+  .ig-top span { display: inline; }
+  .ig-top svg { width: 17px; height: 17px; }
+  .mainnav { order: 3; flex: 1 0 100%; min-width: 0; overflow: visible; }
+  .navlist { width: 100%; justify-content: space-between; flex-wrap: nowrap; gap: 0; }
+  .nav-link .cw { display: none; }
+  .nav-link { font-size: .82rem; padding: 7px 5px; gap: 2px; }
+  .deals-link { margin: 0; padding: 7px 10px; }
+}
+@media (max-width: 400px) {
+  .nav-link { font-size: .78rem; padding: 7px 3px; }
+  .deals-link { padding: 7px 7px; }
+  .ig-top span { display: none; }
+}
 
 /* Deals */
 .deal-board td.when { white-space: nowrap; }
