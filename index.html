@@ -319,6 +319,7 @@ footer p { max-width: 80ch; }
 @media (max-width: 960px) { .ig-top span { display: none; } .ig-top { padding: 7px; } }
 @media (max-width: 760px) { .ig-top { display: none; } }
 .ig-btn { gap: 10px; }
+.picks-wrap + .ig-banner { margin-top: 18px; }
 .ig-banner { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; max-width: 860px; margin: 10px 0 6px; padding: 16px 20px; border-radius: 14px; background: var(--sky); color: #e5ecf5; text-decoration: none; border: 1px solid #1f3550; }
 .ig-banner:hover { border-color: var(--sun); }
 .ig-banner b { color: #fff; }
@@ -1149,13 +1150,9 @@ footer p { max-width: 80ch; }
         <p class="intro">On this page are great award fares out of PHL that I have found myself. I post these fares the day (or moment) I spot them, but award prices change quickly. By the time you see this page, a fare may cost more or be gone, so always confirm on aa.com or the American app before you book or transfer points.</p>
       </header>
       <div class="page-body">
-      <a class="ig-banner" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><span class="ig-ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></span><span><b>New deals hit Instagram first.</b> Follow @phlpoints and turn on post notifications so you see fares before they disappear.</span><span class="ig-go">Follow →</span></a>
 
-
-      <div class="sec-head" style="margin-top:28px">
-        <div><h3>PHL Points picks</h3><p class="intro">Newest first. Miles and taxes are per person, round trip.</p></div>
-      </div>
       <div class="picks-wrap"><table class="picks-table" id="picks-list"></table></div>
+      <a class="ig-banner" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><span class="ig-ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></span><span><b>New deals hit Instagram first.</b> Follow @phlpoints and turn on post notifications so you see fares before they disappear.</span><span class="ig-go">Follow →</span></a>
       <p class="note">Picks drop off automatically 21 days after I spot them or once the travel date passes. PHL Points is not affiliated with American Airlines and cannot guarantee availability or pricing.</p>
       </div>
       <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#deals"><span>Previous</span>Today's Deals</a><a class="hop next" href="#home"><span>Return to</span>Home</a></nav>
@@ -1463,7 +1460,7 @@ footer p { max-width: 80ch; }
       return true;
     }).sort(function (a, b) { return (day(b.spotted) || 0) - (day(a.spotted) || 0); });
     if (!live.length) { list.innerHTML = '<tbody><tr><td class="none">No picks right now. New finds are posted here as soon as I spot them, so check back soon.</td></tr></tbody>'; return; }
-    list.innerHTML = '<thead><tr><th>Route</th><th>Travel dates</th><th>Miles + taxes</th><th>Spotted</th></tr></thead><tbody>' + live.map(function (k) {
+    list.innerHTML = '<thead><tr><th>Route</th><th>Travel dates</th><th>Miles + taxes, per person</th><th>Spotted</th></tr></thead><tbody>' + live.map(function (k) {
       var sp = day(k.spotted), age = sp ? Math.round((today - sp) / 86400000) : 0;
       var when = sp ? sp.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
       var stale = age > 7 ? '<small class="stale">May be gone, search to confirm</small>' : '';
