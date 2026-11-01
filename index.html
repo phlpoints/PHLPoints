@@ -290,6 +290,28 @@ footer p { max-width: 80ch; }
 .sky .lede { display: grid; gap: 14px; max-width: 70ch; }
 .sky .lede p { margin: 0; }
 
+
+/* PHL Award Flights: picks table */
+.pick-warn { max-width: 860px; margin: 10px 0 0; padding: 14px 18px; border-radius: 12px; background: var(--sun-soft); border-left: 4px solid var(--sun); font-size: .95rem; line-height: 1.5; }
+.picks-wrap { max-width: 980px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.picks-table { width: 100%; border-collapse: collapse; }
+.picks-table th { text-align: left; font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: #b9c7d8; background: var(--sky); padding: 12px 16px; font-weight: 600; }
+.picks-table td { padding: 14px 16px; border-top: 1px dashed var(--line); vertical-align: top; }
+.picks-table td small { display: block; color: var(--muted); font-size: .84rem; margin-top: 3px; }
+.picks-table td b.mi { font-family: var(--font-display); font-weight: 800; color: var(--horizon); font-size: 1.15rem; }
+.picks-table td.sp, .picks-table td.dt { white-space: nowrap; }
+.picks-table td.sp { font-weight: 600; }
+.picks-table small.stale { color: var(--stamp); white-space: normal; }
+.picks-table td.none { color: var(--muted); }
+@media (max-width: 680px) {
+  .picks-table thead { display: none; }
+  .picks-table tr { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; padding: 14px 16px; border-top: 1px dashed var(--line); }
+  .picks-table tr:first-child { border-top: 0; }
+  .picks-table td { padding: 0; border: 0; }
+  .picks-table td:first-child { grid-column: 1 / -1; }
+  .picks-table td::before { content: attr(data-l); display: block; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .picks-table td:first-child::before { display: none; }
+}
 /* Instagram links */
 .ig-top { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: #d8e3f0; text-decoration: none; font-weight: 600; font-size: .88rem; padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; white-space: nowrap; }
 .ig-top:hover { color: #fff; background: rgba(255,255,255,.08); }
@@ -1124,29 +1146,19 @@ footer p { max-width: 80ch; }
       <header class="page-head">
         <div class="eyebrow">PHL Deals · Stop 11 of 11</div>
         <h1>PHL award flights</h1>
-        <p class="intro">Check back every day. The award fares American is advertising from PHL to Europe, refreshed every morning, plus great fares I've found myself.</p>
+        <p class="intro">Check back often. These are great award fares out of PHL that I've found myself, posted the day I spot them.</p>
       </header>
       <div class="page-body">
-      <p class="note" id="flights-updated" style="margin:0 0 8px">Updated daily.</p>
+      <p class="note" id="flights-updated" style="margin:0 0 8px">New picks are added as soon as I find them.</p>
       <a class="ig-banner" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><span class="ig-ico"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></span><span><b>New deals hit Instagram first.</b> Follow @phlpoints and turn on post notifications so you see fares before they disappear.</span><span class="ig-go">Follow →</span></a>
 
-      <div class="sec-head" style="margin-top:12px">
-        <div><h3>PHL Points picks</h3><p class="intro">Great award fares I've found myself searching from PHL. Each one shows the day I spotted it. Award prices move fast, so search on aa.com to confirm before you book.</p></div>
-      </div>
-      <article class="trip deal-card">
-        <div class="trip-route"><b>Picks</b><span aria-hidden="true">·</span><b>Spotted by me</b><em>Fares from my own searches · newest first</em></div>
-        <dl class="trip-lines" id="picks-list"></dl>
-      </article>
-      <p class="note"><b>About these picks:</b> Each fare was available on aa.com when I found it, on the date shown. Award seats are limited and prices change constantly, sometimes within hours, so a fare may already be gone or cost more by the time you search. Always confirm the price on aa.com or the American app before transferring points or booking. PHL Points isn't affiliated with American Airlines and can't guarantee availability or pricing.</p>
+      <div class="pick-warn"><b>Heads up:</b> I post these fares the moment I spot them, but award prices change quickly. By the time you see this page, a fare may cost more or be gone, so always confirm on aa.com or the American app before you book or transfer points.</div>
 
-      <div class="sec-head">
-        <div><h3>Current advertised award flights</h3><p class="intro">American opens award seats about 11 months before departure, and that's when the best fares appear. Here's a sampling of the three best round-trip award fares from PHL to Europe that American is advertising for travel 9 to 11 months out, around <span id="eu-window">late 2027</span>.</p></div>
+      <div class="sec-head" style="margin-top:22px">
+        <div><h3>PHL Points picks</h3><p class="intro">Great award fares from PHL that I've found myself, newest first. Miles and taxes are per person, round trip.</p></div>
       </div>
-      <article class="trip deal-card">
-        <div class="trip-route"><b>PHL</b><span aria-hidden="true">✈</span><b>Europe</b><em>Book on day one · award tickets are fully refundable</em></div>
-        <dl class="trip-lines" id="eu-list"></dl>
-      </article>
-      <p class="note">Award prices are dynamic and can change within hours. Search on aa.com with "Redeem miles" checked to confirm before you book.</p>
+      <div class="picks-wrap"><table class="picks-table" id="picks-list"></table></div>
+      <p class="note">Picks drop off automatically 21 days after I spot them or once the travel date passes. PHL Points isn't affiliated with American Airlines and can't guarantee availability or pricing.</p>
       </div>
       <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#deals"><span>Previous</span>Today's Deals</a><a class="hop next" href="#home"><span>Return to</span>Home</a></nav>
     </div>
@@ -1404,7 +1416,7 @@ footer p { max-width: 80ch; }
     if (d.updated) {
       var p = d.updated.split('-'), dt = new Date(+p[0], +p[1] - 1, +p[2]);
       var ut = 'Last updated ' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) + '.';
-      ['deals-updated', 'flights-updated'].forEach(function (id) { var u = document.getElementById(id); if (u) u.textContent = ut; });
+      ['deals-updated'].forEach(function (id) { var u = document.getElementById(id); if (u) u.textContent = ut; });
     }
     var shop = (d.shopping || []).slice(0, 10);
     document.getElementById('shop-list').innerHTML = shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal');
@@ -1416,9 +1428,6 @@ footer p { max-width: 80ch; }
     } else {
       dl.innerHTML = '<div class="dl-note">' + esc(d.dining_note || 'Restaurant list coming soon.') + '</div>';
     }
-    var eu = (d.europe || []).slice(0, 3);
-    try { var o = { month: 'long' }, a = new Date(Date.now() + 270 * 86400000), z = new Date(Date.now() + 331 * 86400000); document.getElementById('eu-window').textContent = (a.getMonth() === z.getMonth() ? '' : a.toLocaleDateString('en-US', o) + ' to ') + z.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }); } catch (e) {}
-    document.getElementById('eu-list').innerHTML = eu.length ? eu.map(function (f) { return row(f.route + ' · ' + f.dates, f.miles + ' ' + (f.cash || ''), f.cabin); }).join('') + (eu.length < 3 ? '<div class="dl-note">American is only advertising ' + eu.length + ' PHL award fare' + (eu.length === 1 ? '' : 's') + ' to Europe for these dates today. Search aa.com with the calendar view to price other cities like Rome, Dublin or Barcelona.</div>' : '') : row('No fares confirmed today', 'Search aa.com with the calendar view');
   })();
 
   // Today's Deals: weekly AA Hotels sample searches
@@ -1455,13 +1464,16 @@ footer p { max-width: 80ch; }
       if (sp && (today - sp) / 86400000 > 21) return false;
       return true;
     }).sort(function (a, b) { return (day(b.spotted) || 0) - (day(a.spotted) || 0); });
-    if (!live.length) { list.innerHTML = '<div class="dl-note">No picks right now. New finds are posted here as soon as I spot them, so check back soon.</div>'; return; }
-    list.innerHTML = live.map(function (k) {
+    if (!live.length) { list.innerHTML = '<tbody><tr><td class="none">No picks right now. New finds are posted here as soon as I spot them, so check back soon.</td></tr></tbody>'; return; }
+    list.innerHTML = '<thead><tr><th>Route</th><th>Travel dates</th><th>Miles + taxes</th><th>Spotted</th></tr></thead><tbody>' + live.map(function (k) {
       var sp = day(k.spotted), age = sp ? Math.round((today - sp) / 86400000) : 0;
-      var when = sp ? 'Spotted ' + sp.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-      var stale = age > 7 ? ' · may no longer be available, search to confirm' : '';
-      return '<div><dt>' + esc(k.route + ' · ' + k.dates) + (k.note ? '<br><small class="pick-note">' + esc(k.note) + '</small>' : '') + '</dt><dd>' + esc(k.miles + ' ' + (k.cash || '')) + ' <small>' + esc((k.cabin || '') + (when ? ' · ' + when : '') + stale) + '</small></dd></div>';
-    }).join('');
+      var when = sp ? sp.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+      var stale = age > 7 ? '<small class="stale">May be gone, search to confirm</small>' : '';
+      return '<tr><td data-l="Route"><b>' + esc(k.route) + '</b><small>' + esc(k.city || '') + (k.note ? ' · ' + esc(k.note) : '') + '</small></td>' +
+        '<td data-l="Travel dates" class="dt">' + esc(k.dates) + '</td>' +
+        '<td data-l="Miles + taxes"><b class="mi">' + esc(k.miles) + '</b><small>' + esc(k.cash || '') + ' · ' + esc((k.cabin || '').replace(/, (round trip|per person).*$/, '')) + '</small></td>' +
+        '<td data-l="Spotted" class="sp">' + esc(when) + stale + '</td></tr>';
+    }).join('') + '</tbody>';
   })();
 
   var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
