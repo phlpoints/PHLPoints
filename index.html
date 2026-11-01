@@ -321,6 +321,15 @@ footer p { max-width: 80ch; }
 .cardlist .take { font-size: 1.02rem; line-height: 1.6; border-left: 3px solid var(--sun); padding-left: 14px; margin: 0; }
 .cardlist .level-list { columns: 1; }
 @media (max-width: 860px) { .cardlist .level { grid-template-columns: 1fr; } }
+
+/* Link-out box to an AA portal */
+.portal-link { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; max-width: 860px; margin-top: 26px; padding: 18px 22px; border-radius: 14px; background: var(--sun); color: #12223a; text-decoration: none; box-shadow: 0 10px 24px rgba(238,155,47,.25); }
+.portal-link:hover { background: #f6c372; }
+.portal-link .pl-ico { width: 48px; height: 48px; border-radius: 12px; background: #fff6e8; display: grid; place-items: center; font-size: 1.5rem; }
+.portal-link b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; }
+.portal-link small { display: block; font-size: .92rem; margin-top: 2px; color: #33445c; }
+.portal-link .pl-go { font-weight: 800; white-space: nowrap; }
+@media (max-width: 560px) { .portal-link { grid-template-columns: auto 1fr; } .portal-link .pl-go { grid-column: 2; } }
 /* Instagram links */
 .ig-top { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: #d8e3f0; text-decoration: none; font-weight: 600; font-size: .88rem; padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; white-space: nowrap; }
 .ig-top:hover { color: #fff; background: rgba(255,255,255,.08); }
@@ -699,21 +708,11 @@ footer p { max-width: 80ch; }
         </div>
       </div>
 
-      <div class="sec-head">
-        <div class="sec-num">Example</div>
-        <div><h3>One order, three layers</h3></div>
-      </div>
-      <div class="trips">
-        <article class="trip">
-          <div class="trip-route"><b>$100</b><span aria-hidden="true">→</span><b>600</b><em>Online order · store paying 5x</em></div>
-          <dl class="trip-lines">
-            <div><dt>Portal miles</dt><dd>500 <small>($100 × 5)</small></dd></div>
-            <div><dt>AA card</dt><dd>100 <small>($100 × 1)</small></dd></div>
-            <div class="total"><dt>Miles + LP earned</dt><dd>600</dd></div>
-          </dl>
-          <p class="trip-end">Every portal mile also counts as a Loyalty Point. The lump-sum "spend $200, get 500 bonus miles" promotions add award miles only, not Loyalty Points. Once you pass 60,000 Loyalty Points, portal miles also get a 25% Loyalty Point bonus.</p>
-        </article>
-      </div>
+      <a class="portal-link" href="https://www.aadvantageeshopping.com/" target="_blank" rel="noopener">
+        <span class="pl-ico" aria-hidden="true">🛍️</span>
+        <span><b>Go to AA Shopping</b><small>aadvantageeshopping.com · log in with your AAdvantage number, then click through to the store</small></span>
+        <span class="pl-go">Open →</span>
+      </a>
       </div>
       <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="#hotels"><span>Previous</span>AA Hotels</a><a class="hop next" href="#dining"><span>Next stop</span>AA Dining</a></nav>
     </div>
