@@ -1286,9 +1286,72 @@ footer p { max-width: 80ch; }
 </script>
 <script type="application/json" id="picks-data">
 [
-  {"route": "PHL → AMS", "city": "Amsterdam", "dates": "Sep 1–7, 2027", "depart": "2027-09-01", "miles": "42,000 miles", "cash": "+ $160.79", "cabin": "Main Cabin, round trip, per person", "spotted": "2026-10-30", "note": "Nonstop both ways"},
-  {"route": "PHL → CDG", "city": "Paris", "dates": "Sep 11–17, 2027", "depart": "2027-09-11", "miles": "42,000 miles", "cash": "+ $131.49", "cabin": "Main Cabin, round trip, per person", "spotted": "2026-10-30", "note": "Nonstop both ways"},
-  {"route": "PHL → NCE", "city": "Nice", "dates": "Sep 12–17, 2027", "depart": "2027-09-12", "miles": "42,000 miles", "cash": "+ $106.09", "cabin": "Main Cabin, round trip, per person", "spotted": "2026-10-30", "note": "Nonstop both ways · lowest taxes of the three"}
+ {
+  "route": "PHL → CUN",
+  "city": "Cancun",
+  "dates": "Mar 31–Apr 7, 2027",
+  "depart": "2027-03-31",
+  "miles": "20,000 miles",
+  "cash": "+ $143.64",
+  "cabin": "Main Cabin, round trip, per person",
+  "spotted": "2026-10-31",
+  "note": "Nonstop both ways · spring break week"
+ },
+ {
+  "route": "PHL → CUN",
+  "city": "Cancun",
+  "dates": "Feb 10–18, 2027",
+  "depart": "2027-02-10",
+  "miles": "20,000 miles",
+  "cash": "+ $143.64",
+  "cabin": "Main Cabin, round trip, per person",
+  "spotted": "2026-10-31",
+  "note": "Nonstop both ways"
+ },
+ {
+  "route": "PHL → MBJ",
+  "city": "Montego Bay",
+  "dates": "Jan 13–21, 2027",
+  "depart": "2027-01-13",
+  "miles": "20,000 miles",
+  "cash": "+ $147.24",
+  "cabin": "Main Cabin, round trip, per person",
+  "spotted": "2026-10-31",
+  "note": "Nonstop both ways"
+ },
+ {
+  "route": "PHL → AMS",
+  "city": "Amsterdam",
+  "dates": "Sep 1–7, 2027",
+  "depart": "2027-09-01",
+  "miles": "42,000 miles",
+  "cash": "+ $160.79",
+  "cabin": "Main Cabin, round trip, per person",
+  "spotted": "2026-10-30",
+  "note": "Nonstop both ways"
+ },
+ {
+  "route": "PHL → CDG",
+  "city": "Paris",
+  "dates": "Sep 11–17, 2027",
+  "depart": "2027-09-11",
+  "miles": "42,000 miles",
+  "cash": "+ $131.49",
+  "cabin": "Main Cabin, round trip, per person",
+  "spotted": "2026-10-30",
+  "note": "Nonstop both ways"
+ },
+ {
+  "route": "PHL → NCE",
+  "city": "Nice",
+  "dates": "Sep 12–17, 2027",
+  "depart": "2027-09-12",
+  "miles": "42,000 miles",
+  "cash": "+ $106.09",
+  "cabin": "Main Cabin, round trip, per person",
+  "spotted": "2026-10-30",
+  "note": "Nonstop both ways · lowest taxes of the Europe picks"
+ }
 ]
 </script>
 <script type="application/json" id="hotels-data">
@@ -1510,7 +1573,7 @@ footer p { max-width: 80ch; }
 </script>
 <script>
   // Visitor stats (GoatCounter): only on the public site, and count each page of the guide.
-  window.goatcounter = { no_onload: !/(^|\.)phlpoints\.com$/.test(location.hostname), path: function () { return location.pathname + location.hash; } };
+  window.goatcounter = { no_onload: !/(^|[.])phlpoints[.]com$/.test(location.hostname), path: function () { return location.pathname + location.hash; } };
   window.addEventListener('hashchange', function () {
     if (!window.goatcounter.no_onload && window.goatcounter.count) window.goatcounter.count({ path: location.pathname + location.hash });
   });
