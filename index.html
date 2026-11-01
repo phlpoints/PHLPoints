@@ -312,6 +312,15 @@ footer p { max-width: 80ch; }
   .picks-table td::before { content: attr(data-l); display: block; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
   .picks-table td:first-child::before { display: none; }
 }
+
+/* Cards page: stacked boxes */
+.cardlist .level { grid-template-columns: 280px 1fr; }
+.cardlist .cname { font-family: var(--font-display); font-weight: 800; font-stretch: 108%; font-size: 1.9rem; text-transform: uppercase; line-height: 1; }
+.cardlist .level-head .lp { font-size: 2rem; }
+.cardlist .card-main { display: grid; gap: 14px; align-content: start; }
+.cardlist .take { font-size: 1.02rem; line-height: 1.6; border-left: 3px solid var(--sun); padding-left: 14px; margin: 0; }
+.cardlist .level-list { columns: 1; }
+@media (max-width: 860px) { .cardlist .level { grid-template-columns: 1fr; } }
 /* Instagram links */
 .ig-top { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: #d8e3f0; text-decoration: none; font-weight: 600; font-size: .88rem; padding: 7px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; white-space: nowrap; }
 .ig-top:hover { color: #fff; background: rgba(255,255,255,.08); }
@@ -1033,69 +1042,77 @@ footer p { max-width: 80ch; }
   </section>
   <section class="page" data-page="cards" hidden>
     <div class="wrap">
-      <div class="pass">
-        <div class="pass-main">
-          <div class="pass-top">
-            <span class="airline">PHL Points · Boarding pass</span>
-            <span class="stop">Stop 09 of 11</span>
-          </div>
-          <div class="route">
-            <div class="iata"><b>PHL</b><span>Philadelphia</span></div>
-            <div class="flightpath" aria-hidden="true"><svg viewBox="0 0 300 30" preserveAspectRatio="none"><path d="M4 26 Q150 -8 296 26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 5" vector-effect="non-scaling-stroke"/><path d="M150 6.5 l9 3.4 -9 3.4 2 -3.4z" fill="currentColor"/></svg></div>
-            <div class="iata"><b>CRD</b><span>Cards</span></div>
-          </div>
-          <h1>Pick the right card</h1>
-          <p class="intro">Citi became the sole issuer of AAdvantage consumer cards in 2026, and Barclays Aviator accounts were moved to the Citi Platinum Select starting April 24. These are the four personal cards worth knowing.</p>
-          <dl class="fields">
-            <div><dt>Earns</dt><dd>Miles + LP</dd></div>
-            <div><dt>Best for</dt><dd>Choosing a card</dd></div>
-            <div><dt>Next stop</dt><dd>Today's Deals</dd></div>
-          </dl>
-        </div>
-        <div class="pass-stub" aria-hidden="true">
-          <span class="stub-code">CRD</span>
-          <span class="barcode"></span>
-          <span class="stub-seat">Stop 09</span>
-        </div>
-      </div>
+      <header class="page-head">
+        <div class="eyebrow">Cards · Stop 09 of 11</div>
+        <h1>Pick the right card</h1>
+        <p class="intro">Citi became the sole issuer of AAdvantage consumer cards in 2026, and Barclays Aviator accounts were moved to the Citi Platinum Select starting April 24. These are the four personal cards worth knowing, and what I think of each.</p>
+      </header>
       <div class="page-body">
-      <div class="cards">
-        <article class="cc">
-          <h3>MileUp</h3>
-          <div class="fee num">$0 <small>/ yr</small></div>
-          <dl>
-            <dt>Earns</dt><dd>2x at grocery stores and on AA; 1x elsewhere</dd>
-            <dt>Status</dt><dd>1 LP per $1</dd>
-          </dl>
-          <p class="who">For: anyone starting out who wants LP from grocery runs with no fee.</p>
+      <div class="levels cardlist">
+        <article class="level" style="--o:.35">
+          <div class="level-head">
+            <span class="tag">No annual fee</span>
+            <h3 class="cname">MileUp</h3>
+            <div class="lp num">$0 <small>annual fee</small></div>
+          </div>
+          <div class="card-main">
+            <p class="take">A nice beginner card to learn about the program without an annual fee. The point multipliers will be limited but this is a nice way to learn about the AA program without any extra costs.</p>
+            <ul class="level-list">
+              <li><b>2x miles</b> at grocery stores and on American purchases</li>
+              <li><b>1x miles</b> on everything else</li>
+              <li><b>1 Loyalty Point</b> per dollar spent</li>
+            </ul>
+          </div>
         </article>
-        <article class="cc pick">
-          <span class="tag" style="justify-self:start">Best start for most</span>
-          <h3>Platinum Select</h3>
-          <div class="fee num">$99 <small>→ $150 Jan 24, 2027</small></div>
-          <dl>
-            <dt>Earns</dt><dd>2x on AA, gas and restaurants. From Jan 2027 adds 2x on transit and streaming, 3x on AAdvantage Hotels and Cars</dd>
-            <dt>Perks</dt><dd>Free first checked bag. From 2027: up to $100/yr inflight credit, Global Entry / PreCheck credit, Walmart+</dd>
-          </dl>
-          <p class="who">For: two or more round trips a year with a checked bag. The bag benefit alone covers the fee.</p>
+        <article class="level" style="--o:.55">
+          <div class="level-head">
+            <span class="tag">My everyday sidekick</span>
+            <h3 class="cname">Platinum Select</h3>
+            <div class="lp num">$99 <small>annual fee · $150 from Jan 24, 2027</small></div>
+          </div>
+          <div class="card-main">
+            <p class="take">This is a great card. It gets you 2x points at Restaurants and Gas, comes with built in status in specific areas like free first checked bag. I use this card as a complement to the Executive Card as this card provides 2x points on restaurants and gas stations, two regular purchases that Executive card does not provide an individual multiplier. When used with the AA Dining, you can realize a large multiplier on restaurants. This card also provides 3x points on hotels and when used with the AA Hotel portal can provide a large point return.</p>
+            <ul class="level-list">
+              <li><b>2x miles</b> on American, restaurants and gas</li>
+              <li><b>3x on AAdvantage Hotels and Cars</b> and 2x on transit and streaming, starting Jan 24, 2027</li>
+              <li><b>Free first checked bag</b> on domestic American flights</li>
+              <li><b>From 2027:</b> up to $100 a year in inflight credit and a Global Entry / TSA PreCheck credit</li>
+            </ul>
+          </div>
         </article>
-        <article class="cc">
-          <h3>Globe</h3>
-          <div class="fee num">$350 <small>/ yr</small></div>
-          <dl>
-            <dt>Earns</dt><dd>6x AAdvantage Hotels, 3x AA, 2x restaurants and Rides &amp; Rails (SEPTA counts as public transit)</dd>
-            <dt>Perks</dt><dd>4 Admirals Club passes, $99 domestic companion fare from year two, Flight Streak: 5,000 LP per 4 flights (max 15,000)</dd>
-          </dl>
-          <p class="who">For: 8 to 12 AA flights a year out of PHL, a few lounge visits, and a travel partner for the companion fare.</p>
+        <article class="level" style="--o:.75">
+          <div class="level-head">
+            <span class="tag">For a few trips a year</span>
+            <h3 class="cname">Globe</h3>
+            <div class="lp num">$350 <small>annual fee</small></div>
+          </div>
+          <div class="card-main">
+            <p class="take">This is a newer card and I have not used yet as it seems redundant for people that already have the benefits of the Executive Card. It seems to be targeted at people who will fly a few times a year and want a certain level of status with the airline. It does not provide everyday flight access to the Admirals Club but does provide 4 Admirals Club passes. The point return on hotels is also nice at 6x points plus the loyalty bonus when you utilize AA Hotels. This card also provides a companion pass. I would probably love this card if I did not already utilize the Executive and Platinum Cards.</p>
+            <ul class="level-list">
+              <li><b>6x miles</b> on AAdvantage Hotels</li>
+              <li><b>3x miles</b> on American; <b>2x</b> on restaurants and rides and rails (SEPTA counts)</li>
+              <li><b>4 Admirals Club passes</b> a year</li>
+              <li><b>$99 domestic companion fare</b> from year two</li>
+              <li><b>Flight Streak:</b> 5,000 Loyalty Points for every 4 flights, up to 15,000</li>
+            </ul>
+          </div>
         </article>
-        <article class="cc">
-          <h3>Executive</h3>
-          <div class="fee num">$695 <small>/ yr new</small></div>
-          <dl>
-            <dt>Earns</dt><dd>4x on AA, 12x on AAdvantage Hotels and Cars</dd>
-            <dt>Perks</dt><dd>Full Admirals Club membership. 10,000 bonus LP at each of 50K, 90K, 165K and 240K LP (up to 40,000)</dd>
-          </dl>
-          <p class="who">For: chasing Platinum Pro or Executive Platinum, or using the PHL clubs every month.</p>
+        <article class="level" style="--o:1">
+          <div class="level-head">
+            <span class="tag">My top pick</span>
+            <h3 class="cname">Executive</h3>
+            <div class="lp num">$695 <small>annual fee</small></div>
+          </div>
+          <div class="card-main">
+            <p class="take">I love this card. I cannot put it more bluntly than that. It has been a gamechanger for flying my family out of PHL regularly at the highest levels of AA status and for free. Accruing 12x hotel points plus up to 23,000 in loyalty points for single hotel visit is simply insane. That perk alone allows me to fly my family around the world regularly. The every flight Admirals Club lounge access is also a game changer for families with young children as the lounge in A terminal has a children's room. This card also allows you to accrue the highest levels of status with American Airlines quickly which, in turn, allows you to reach each of the Rewards provided when you reach certain Loyalty Point levels. This says nothing of the Global Entry credit and bonuses for purchases on AA.com.</p>
+            <ul class="level-list">
+              <li><b>12x miles</b> on AAdvantage Hotels and Cars</li>
+              <li><b>4x miles</b> on American purchases</li>
+              <li><b>Full Admirals Club membership</b> on every trip</li>
+              <li><b>10,000 bonus Loyalty Points</b> at 50K, 90K, 165K and 240K Loyalty Points (up to 40,000 a year)</li>
+              <li><b>Global Entry / TSA PreCheck</b> credit</li>
+            </ul>
+          </div>
         </article>
       </div>
       <p class="note">Card details and fees as published by Citi and American; offers change often. The Globe's welcome bonus is unavailable if you earned a bonus on certain other Citi AAdvantage cards in the past 48 months, so read the terms before you sequence applications.</p>
