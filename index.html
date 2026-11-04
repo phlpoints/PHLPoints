@@ -422,7 +422,7 @@ footer p { max-width: 80ch; }
 .trip-route span { color: #f6c372; }
 .trip-route em { font-style: normal; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #b9c7d8; width: 100%; }
 .trip-lines { margin: 0; padding: 14px 20px 4px; display: grid; }
-.trip-lines div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.trip-lines div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); box-sizing: border-box; }
 #dine-list > div:last-child, #shop-list > div:last-child { border-bottom: 0; }
 .trip-lines dt { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; white-space: nowrap; }
 .trip-lines dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -1799,13 +1799,34 @@ footer p { max-width: 80ch; }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
   function fitFive() {
-    ['shop-list', 'dine-list'].forEach(function (id) {
-      var dl = document.getElementById(id); if (!dl || !dl.offsetParent) return;
+    var s = document.getElementById('shop-list'), d = document.getElementById('dine-list');
+    if (!s || !d || !s.offsetParent) return;
+    var sr = s.children, dr = d.children, i;
+    for (i = 0; i < sr.length; i++) sr[i].style.minHeight = '';
+    for (i = 0; i < dr.length; i++) dr[i].style.minHeight = '';
+    var hs = s.closest('.deal-card').querySelector('.trip-route'), hd = d.closest('.deal-card').querySelector('.trip-route');
+    hs.style.minHeight = hd.style.minHeight = '';
+    var side = Math.abs(s.closest('.deal-card').getBoundingClientRect().top - d.closest('.deal-card').getBoundingClientRect().top) < 40;
+    if (side) {
+      var hm = Math.max(hs.getBoundingClientRect().height, hd.getBoundingClientRect().height);
+      hs.style.minHeight = hd.style.minHeight = hm + 'px';
+      for (i = 0; i < Math.min(sr.length, dr.length); i++) {
+        var hh = Math.max(sr[i].getBoundingClientRect().height, dr[i].getBoundingClientRect().height);
+        sr[i].style.minHeight = dr[i].style.minHeight = hh + 'px';
+      }
+    }
+    [s, d].forEach(function (dl) {
       var rows = dl.children; if (rows.length <= 5) { dl.style.maxHeight = 'none'; return; }
-      var top = dl.getBoundingClientRect().top, cut = rows[5].getBoundingClientRect().top;
-      dl.style.maxHeight = Math.ceil(cut - top) + 'px';
+      dl.style.maxHeight = Math.ceil(rows[5].getBoundingClientRect().top - dl.getBoundingClientRect().top + dl.scrollTop) + 'px';
     });
+    s.dataset.side = d.dataset.side = side ? '1' : '';
   }
+  (function () {
+    var s = document.getElementById('shop-list'), d = document.getElementById('dine-list'), busy = false;
+    if (!s || !d) return;
+    function sync(a, b) { a.addEventListener('scroll', function () { if (busy || !a.dataset.side) return; busy = true; b.scrollTop = a.scrollTop; requestAnimationFrame(function () { busy = false; }); }); }
+    sync(s, d); sync(d, s);
+  })();
   window.addEventListener('resize', fitFive);
   window.addEventListener('hashchange', route);
   document.addEventListener('click', function (e) {
