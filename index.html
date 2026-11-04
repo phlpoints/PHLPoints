@@ -273,6 +273,8 @@ footer p { max-width: 80ch; }
 .deal-pair .p-b1 { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; } .deal-pair .p-b2 { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; }
 .deal-pair .p-b1 > .deal-card, .deal-pair .p-b2 > .deal-card { flex: 1; }
 .deal-pair .trip-route em { display: block; margin-top: 4px; }
+.deal-pair #shop-list, .deal-pair #dine-list { max-height: 360px; overflow-y: auto; padding-right: 6px; scroll-snap-type: y proximity; }
+.deal-pair .p-b1::after, .deal-pair .p-b2::after { content: "Scroll the box for more ↓"; display: block; font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
 @media (max-width: 900px) { .deal-pair { grid-template-columns: 1fr; }
  .deal-pair .p-h1 { grid-row: 1; grid-column: 1; } .deal-pair .p-b1 { grid-row: 2; grid-column: 1; }
  .deal-pair .p-h2 { grid-row: 3; grid-column: 1; } .deal-pair .p-b2 { grid-row: 4; grid-column: 1; }
@@ -1776,6 +1778,7 @@ footer p { max-width: 80ch; }
     });
     closeAll();
     window.scrollTo(0, 0);
+    if (name === 'deals') setTimeout(fitFive, 0);
     if (jumpTo) { var jt = document.getElementById(jumpTo); if (jt) setTimeout(function () { jt.scrollIntoView(); }, 0); }
     if (name === 'home') drawSky();
   }
@@ -1794,6 +1797,15 @@ footer p { max-width: 80ch; }
     if (!e.target.closest('.has-sub, .sub')) closeSubs();
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+  function fitFive() {
+    ['shop-list', 'dine-list'].forEach(function (id) {
+      var dl = document.getElementById(id); if (!dl || !dl.offsetParent) return;
+      var rows = dl.children; if (rows.length <= 5) { dl.style.maxHeight = 'none'; return; }
+      var top = dl.getBoundingClientRect().top, cut = rows[5].getBoundingClientRect().top;
+      dl.style.maxHeight = Math.ceil(cut - top) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitFive);
   window.addEventListener('hashchange', route);
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-jump]'); if (!a) return;
