@@ -453,6 +453,10 @@ footer p { max-width: 80ch; }
 .hotel-picks .trip-lines dt { white-space: nowrap; }
 .hotel-picks .trip-lines dd { max-width: 72%; }
 .hotel-picks .trip-lines dd small { display: block; }
+.trips.hotel-picks { align-items: stretch; }
+.hotel-picks .trip { display: flex; flex-direction: column; }
+.hotel-picks .trip .trip-lines { flex: 1; display: flex; flex-direction: column; }
+.hotel-picks .trip .trip-lines .total { margin-top: auto; }
 .pick-note { font-weight: 400; color: var(--muted); }
 .has-sub > .nav-link.deals-link, .has-sub.active > .nav-link.deals-link { color: #12223a; }
 .sub-btn.deals-link svg { color: #12223a; }
