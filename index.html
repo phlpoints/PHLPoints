@@ -364,6 +364,17 @@ footer p { max-width: 80ch; }
   .picks-table td::before { content: attr(data-l); display: block; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
   .picks-table td:first-child::before { display: none; }
 }
+@media (max-width: 720px) {
+  .picks-table tr { grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 14px; align-items: start; }
+  .picks-table td::before { display: none; }
+  .picks-table td:first-child { grid-column: 1; grid-row: 1; }
+  .picks-table td.dt { grid-column: 1; grid-row: 2; font-size: .9rem; white-space: normal; }
+  .picks-table td:nth-child(3) { grid-column: 2; grid-row: 1 / span 2; text-align: right; }
+  .picks-table td:nth-child(3) small { font-size: .75rem; }
+  .picks-table td.sp { grid-column: 1 / -1; grid-row: 3; font-weight: 400; font-size: .75rem; color: var(--muted); }
+  .picks-table td.sp::before { display: inline; content: "Spotted "; font: inherit; letter-spacing: 0; text-transform: none; color: inherit; margin: 0; }
+  .picks-table td b.mi { font-size: 1.05rem; }
+}
 
 /* Cards page: stacked boxes */
 .cardlist .level { grid-template-columns: 280px 1fr; }
@@ -1743,7 +1754,7 @@ footer p { max-width: 80ch; }
       var sp = day(k.spotted), age = sp ? Math.round((today - sp) / 86400000) : 0;
       var when = sp ? sp.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
       var stale = age > 7 ? '<small class="stale">May be gone, search to confirm</small>' : '';
-      return '<tr><td data-l="Route"><b>' + esc(k.route) + '</b><small>' + esc(k.city || '') + (k.note ? ' · ' + esc(k.note) : '') + '</small></td>' +
+      return '<tr><td data-l="Route"><b>' + esc(k.route) + '</b><small>' + esc(k.city || '') + '</small></td>' +
         '<td data-l="Travel dates" class="dt">' + esc(k.dates) + '</td>' +
         '<td data-l="Miles + taxes"><b class="mi">' + esc(k.miles) + '</b><small>' + esc(k.cash || '') + ' · ' + esc((k.cabin || '').replace(/, (round trip|per person).*$/, '')) + '</small></td>' +
         '<td data-l="Spotted" class="sp">' + esc(when) + stale + '</td></tr>';
