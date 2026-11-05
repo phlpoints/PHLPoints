@@ -457,6 +457,13 @@ footer p { max-width: 80ch; }
 .hotel-picks .trip-lines dd { max-width: 72%; }
 .hotel-picks .trip-lines dd small { display: block; }
 .trips.hotel-picks { align-items: stretch; }
+.hotel-hint { display: none; }
+@media (max-width: 960px) {
+  #hotel-picks { display: block; overflow-y: auto; border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--paper); }
+  #hotel-picks .trip { margin-bottom: 12px; }
+  #hotel-picks .trip:last-child { margin-bottom: 0; }
+  .hotel-hint { display: block; }
+}
 .hotel-picks .trip { display: flex; flex-direction: column; }
 .hotel-picks .trip .trip-lines { flex: 1; display: flex; flex-direction: column; }
 .hotel-picks .trip .trip-lines .total { margin-top: auto; }
@@ -1231,6 +1238,7 @@ footer p { max-width: 80ch; }
         <div><h3>AA Hotels: picks of the week</h3><p class="intro">Each week I run three sample searches on the AA Hotels portal (a week in Europe, a weekend in an American city and five days in the Caribbean) and post the hotel that earns the most miles and Loyalty Points per dollar, among hotels guests rate 8/10 or better.</p></div>
       </div>
       <div class="trips hotel-picks" id="hotel-picks"></div>
+<p class="scroll-hint hotel-hint">Scroll the box for more hotels ↓</p>
       <p class="note" id="hotel-note">Miles shown are the booking award for AAdvantage credit cardmembers with status, before your card's own miles (12x with the Executive card). Members without status or a card earn less. Prices and awards change daily, so search the AA Hotels portal to confirm.</p>
 
 
@@ -1790,7 +1798,7 @@ footer p { max-width: 80ch; }
     });
     closeAll();
     window.scrollTo(0, 0);
-    if (name === 'deals') setTimeout(fitFive, 0);
+    if (name === 'deals') setTimeout(function () { fitFive(); fitHotels(); }, 0);
     if (jumpTo) { var jt = document.getElementById(jumpTo); if (jt) setTimeout(function () { jt.scrollIntoView(); }, 0); }
     if (name === 'home') drawSky();
   }
@@ -1832,6 +1840,13 @@ footer p { max-width: 80ch; }
     });
     s.dataset.side = d.dataset.side = side ? '1' : '';
   }
+  function fitHotels() {
+    var hp = document.getElementById('hotel-picks'); if (!hp || !hp.offsetParent) return;
+    var cards = hp.querySelectorAll('.trip');
+    if (window.innerWidth > 960 || cards.length < 2) { hp.style.maxHeight = ''; return; }
+    hp.style.maxHeight = Math.ceil(cards[1].getBoundingClientRect().top - hp.getBoundingClientRect().top + hp.scrollTop + 70) + 'px';
+  }
+  window.addEventListener('resize', fitHotels);
   window.addEventListener('resize', fitFive);
   window.addEventListener('hashchange', route);
   document.addEventListener('click', function (e) {
