@@ -462,6 +462,14 @@ footer p { max-width: 80ch; }
   #hotel-picks { display: block; overflow-y: auto; border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--paper); }
   #hotel-picks .trip { margin-bottom: 12px; }
   #hotel-picks .trip:last-child { margin-bottom: 0; }
+  #hotel-picks .trip { margin-bottom: 10px; }
+  #hotel-picks .trip-route { padding: 10px 14px; gap: 2px 10px; }
+  #hotel-picks .trip-route b { font-size: 1.25rem; }
+  #hotel-picks .trip-route em { font-size: .62rem; }
+  #hotel-picks .trip-lines { padding: 4px 14px 8px; }
+  #hotel-picks .trip-lines div { padding: 5px 0; font-size: .88rem; }
+  #hotel-picks .trip-lines dd small { font-size: .78rem; }
+  #hotel-picks .trip-lines .total dd { font-size: 1.15rem; }
   .hotel-hint { display: block; }
 }
 .hotel-picks .trip { display: flex; flex-direction: column; }
@@ -1205,8 +1213,7 @@ footer p { max-width: 80ch; }
       <div class="page-body">
       <p class="note" id="deals-updated" style="margin:0 0 8px">Updated daily.</p>
 
-      <nav class="jump" aria-label="Jump to"><a href="#deals" data-jump="d-flights">✈ Award flights</a><a href="#deals" data-jump="d-shop">🛍 AA Shopping</a><a href="#deals" data-jump="d-dine">🍽 AA Dining</a><a href="#deals" data-jump="d-hotels">🏨 AA Hotels</a></nav>
-<div class="sec-head" id="d-flights">
+      <div class="sec-head" id="d-flights">
 <div><h3>PHL award flights</h3><p class="intro">Great award fares out of PHL that I have found myself, posted the day (or moment) I spot them. Award prices change quickly, so always confirm on aa.com or the American app before you book or transfer points.</p></div>
 </div>
 <div class="picks-scroll"><div class="picks-wrap"><table class="picks-table" id="picks-list"></table></div></div>
@@ -1843,7 +1850,8 @@ footer p { max-width: 80ch; }
     var hp = document.getElementById('hotel-picks'); if (!hp || !hp.offsetParent) return;
     var cards = hp.querySelectorAll('.trip');
     if (window.innerWidth > 960 || cards.length < 2) { hp.style.maxHeight = ''; return; }
-    hp.style.maxHeight = Math.ceil(cards[1].getBoundingClientRect().top - hp.getBoundingClientRect().top + hp.scrollTop + 70) + 'px';
+    var k = cards.length > 2 ? 2 : 1;
+    hp.style.maxHeight = Math.ceil(cards[k].getBoundingClientRect().top - hp.getBoundingClientRect().top + hp.scrollTop + 46) + 'px';
   }
   window.addEventListener('resize', fitHotels);
   window.addEventListener('resize', fitFive);
