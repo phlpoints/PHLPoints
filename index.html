@@ -1239,7 +1239,7 @@ footer p { max-width: 80ch; }
       </div>
       <div class="trips hotel-picks" id="hotel-picks"></div>
 <p class="scroll-hint hotel-hint">Scroll the box for more hotels ↓</p>
-      <p class="note" id="hotel-note">Miles shown are the booking award for AAdvantage credit cardmembers with status, before your card's own miles (12x with the Executive card). Members without status or a card earn less. Prices and awards change daily, so search the AA Hotels portal to confirm.</p>
+      <p class="note" id="hotel-note">Prices and awards change daily, so search the AA Hotels portal to confirm.</p>
 
 
       
@@ -1712,8 +1712,7 @@ footer p { max-width: 80ch; }
       return '<article class="trip"><div class="trip-route"><b>' + esc(p.city) + '</b><em>' + esc(p.trip) + '</em></div>' +
         '<dl class="trip-lines"><div><dt>Hotel</dt><dd>' + esc(p.hotel) + ' <small>' + esc(p.area) + '</small></dd></div>' +
         '<div><dt>Dates</dt><dd>' + esc(p.dates) + '</dd></div>' +
-        '<div><dt>Total cost</dt><dd>$' + n(p.usd) + '</dd></div>' +
-        '<div class="total"><dt>Miles + LP</dt><dd>' + n(p.miles) + ' <small>' + mpd + ' per $1</small></dd></div></dl></article>';
+        '<div class="total"><dt>Total cost</dt><dd>$' + n(p.usd) + '</dd></div></dl></article>';
     }).join('');
     if (d.updated) { var q = d.updated.split('-'), dt = new Date(+q[0], +q[1] - 1, +q[2]); var note = document.getElementById('hotel-note'); if (note) note.textContent = 'Searched ' + dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) + '. ' + note.textContent; }
   })();
