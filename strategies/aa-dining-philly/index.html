@@ -400,13 +400,15 @@ footer p { max-width: 80ch; }
 /* Link-out box to an AA portal */
 .portal-link { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; max-width: 860px; margin-top: 26px; padding: 18px 22px; border-radius: 14px; background: var(--sun); color: #12223a; text-decoration: none; box-shadow: 0 10px 24px rgba(238,155,47,.25); }
 .portal-link:hover { background: #f6c372; }
-.ref-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 30px; }
-.post-wrap .ref-wrap { margin: 28px 0 0; }
-.ref-link { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px 11px 12px; border-radius: 999px; background: #12223a; color: #fff; font-weight: 700; font-size: .98rem; text-decoration: none; box-shadow: 0 6px 16px rgba(18,34,58,.18); transition: transform .15s, background .15s; }
-.ref-link:hover { background: #1d3557; transform: translateY(-1px); }
-.ref-ico { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; background: #ee9b2f; align-items: center; justify-content: center; font-size: 15px; }
-.ref-arr { color: #f6c372; }
-.ref-note { font-size: .82rem; color: #5a6a80; }
+.ref-card { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; max-width: 860px; margin: 0 0 30px; padding: 16px 16px 16px 18px; border-radius: 18px; background: linear-gradient(135deg, #f6c372 0%, #ee9b2f 100%); color: #12223a; text-decoration: none; border: 1px solid rgba(18,34,58,.08); box-shadow: 0 12px 28px rgba(238,155,47,.28); transition: transform .15s, box-shadow .15s; }
+.ref-card:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(238,155,47,.36); }
+.post-wrap .ref-card { margin: 28px 0 0; }
+.rc-ico { width: 52px; height: 52px; border-radius: 14px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 10px rgba(18,34,58,.12); }
+.rc-txt b { display: block; font-size: 1.12rem; font-weight: 800; letter-spacing: -.01em; }
+.rc-txt small { display: block; margin-top: 3px; font-size: .86rem; line-height: 1.4; color: rgba(18,34,58,.78); }
+.rc-go { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; background: #12223a; color: #fff; font-weight: 700; font-size: .95rem; white-space: nowrap; }
+.rc-go span { color: #f6c372; }
+@media (max-width: 640px) { .ref-card { grid-template-columns: auto 1fr; gap: 14px; } .rc-go { grid-column: 1 / -1; justify-content: center; } .rc-ico { width: 46px; height: 46px; } }
 .portal-link .pl-ico { width: 48px; height: 48px; border-radius: 12px; background: #fff6e8; display: grid; place-items: center; font-size: 1.5rem; }
 .portal-link b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; }
 .portal-link small { display: block; font-size: .92rem; margin-top: 2px; color: #33445c; }
@@ -711,7 +713,7 @@ footer p { max-width: 80ch; }
 <p>Some of the top-rated participating restaurants right now: Urban Village Brewing Co., Philly Style Bagels, Milkboy on Chestnut Street, Rittenhouse Grill, Del Rossi's Cheesesteak Co. and <a href="/strategies/puglia-pizza/">Puglia Pizza</a> in South Philly. See the current Top 10 on <a href="/deals/">Today's Deals</a> and the full guide on the <a href="/aa-dining/">AA Dining</a> page.</p>
 <p class="post-note">Dining program rules and card earning rates change, so check aadvantagedining.com and your card's terms.</p>
         </div>
-        <div class="ref-wrap"><a class="ref-link" href="https://www.aadvantagedining.com/join?utm_source=accountcenter&amp;utm_medium=website&amp;utm_campaign=2023_referral&amp;referrer=2EA8147E-EFDA-4833-A5D9-801FC722EECF" target="_blank" rel="noopener"><span class="ref-ico" aria-hidden="true">🍽️</span>Join AA Dining with my link<span class="ref-arr" aria-hidden="true">→</span></a><span class="ref-note">I may earn bonus miles if you join and dine.</span></div>
+        <a class="ref-card" href="https://www.aadvantagedining.com/join?utm_source=accountcenter&amp;utm_medium=website&amp;utm_campaign=2023_referral&amp;referrer=2EA8147E-EFDA-4833-A5D9-801FC722EECF" target="_blank" rel="noopener"><span class="rc-ico" aria-hidden="true">🍽️</span><span class="rc-txt"><b>New to AA Dining? Join with my link</b><small>Register your cards, opt in to emails and start earning. I may earn bonus miles if you join and dine.</small></span><span class="rc-go">Join <span aria-hidden="true">→</span></span></a>
       </article>
       <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="/strategies/"><span>Back to</span>Strategies</a><a class="hop next" href="/strategies/puglia-pizza/"><span>Next strategy</span>Philadelphia Restaurant Spotlight: Earn 6x Miles at Puglia Pizza</a></nav>
     </div>
