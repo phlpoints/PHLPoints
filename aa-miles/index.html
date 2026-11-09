@@ -1172,8 +1172,6 @@ footer p { max-width: 80ch; }
     }
     var shop = (d.shopping || []).slice(0, 10);
     document.getElementById('shop-list').innerHTML = shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal');
-    var top = d.shopping_top, st = document.getElementById('shop-top');
-    if (top && top.store) st.innerHTML = '<b>Best rate anywhere on the portal today:</b> ' + esc(top.store) + ', ' + esc(top.rate) + '.'; else st.remove();
     var dine = d.dining || [], dl = document.getElementById('dine-list');
     if (dine.length) {
       dl.innerHTML = dine.slice(0, 10).map(function (r, i) { var rt = String(r.area || '').match(/[\d.]+★\s*\([\d,]+ reviews\)/); return row((i + 1) + '. ' + r.name, r.cuisine, rt ? rt[0] : ''); }).join('');
