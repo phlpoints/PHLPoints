@@ -366,6 +366,11 @@ footer p { max-width: 80ch; }
 .picks-table td.sp, .picks-table td.dt { white-space: nowrap; }
 .picks-table td b.usd { font-family: var(--font-display); font-weight: 800; color: var(--ink); font-size: 1.15rem; }
 .picks-table td.fare { white-space: nowrap; }
+.pick-filter { display: flex; gap: 8px; margin: 0 0 12px; flex-wrap: wrap; }
+.pick-filter button { font: inherit; font-size: .9rem; font-weight: 700; padding: 8px 14px; border-radius: 999px; border: 1px solid #c9d3df; background: #fff; color: #12223a; cursor: pointer; }
+.pick-filter button span { margin-left: 6px; font-size: .78rem; font-weight: 700; color: #5a6a80; }
+.pick-filter button.on { background: #12223a; border-color: #12223a; color: #fff; }
+.pick-filter button.on span { color: #f6c372; }
 .picks-table td.fare .cpm { display: block; margin-top: 4px; font-size: .78rem; font-weight: 700; color: #2a8a4a; }
 .picks-table td.sp { font-weight: 600; }
 .picks-table small.stale { color: var(--stamp); white-space: normal; }
@@ -1209,6 +1214,8 @@ footer p { max-width: 80ch; }
     var picks; try { picks = JSON.parse(el.textContent) || []; } catch (e) { picks = []; }
     function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
     function day(s) { var p = String(s || '').split('-'); return p.length === 3 ? new Date(+p[0], +p[1] - 1, +p[2]) : null; }
+    var US = 'ATL AUS BDL BNA BOS BUF BWI CHS CLE CLT CMH CVG DCA DEN DFW DTW EWR EYW FLL GSO HNL IAD IAH IND JAX JFK LAS LAX LGA MCI MCO MEM MIA MKE MSP MSY OGG ORD ORF PBI PDX PHX PIT PVD PWM RDU RIC RSW SAN SAT SAV SDF SEA SFO SJC SJU SLC SMF SRQ STL STT TPA TUS'.split(' ');
+    function region(k) { var c = String(k.route || '').replace(/[^A-Z]/g, '').slice(-3); return US.indexOf(c) >= 0 ? 'us' : 'intl'; }
     function cpm(k) {
       var n = function (s) { return parseFloat(String(s || '').replace(/[^0-9.]/g, '')) || 0; };
       var fare = n(k.fare), fees = n(k.cash), miles = n(k.miles);
@@ -1227,12 +1234,25 @@ footer p { max-width: 80ch; }
       var sp = day(k.spotted), age = sp ? Math.round((today - sp) / 86400000) : 0;
       var when = sp ? sp.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
       var stale = age > 7 ? '<small class="stale">May be gone, search to confirm</small>' : '';
-      return '<tr><td data-l="Route"><b>' + esc(k.route) + '</b><small>' + esc(k.city || '') + '</small></td>' +
+      return '<tr data-region="' + region(k) + '"><td data-l="Route"><b>' + esc(k.route) + '</b><small>' + esc(k.city || '') + '</small></td>' +
         '<td data-l="Travel dates" class="dt">' + esc(k.dates) + '</td>' +
         '<td data-l="Miles + taxes"><b class="mi">' + esc(k.miles) + '</b><small>' + esc(k.cash || '') + ' · ' + esc((k.cabin || '').replace(/, (round trip|per person).*$/, '')) + '</small></td>' +
         '<td data-l="Cash fare" class="fare">' + (k.fare ? '<b class="usd">' + esc(k.fare) + '</b><small>' + esc(k.fare_cabin || '') + '</small>' + cpm(k) : '<small>Check aa.com</small>') + '</td>' +
         '<td data-l="Spotted" class="sp">' + esc(when) + stale + '</td></tr>';
     }).join('') + '</tbody>';
+    var bar = document.getElementById('pick-filter');
+    if (bar) {
+      var counts = { all: live.length, us: 0, intl: 0 };
+      live.forEach(function (k) { counts[region(k)]++; });
+      Array.prototype.forEach.call(bar.querySelectorAll('button'), function (b) {
+        var f = b.getAttribute('data-f'); b.querySelector('span').textContent = counts[f];
+        b.addEventListener('click', function () {
+          Array.prototype.forEach.call(bar.querySelectorAll('button'), function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          Array.prototype.forEach.call(list.querySelectorAll('tbody tr[data-region]'), function (r) { r.style.display = (f === 'all' || r.getAttribute('data-region') === f) ? '' : 'none'; });
+          var box = list.closest('.picks-scroll'); if (box) box.scrollTop = 0;
+        });
+      });
+    }
   })();
 
   var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
