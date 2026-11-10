@@ -495,6 +495,7 @@ footer p { max-width: 80ch; }
 .steps.stack.plain .step::before { display: none; }
 .callout + .steps { margin-top: 22px; }
 .page-body > .callout:first-child { margin-top: 0; }
+.page-body > .sec-head:first-child { margin-top: 0; }
 .page-head { display: grid; gap: 12px; margin: 8px 0 32px; }
 .page-head h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; font-stretch: 112%; text-transform: uppercase; }
 .page-head .intro { font-size: 1.15rem; max-width: 68ch; color: var(--ink); }
@@ -1298,7 +1299,7 @@ footer p { max-width: 80ch; }
     if (d.updated) {
       var p = d.updated.split('-'), dt = new Date(+p[0], +p[1] - 1, +p[2]);
       var ut = 'Last updated ' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) + '.';
-      ['deals-updated'].forEach(function (id) { var u = document.getElementById(id); if (u) u.textContent = ut; });
+
     }
     var shop = (d.shopping || []).slice(0, 10);
     document.getElementById('shop-list').innerHTML = shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal');

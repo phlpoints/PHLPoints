@@ -494,6 +494,7 @@ footer p { max-width: 80ch; }
 .steps.stack.plain .step::before { display: none; }
 .callout + .steps { margin-top: 22px; }
 .page-body > .callout:first-child { margin-top: 0; }
+.page-body > .sec-head:first-child { margin-top: 0; }
 .page-head { display: grid; gap: 12px; margin: 8px 0 32px; }
 .page-head h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; font-stretch: 112%; text-transform: uppercase; }
 .page-head .intro { font-size: 1.15rem; max-width: 68ch; color: var(--ink); }
@@ -744,7 +745,6 @@ footer p { max-width: 80ch; }
         <p class="intro">Bookmark and check this page every day for the best AA deals. I update the flights throughout the day, the shopping and dining every morning, and the hotels twice a week. On this page, I outline award flights out of PHL I have found myself, today's best AA Shopping rates at the most popular stores, ten of the best Philly restaurants on AA Dining, and the latest AA Hotels finds. Regularly utilizing these services with an AA credit card will help grow your miles accounts and provides better redemption than many other credit cards on the market. Happy Travels!</p>
       </header>
       <div class="page-body">
-      <p class="note" id="deals-updated" style="margin:0 0 8px">Updated daily.</p>
 
       <div class="sec-head" id="d-flights">
 <div><h3>PHL award flights</h3><p class="intro">Great award fares out of PHL that I have found myself, posted the day (or moment) I spot them. Award prices change quickly, so always confirm on aa.com or the American app before you book or transfer points.</p></div>
@@ -1323,7 +1323,7 @@ footer p { max-width: 80ch; }
     if (d.updated) {
       var p = d.updated.split('-'), dt = new Date(+p[0], +p[1] - 1, +p[2]);
       var ut = 'Last updated ' + dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) + '.';
-      ['deals-updated'].forEach(function (id) { var u = document.getElementById(id); if (u) u.textContent = ut; });
+
     }
     var shop = (d.shopping || []).slice(0, 10);
     document.getElementById('shop-list').innerHTML = shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal');
