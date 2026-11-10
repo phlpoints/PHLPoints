@@ -501,6 +501,9 @@ footer p { max-width: 80ch; }
 .page-head .intro { font-size: 1.15rem; max-width: 68ch; color: var(--ink); }
 .step .aside { font-size: .92rem; color: var(--muted); background: var(--sun-soft); border-radius: 8px; padding: 10px 12px; margin-top: 4px; }
 .callout { margin-top: 22px; font-size: 1.1rem; font-weight: 600; max-width: 70ch; border-left: 4px solid var(--sun); padding: 4px 0 4px 16px; }
+/* Line up text with the full-width boxes on every page */
+.page .page-head .intro, .page .prose, .page .sec-head .intro, .page .note, .page .callout, .page .pass .intro, .page .sec-head > div { max-width: none !important; }
+.page .portal-link, .page .ref-card, .page .ig-banner, .page .steps.stack, .page .deal-card, .page .pick-warn, .page .picks-wrap, .page .deals-news, .page .slim-ref { max-width: none !important; }
 .trips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
 .trip { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; align-content: start; }
 .trip-route { background: var(--sky); color: #fff; padding: 16px 20px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
