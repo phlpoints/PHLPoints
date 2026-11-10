@@ -882,7 +882,15 @@ footer p { max-width: 80ch; }
   "store": "McAfee",
   "rate": "26 miles/$",
   "note": "Was 12 miles/$"
- }
+ },
+ "shopping_extra": [
+  {
+   "store": "Total Wine & More",
+   "rate": "2 miles/$",
+   "note": "My pick · Today only, was 1 mile/$",
+   "until": "2026-11-10"
+  }
+ ]
 }
 </script>
 <script type="application/json" id="picks-data">
@@ -1293,7 +1301,9 @@ footer p { max-width: 80ch; }
 
     }
     var shop = (d.shopping || []).slice(0, 10);
-    document.getElementById('shop-list').innerHTML = shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal');
+    var today = new Date(); today = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    var extra = (d.shopping_extra || []).filter(function (s) { return !s.until || s.until >= today; });
+    document.getElementById('shop-list').innerHTML = extra.map(function (s) { return row('\u2605 ' + s.store, s.rate, s.note); }).join('') + (shop.length ? shop.map(function (s, i) { return row((i + 1) + '. ' + s.store, s.rate, s.note); }).join('') : row('No offers', 'Check the AA Shopping portal'));
     var dine = d.dining || [], dl = document.getElementById('dine-list');
     if (dine.length) {
       dl.innerHTML = dine.slice(0, 10).map(function (r, i) { var rt = String(r.area || '').match(/[\d.]+★\s*\([\d,]+ reviews\)/); return row((i + 1) + '. ' + r.name, r.cuisine, rt ? rt[0] : ''); }).join('');
