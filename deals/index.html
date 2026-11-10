@@ -330,6 +330,13 @@ footer p { max-width: 80ch; }
 .portal-link .pl-go { flex: none; padding: 7px 14px; border-radius: 999px; background: #12223a; color: #fff; font-weight: 700; font-size: .86rem; white-space: nowrap; }
 @media (max-width: 640px) { .portal-link { border-radius: 16px; } .portal-link small { display: block; font-size: .8rem; } }
 .post-wrap .portal-link { margin-top: 24px; }
+.portal-link.news-pill { background: linear-gradient(135deg, #2a67ab 0%, #12223a 100%); color: #fff; box-shadow: 0 8px 20px rgba(18,34,58,.25); }
+.portal-link.news-pill:hover { background: linear-gradient(135deg, #2f72bb 0%, #16294a 100%); }
+.portal-link.news-pill small { color: rgba(255,255,255,.82); }
+.portal-link.news-pill .pl-ico { background: #fff; }
+.portal-link.news-pill .pl-go { background: #f6c372; color: #12223a; }
+.wrap > .news-pill { margin: 30px 0 4px; }
+.post-wrap .portal-link + .news-pill { margin-top: 14px; }
 @media (max-width: 640px) { .post-stats { grid-template-columns: 1fr; } }
 
 /* Top-row navigation with dropdown */
@@ -445,7 +452,7 @@ footer p { max-width: 80ch; }
 .news-card .rc-go { background: #f6c372; color: #12223a; }
 .news-card .rc-go span { color: #12223a; }
 .wrap > .news-card { margin: 34px 0 6px; }
-.deals-news { margin: 22px 0 0 !important; }
+.deals-news { margin: 22px 0 0 !important; max-width: 860px !important; }
 .post-hero + .ref-card { margin: 0 0 24px; }
 .rc-ico { width: 52px; height: 52px; border-radius: 14px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 10px rgba(18,34,58,.12); }
 .rc-txt b { display: block; font-size: 1.12rem; font-weight: 800; letter-spacing: -.01em; }
@@ -746,7 +753,7 @@ footer p { max-width: 80ch; }
 <p class="scroll-hint">Scroll the box for more picks ↓</p>
 <p class="note">Flying to Europe? See <a href="/strategies/europe-travel-essentials/">my 5 essentials for European travel</a>. The 📖 links on European flights go to Rick Steves, my preferred guidebooks for planning a trip.</p>
 <p class="note">Picks drop off automatically 21 days after I spot them or once the travel date passes. PHL Points is not affiliated with American Airlines and cannot guarantee availability or pricing.</p>
-<a class="ref-card news-card deals-news" data-goatcounter-click="newsletter-deals" data-goatcounter-title="Newsletter signup (deals)" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=deals" target="_blank" rel="noopener"><span class="rc-ico" aria-hidden="true">✉️</span><span class="rc-txt"><b>Get the PHL Points weekly email</b><small>My 5 best PHL award deals and 1 strategy, every Friday. Free.</small></span><span class="rc-go">Sign up <span aria-hidden="true">→</span></span></a>
+<a class="portal-link news-pill deals-news" data-goatcounter-click="newsletter-deals" data-goatcounter-title="Newsletter signup (deals)" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=deals" target="_blank" rel="noopener"><span class="pl-ico" aria-hidden="true">✉️</span><span><b>Weekly email</b><small>Every Friday I send this week&#39;s top five deals and one strategy.</small></span><span class="pl-go">Sign up →</span></a>
 <div class="deal-pair">
 <div class="sec-head p-h1" id="d-shop">
         <div><h3>AA Shopping: top 10 popular stores</h3><p class="intro">Today's AA Shopping rates at the big-name stores most people actually shop, highest rate first. Every portal mile is also a Loyalty Point. Amazon, Walmart and Target aren't on the portal.</p></div>

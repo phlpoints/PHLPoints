@@ -331,6 +331,13 @@ footer p { max-width: 80ch; }
 .portal-link .pl-go { flex: none; padding: 7px 14px; border-radius: 999px; background: #12223a; color: #fff; font-weight: 700; font-size: .86rem; white-space: nowrap; }
 @media (max-width: 640px) { .portal-link { border-radius: 16px; } .portal-link small { display: block; font-size: .8rem; } }
 .post-wrap .portal-link { margin-top: 24px; }
+.portal-link.news-pill { background: linear-gradient(135deg, #2a67ab 0%, #12223a 100%); color: #fff; box-shadow: 0 8px 20px rgba(18,34,58,.25); }
+.portal-link.news-pill:hover { background: linear-gradient(135deg, #2f72bb 0%, #16294a 100%); }
+.portal-link.news-pill small { color: rgba(255,255,255,.82); }
+.portal-link.news-pill .pl-ico { background: #fff; }
+.portal-link.news-pill .pl-go { background: #f6c372; color: #12223a; }
+.wrap > .news-pill { margin: 30px 0 4px; }
+.post-wrap .portal-link + .news-pill { margin-top: 14px; }
 @media (max-width: 640px) { .post-stats { grid-template-columns: 1fr; } }
 
 /* Top-row navigation with dropdown */
@@ -446,7 +453,7 @@ footer p { max-width: 80ch; }
 .news-card .rc-go { background: #f6c372; color: #12223a; }
 .news-card .rc-go span { color: #12223a; }
 .wrap > .news-card { margin: 34px 0 6px; }
-.deals-news { margin: 22px 0 0 !important; }
+.deals-news { margin: 22px 0 0 !important; max-width: 860px !important; }
 .post-hero + .ref-card { margin: 0 0 24px; }
 .rc-ico { width: 52px; height: 52px; border-radius: 14px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 10px rgba(18,34,58,.12); }
 .rc-txt b { display: block; font-size: 1.12rem; font-weight: 800; letter-spacing: -.01em; }
@@ -747,7 +754,7 @@ footer p { max-width: 80ch; }
       </div>
     </div>
     <div class="wrap">
-      <a class="ref-card news-card" data-goatcounter-click="newsletter-home" data-goatcounter-title="Newsletter signup (home)" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=home" target="_blank" rel="noopener"><span class="rc-ico" aria-hidden="true">✉️</span><span class="rc-txt"><b>Get the PHL Points weekly email</b><small>My 5 best PHL award deals and 1 strategy, every Friday. Free.</small></span><span class="rc-go">Sign up <span aria-hidden="true">→</span></span></a>
+      <a class="portal-link news-pill" data-goatcounter-click="newsletter-home" data-goatcounter-title="Newsletter signup (home)" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=home" target="_blank" rel="noopener"><span class="pl-ico" aria-hidden="true">✉️</span><span><b>Weekly email</b><small>Every Friday I send this week&#39;s top five deals and one strategy.</small></span><span class="pl-go">Sign up →</span></a>
       <div class="section-title"><h2>Choose your destination</h2><span class="muted">11 stops. Go in order, or jump to any one.</span></div>
       <div class="dest"><a class="mini" href="/overview/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>OVR</b></span><span class="mini-name">Overview</span><span class="mini-best">Everyone. Start here</span><span class="mini-stop">Stop 01</span></a><a class="mini" href="/aa-hotels/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>HTL</b></span><span class="mini-name">AA Hotels</span><span class="mini-best">Closing a status gap</span><span class="mini-stop">Stop 02</span></a><a class="mini" href="/aa-shopping/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>SHP</b></span><span class="mini-name">AA Shopping</span><span class="mini-best">Online shoppers</span><span class="mini-stop">Stop 03</span></a><a class="mini" href="/aa-dining/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>DIN</b></span><span class="mini-name">AA Dining</span><span class="mini-best">Eating out in Philly</span><span class="mini-stop">Stop 04</span></a><a class="mini" href="/aa-miles/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>RDM</b></span><span class="mini-name">AA Miles</span><span class="mini-best">Booking awards from PHL</span><span class="mini-stop">Stop 05</span></a><a class="mini" href="/ba-avios/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>AVS</b></span><span class="mini-name">BA Avios</span><span class="mini-best">Amex, Chase and other cards</span><span class="mini-stop">Stop 06</span></a><a class="mini" href="/status/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>STS</b></span><span class="mini-name">Status</span><span class="mini-best">Status chasers</span><span class="mini-stop">Stop 07</span></a><a class="mini" href="/philly-lounges/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>LNG</b></span><span class="mini-name">Philly Lounges</span><span class="mini-best">Early arrivals and layovers</span><span class="mini-stop">Stop 08</span></a><a class="mini" href="/cards/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>CRD</b></span><span class="mini-name">Cards</span><span class="mini-best">Choosing a card</span><span class="mini-stop">Stop 09</span></a><a class="mini" href="/deals/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>DLS</b></span><span class="mini-name">Today's Deals</span><span class="mini-best">Checking in every day</span><span class="mini-stop">Stop 10</span></a><a class="mini" href="/strategies/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>STR</b></span><span class="mini-name">Strategies</span><span class="mini-best">Real trips, real numbers</span><span class="mini-stop">Stop 11</span></a></div>
     </div>
