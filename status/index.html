@@ -587,9 +587,16 @@ footer p { max-width: 80ch; }
 .dl-note { padding: 10px 0; color: var(--muted); }
 
 /* Lounges */
-.lounges { grid-template-columns: repeat(2, 1fr); }
-.lounges .trip-route b:first-child { font-size: 1.5rem; }
-.lounges .trip-lines dd { max-width: 70%; }
+.lounges { grid-template-columns: 1fr; gap: 26px; }
+.lounges .trip-route { padding: 22px 28px; }
+.lounges .trip-route b { font-size: 2rem !important; }
+.lounges .trip-route em { font-size: .8rem; }
+.lounges .trip-lines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; padding: 14px 28px 4px; }
+.lounges .trip-lines > div { display: block; border-bottom: 0; }
+.lounges .trip-lines dd { max-width: none; text-align: left; font-size: 1.02rem; margin-top: 4px; }
+.lounges .trip-end { padding: 6px 28px 26px; font-size: 1.05rem; line-height: 1.65; }
+@media (max-width: 760px) { .lounges .trip-lines { grid-template-columns: 1fr; } .lounges .trip-lines > div { padding: 10px 0; } .lounges .trip-route b { font-size: 1.6rem !important; } }
+
 .lounges .trip-end { display: grid; gap: 10px; }
 .lounges .trip-end p { margin: 0; }
 @media (max-width: 860px) { .lounges { grid-template-columns: 1fr; } }
