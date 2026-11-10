@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="google-site-verification" content="pRvjShOth8bOWYKsiZf2lSfMi0BHAwAWlpWDcReES6Q" />
-<script>window.__PAGE__ = "fly"; window.PATHS = {"home": "/", "overview": "/overview/", "hotels": "/aa-hotels/", "shopping": "/aa-shopping/", "dining": "/aa-dining/", "fly": "/aa-miles/", "status": "/status/", "lounges": "/philly-lounges/", "cards": "/cards/", "deals": "/deals/", "strategies": "/strategies/", "privacy": "/privacy/", "europe-gear": "/strategies/europe-travel-essentials/", "italki": "/strategies/learn-italian-italki/", "status-france": "/strategies/aa-hotels-status-france/", "dining-101": "/strategies/aa-dining-philly/", "puglia-pizza": "/strategies/puglia-pizza/", "gold-italy": "/strategies/naples-sorrento-gold/", "gold-philly": "/strategies/philly-staycation-gold/", "hotel-loop": "/strategies/aa-hotel-flight-loop/", "flights": "/deals/#flights"};</script>
+<script>window.__PAGE__ = "fly"; window.PATHS = {"home": "/", "overview": "/overview/", "bonus": "/bonus-miles/", "loyalty": "/loyalty-points/", "hotels": "/aa-hotels/", "shopping": "/aa-shopping/", "dining": "/aa-dining/", "fly": "/aa-miles/", "status": "/status/", "lounges": "/philly-lounges/", "cards": "/cards/", "deals": "/deals/", "strategies": "/strategies/", "privacy": "/privacy/", "europe-gear": "/strategies/europe-travel-essentials/", "italki": "/strategies/learn-italian-italki/", "status-france": "/strategies/aa-hotels-status-france/", "dining-101": "/strategies/aa-dining-philly/", "puglia-pizza": "/strategies/puglia-pizza/", "gold-italy": "/strategies/naples-sorrento-gold/", "gold-philly": "/strategies/philly-staycation-gold/", "hotel-loop": "/strategies/aa-hotel-flight-loop/", "flights": "/deals/#flights"};</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Redeem AA Miles: Using American Airlines Miles from PHL | PHL Points</title>
 <meta name="description" content="How to redeem AAdvantage miles for award flights out of Philadelphia without wasting them.">
@@ -500,6 +500,13 @@ footer p { max-width: 80ch; }
 .page-head .intro { font-size: 1.15rem; max-width: 68ch; color: var(--ink); }
 .step .aside { font-size: .92rem; color: var(--muted); background: var(--sun-soft); border-radius: 8px; padding: 10px 12px; margin-top: 4px; }
 .callout { margin-top: 22px; font-size: 1.1rem; font-weight: 600; max-width: 70ch; border-left: 4px solid var(--sun); padding: 4px 0 4px 16px; }
+.ov-links { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.ov-link { display: grid; gap: 6px; padding: 22px 24px; border-radius: 16px; background: var(--sky, #12223a); color: #fff; text-decoration: none; box-shadow: 0 10px 24px rgba(18,34,58,.18); }
+.ov-link b { font-family: var(--font-display); font-size: 1.6rem; color: #f6c372; }
+.ov-link span { color: #dbe6f3; line-height: 1.5; }
+.ov-link .ov-k { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #b9c7d8; }
+.ov-link:hover { transform: translateY(-2px); }
+@media (max-width: 700px) { .ov-links { grid-template-columns: 1fr; } }
 /* Line up text with the full-width boxes on every page */
 .page .page-head .intro, .page .prose, .page .sec-head .intro, .page .note, .page .callout, .page .pass .intro, .page .sec-head > div { max-width: none !important; }
 .page .portal-link, .page .ref-card, .page .ig-banner, .page .steps.stack, .page .deal-card, .page .pick-warn, .page .picks-wrap, .page .deals-news, .page .slim-ref { max-width: none !important; }
@@ -727,13 +734,17 @@ footer p { max-width: 80ch; }
           <button class="nav-link sub-btn deals-link" type="button" aria-expanded="false" aria-controls="sub-philly">PHL Deals<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
           <ul class="sub" id="sub-philly" hidden><li class="sub-head" aria-hidden="true">Updated every day</li><li><a href="/deals/" data-link="deals"><span class="m-code">DLS</span><span class="m-name">Today's Deals</span></a></li><li><a href="/strategies/" data-link="strategies"><span class="m-code">STR</span><span class="m-name">Strategies</span></a></li></ul>
         </li>
-        <li class="has-sub" data-group="overview hotels shopping dining fly">
-          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn">Miles Guide<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
-          <ul class="sub" id="sub-earn" hidden><li class="sub-head" aria-hidden="true">Earning and using your miles</li><li><a href="/overview/" data-link="overview"><span class="m-code">OVR</span><span class="m-name">Overview</span></a></li><li><a href="/aa-hotels/" data-link="hotels"><span class="m-code">HTL</span><span class="m-name">AA Hotels</span></a></li><li><a href="/aa-shopping/" data-link="shopping"><span class="m-code">SHP</span><span class="m-name">AA Shopping</span></a></li><li><a href="/aa-dining/" data-link="dining"><span class="m-code">DIN</span><span class="m-name">AA Dining</span></a></li><li><a href="/aa-miles/" data-link="fly"><span class="m-code">RDM</span><span class="m-name">Redeem AA Miles</span></a></li></ul>
+        <li class="has-sub" data-group="overview bonus loyalty fly">
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn"><span class="cw">Miles </span>Guide<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-earn" hidden><li class="sub-head" aria-hidden="true">How AAdvantage works</li><li><a href="/overview/" data-link="overview"><span class="m-code">OVR</span><span class="m-name">Overview</span></a></li><li><a href="/bonus-miles/" data-link="bonus"><span class="m-code">BNS</span><span class="m-name">Bonus Miles</span></a></li><li><a href="/loyalty-points/" data-link="loyalty"><span class="m-code">LPS</span><span class="m-name">Loyalty Points</span></a></li><li><a href="/aa-miles/" data-link="fly"><span class="m-code">RDM</span><span class="m-name">Redeem AA Miles</span></a></li></ul>
+        </li>
+        <li class="has-sub" data-group="hotels shopping dining">
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-portals"><span class="cw">AA </span>Portals<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-portals" hidden><li class="sub-head" aria-hidden="true">Where you earn the most</li><li><a href="/aa-hotels/" data-link="hotels"><span class="m-code">HTL</span><span class="m-name">AA Hotels</span></a></li><li><a href="/aa-shopping/" data-link="shopping"><span class="m-code">SHP</span><span class="m-name">AA Shopping</span></a></li><li><a href="/aa-dining/" data-link="dining"><span class="m-code">DIN</span><span class="m-name">AA Dining</span></a></li></ul>
         </li>
         <li><a class="nav-link" href="/status/" data-link="status">Status</a></li>
         <li><a class="nav-link" href="/philly-lounges/" data-link="lounges"><span class="cw">PHL </span>Lounges</a></li>
-        <li><a class="nav-link" href="/cards/" data-link="cards">AA Cards</a></li>
+        <li><a class="nav-link" href="/cards/" data-link="cards"><span class="cw">AA </span>Cards</a></li>
       </ul>
     </nav>
     <div class="philly-btns"><a class="pbtn" href="/deals/" data-link="deals"><span class="pk">DLS</span>Today's Deals</a><a class="pbtn" href="/strategies/" data-link="strategies"><span class="pk">STR</span>Strategies</a></div>
@@ -746,7 +757,7 @@ footer p { max-width: 80ch; }
   <section class="page" data-page="fly">
     <div class="wrap">
       <header class="page-head">
-        <div class="eyebrow">Miles Guide · Stop 05 of 10</div>
+        <div class="eyebrow">Miles Guide · Stop 07 of 12</div>
         <h1>Redeem AA Miles</h1>
         <p class="intro">If you have read this far and followed the program, you have amassed tens or hundreds of thousands of AA miles. But if you do not use your points wisely, you will waste them on expensive award flights that undermine all of the work you put in. To avoid that fate, follow these tips.</p>
       </header>
