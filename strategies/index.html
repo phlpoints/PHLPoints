@@ -420,6 +420,15 @@ footer p { max-width: 80ch; }
 .ref-card { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; max-width: 860px; margin: 0 0 30px; padding: 16px 16px 16px 18px; border-radius: 18px; background: linear-gradient(135deg, #f6c372 0%, #ee9b2f 100%); color: #12223a; text-decoration: none; border: 1px solid rgba(18,34,58,.08); box-shadow: 0 12px 28px rgba(238,155,47,.28); transition: transform .15s, box-shadow .15s; }
 .ref-card:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(238,155,47,.36); }
 .post-wrap .ref-card { margin: 28px 0 0; }
+.slim-ref { display: flex; align-items: center; gap: 14px; margin: 22px 0 26px; padding: 12px 14px 12px 16px; background: #fff; border: 1px solid #dfe6ef; border-left: 5px solid #ee9b2f; border-radius: 14px; color: #12223a; text-decoration: none; box-shadow: 0 6px 18px rgba(18,34,58,.08); transition: transform .15s, box-shadow .15s; }
+.slim-ref:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(18,34,58,.14); }
+.sr-ico { font-size: 26px; flex: none; }
+.sr-txt { flex: 1; min-width: 0; }
+.sr-txt b { display: block; font-size: 1rem; font-weight: 800; }
+.sr-txt small { display: block; margin-top: 2px; font-size: .82rem; line-height: 1.35; color: #5a6a80; }
+.sr-go { flex: none; padding: 9px 14px; border-radius: 999px; background: #12223a; color: #fff; font-weight: 700; font-size: .88rem; white-space: nowrap; }
+@media (max-width: 520px) { .slim-ref { flex-wrap: wrap; } .sr-go { width: 100%; text-align: center; } }
+
 .news-card { background: linear-gradient(135deg, #2a67ab 0%, #12223a 100%); color: #fff; box-shadow: 0 12px 28px rgba(18,34,58,.28); }
 .news-card:hover { box-shadow: 0 16px 34px rgba(18,34,58,.36); }
 .news-card .rc-txt small { color: rgba(255,255,255,.82); }
@@ -728,8 +737,8 @@ footer p { max-width: 80ch; }
 <a class="strat-card" href="/strategies/learn-italian-italki/">
 <img src="/img/strat-italki.jpg" alt="The Colosseum in Rome at sunrise" loading="lazy">
 <div class="sc-body"><div class="sc-meta">Nov 10, 2026 · Travel prep</div>
-<h3>How I learned Italian before my trip to Rome</h3>
-<p>Weekly lessons with a tutor from Venice on italki, from anywhere in the world.</p><span class="sc-go">Read the strategy →</span></div></a>
+<h3>Next Level Travel: Language Learning</h3>
+<p>How I learned Italian for Rome with a tutor from Venice on italki and practice on Rosetta Stone.</p><span class="sc-go">Read the strategy →</span></div></a>
 <a class="strat-card" href="/strategies/aa-hotels-status-france/">
 <img src="/img/strat-france.jpg" alt="Illustration of a Gothic cathedral above French farmland" loading="lazy">
 <div class="sc-body"><div class="sc-meta">Nov 9, 2026 · Status</div>
