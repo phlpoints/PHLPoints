@@ -2003,5 +2003,12 @@ if(!live.length){box.outerHTML='<p class="muted">New award flights are posted as
 box.innerHTML=live.map(function(k){var m=n(k.miles),v=m?((n(k.fare)-n(k.cash))/m*100):0;
 return '<a class="hp-pick" href="/deals/"><span class="r">'+e(k.route)+'</span><span class="c">'+e(k.city)+'</span><span class="d">'+e(k.dates)+'</span><span class="m">'+e(k.miles)+' '+e(k.cash)+'</span><span class="f">Cash fare '+e(k.fare)+' · '+e(k.cabin)+'</span>'+(v?'<span class="v">About '+v.toFixed(1)+'¢ per mile</span>':'')+'</a>'}).join('')})();
 </script>
+<script>
+(function(){var h=document.querySelector('.sky h1');if(!h)return;
+function fit(){h.style.fontSize='';if(window.innerWidth<=640)return;
+var r=document.createRange();r.selectNodeContents(h);var tw=r.getBoundingClientRect().width,cw=h.clientWidth;
+if(!tw||!cw)return;var fs=parseFloat(getComputedStyle(h).fontSize);h.style.fontSize=Math.min(fs*cw/tw*0.995,72)+'px';}
+fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('resize',fit);})();
+</script>
 </body>
 </html>
