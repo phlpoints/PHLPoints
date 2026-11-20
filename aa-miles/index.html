@@ -722,6 +722,7 @@ footer p { max-width: 80ch; }
 .foot-about b { color: #fff; }
 
 /* nav v2 */
+.topbar .ig-top:not(.news-top){background:#fff;color:#12223a!important;border-color:#fff!important}.topbar .ig-top:not(.news-top):hover{background:#e8eef6}
 .sub a .m-hint{font-size:.78rem;color:#9fb3c8;font-weight:500;white-space:nowrap}.sub a{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.sub a .m-name{white-space:nowrap}.sub a[aria-current="page"] .m-hint{color:#12223a;opacity:.75}
 @media (min-width:1000px){.topbar .wrap{flex-wrap:nowrap;padding-bottom:12px;gap:14px}.topbar .brand{order:1}.topbar .mainnav{order:2;flex:1 1 auto;border-top:0;margin-top:0;padding:0 0 0 18px}.topbar .navlist{width:auto;margin-left:0;gap:2px}.topbar .news-top{order:3;margin-left:auto}.topbar .ig-top:not(.news-top){order:4;margin-left:0}}
 .sub a{grid-template-columns:1fr}
@@ -736,14 +737,15 @@ footer p { max-width: 80ch; }
     <a class="brand" href="/"><svg class="bell-mark" viewBox="0 0 110 96" aria-hidden="true"><path d="M8 90 C 2 50, 28 14, 82 12" fill="none" stroke="#f6c372" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 9"/><g transform="translate(94 12) rotate(84) scale(0.95) translate(-12 -12)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="#ee9b2f"/></g><g transform="translate(22 33) scale(0.5)" fill="#f6c372"><rect x="18" y="0" width="104" height="13" rx="3"/><rect x="14" y="-3" width="10" height="19" rx="2"/><rect x="116" y="-3" width="10" height="19" rx="2"/><rect x="61" y="11" width="18" height="9" rx="2"/><path d="M45 34 C45 14 95 14 95 34 C95 64 97 92 117 107 Q123 111 123 116 L17 116 Q17 111 23 107 C43 92 45 64 45 34 Z"/><rect x="15" y="114" width="110" height="12" rx="6"/></g><g transform="translate(22 33) scale(0.5)" fill="none" stroke="#0e2a47" stroke-linecap="round" stroke-linejoin="round"><path d="M45.6 44 Q70 38 94.4 44" stroke-width="5"/><path d="M30 104 Q70 96 110 104" stroke-width="5"/><path d="M80 126 L78 116 L81 106 L77 96 L80 86 L76 74 L78 64" stroke-width="6"/></g></svg><span class="long">PHL</span>&nbsp;<span>Points</span></a>
     <nav class="mainnav" id="mainnav" aria-label="Main">
       <ul class="navlist">
-        <li><a class="nav-link" href="/deals/" data-link="deals">Deals</a></li>
         <li class="has-sub" data-group="overview mvlp bonus loyalty fly hotels shopping dining">
-          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn">Miles<span class="cw"> Guide</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn">Earn<span class="cw"> Miles</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
           <ul class="sub" id="sub-earn" hidden><li class="sub-head" aria-hidden="true">Start here</li><li><a href="/miles-vs-loyalty-points/" data-link="mvlp"><span class="m-name">Miles vs. Loyalty Points</span></a></li><li class="sub-head" aria-hidden="true">Earn miles</li><li><a href="/aa-hotels/" data-link="hotels"><span class="m-name">AA Hotels</span><span class="m-hint">Up to 12x</span></a></li><li><a href="/aa-dining/" data-link="dining"><span class="m-name">AA Dining</span><span class="m-hint">Up to 7x</span></a></li><li><a href="/aa-shopping/" data-link="shopping"><span class="m-name">AA Shopping</span><span class="m-hint">2–8x</span></a></li><li class="sub-head" aria-hidden="true">Use your miles</li><li><a href="/aa-miles/" data-link="fly"><span class="m-name">Redeem AA Miles</span></a></li></ul>
         </li>
-        <li><a class="nav-link" href="/status/" data-link="status">Status</a></li>
-        <li><a class="nav-link" href="/philly-lounges/" data-link="lounges">Lounges</a></li>
-        <li><a class="nav-link" href="/cards/" data-link="cards">Cards</a></li>
+        <li class="has-sub" data-group="status lounges cards">
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-better">Fly Better<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-better" hidden><li class="sub-head" aria-hidden="true">Status, lounges and cards</li><li><a href="/status/" data-link="status"><span class="m-name">Status</span></a></li><li><a href="/philly-lounges/" data-link="lounges"><span class="m-name">PHL Lounges and Map</span></a></li><li><a href="/cards/" data-link="cards"><span class="m-name">PHL Cards</span></a></li></ul>
+        </li>
+        <li><a class="nav-link" href="/deals/" data-link="deals">Deals</a></li>
         <li><a class="nav-link" href="/strategies/" data-link="strategies">Strategies</a></li>
       </ul>
     </nav>
