@@ -104,6 +104,8 @@ p { margin: 0; }
 .sky .eyebrow { color: #f6c372; }
 .sky h1 { font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; font-stretch: 115%; letter-spacing: -.01em; text-transform: uppercase; margin-top: 12px; }
 .sky h1 em { font-style: normal; color: #f6c372; }
+.sky h1 { font-size: clamp(2rem, 4.4vw, 3.4rem); white-space: nowrap; }
+@media (max-width: 640px) { .sky h1 { white-space: normal; text-wrap: wrap; font-size: clamp(1.5rem, 7.4vw, 2.2rem); } }
 .sky .lede { font-size: 1.12rem; margin-top: 18px; max-width: 54ch; color: #dbe6f3; }
 .hero-cta { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
 .btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; padding: 11px 20px; border-radius: 999px; background: var(--sun); color: #12223a; }
