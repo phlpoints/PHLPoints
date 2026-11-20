@@ -724,6 +724,36 @@ footer p { max-width: 80ch; }
 .foot-about a { color: #f6c372; font-weight: 600; }
 .foot-about b { color: #fff; }
 .faq{border-bottom:1px solid rgba(0,0,0,.12);padding:12px 0}.faq summary{cursor:pointer;font-weight:700}.faq p{margin:8px 0 0}
+
+.hero-sum{font-size:1.25rem;line-height:1.5;color:#dbe6f3;max-width:760px;margin:14px 0 0}
+.see-all{font-weight:700;color:var(--horizon);text-decoration:none}
+.hp-picks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hp-pick{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:4px;text-decoration:none;color:var(--ink)}
+.hp-pick .r{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;color:var(--muted)}
+.hp-pick .c{font-family:var(--font-display);font-weight:800;font-size:1.35rem;line-height:1.1}
+.hp-pick .d{color:var(--muted);font-size:.92rem}
+.hp-pick .m{font-weight:800;font-size:1.1rem;margin-top:6px}
+.hp-pick .f{font-size:.9rem;color:var(--muted)}
+.hp-pick .v{justify-self:start;margin-top:6px;background:#fff1dc;color:#7a4a08;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:999px}
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.path{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px}
+a.path:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(14,42,71,.12)}
+.path-ico{width:40px;height:40px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-size:1.15rem;color:#12223a}
+.path h3{margin:4px 0 0;font-size:1.25rem}
+.path p{margin:0;color:var(--muted);font-size:.97rem;text-align:left!important;hyphens:none}
+.path-go{margin-top:auto;font-weight:700;color:var(--horizon)}
+.path-links{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.path-links a{display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem}
+.path-links a:hover{border-color:var(--sun)}
+.about{margin-top:48px}
+.about h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;font-stretch:112%;text-transform:uppercase;margin-bottom:12px}
+.about-text p{margin:0 0 14px}
+@media (max-width:860px){.hp-picks,.paths{grid-template-columns:1fr}}
+@media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}.hero-sum{font-size:1.1rem;text-align:left!important}}
+
+/* nav v2 */
+.topbar .news-top{margin-left:auto}
+@media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
 </style>
 <meta name="impact-site-verification" value="a5431f1f-4d34-41f9-9aa1-87e5e3ec1e27">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why should Philadelphia flyers focus on American Airlines miles?", "acceptedAnswer": {"@type": "Answer", "text": "PHL is dominated by American Airlines, and none of the big transferable credit cards (American Express Platinum, Chase Sapphire Reserve, Capital One Venture X) can transfer points to American. Earning AAdvantage miles directly is the way to fly the airline that actually serves PHL."}}, {"@type": "Question", "name": "What is the difference between AAdvantage miles and Loyalty Points?", "acceptedAnswer": {"@type": "Answer", "text": "Loyalty Points earn you status with American Airlines. Bonus miles are what you use to book award flights. You need both to get free flights and the highest level of service."}}, {"@type": "Question", "name": "How can I earn American Airlines miles without flying?", "acceptedAnswer": {"@type": "Answer", "text": "Through the AA Hotels portal (up to 12x miles per dollar with the Citi AAdvantage Executive card plus a Loyalty Point award per stay), AA Dining (up to 7 miles and 6 Loyalty Points per dollar as a VIP with an AA card), AA Shopping (2-8x at many stores) and the Citi AAdvantage cards."}}, {"@type": "Question", "name": "Is PHL Points affiliated with American Airlines?", "acceptedAnswer": {"@type": "Answer", "text": "No. PHL Points is an independent guide for Philadelphia flyers and is not affiliated with American Airlines."}}]}</script>
@@ -734,24 +764,17 @@ footer p { max-width: 80ch; }
     <a class="brand" href="/"><svg class="bell-mark" viewBox="0 0 110 96" aria-hidden="true"><path d="M8 90 C 2 50, 28 14, 82 12" fill="none" stroke="#f6c372" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 9"/><g transform="translate(94 12) rotate(84) scale(0.95) translate(-12 -12)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="#ee9b2f"/></g><g transform="translate(22 33) scale(0.5)" fill="#f6c372"><rect x="18" y="0" width="104" height="13" rx="3"/><rect x="14" y="-3" width="10" height="19" rx="2"/><rect x="116" y="-3" width="10" height="19" rx="2"/><rect x="61" y="11" width="18" height="9" rx="2"/><path d="M45 34 C45 14 95 14 95 34 C95 64 97 92 117 107 Q123 111 123 116 L17 116 Q17 111 23 107 C43 92 45 64 45 34 Z"/><rect x="15" y="114" width="110" height="12" rx="6"/></g><g transform="translate(22 33) scale(0.5)" fill="none" stroke="#0e2a47" stroke-linecap="round" stroke-linejoin="round"><path d="M45.6 44 Q70 38 94.4 44" stroke-width="5"/><path d="M30 104 Q70 96 110 104" stroke-width="5"/><path d="M80 126 L78 116 L81 106 L77 96 L80 86 L76 74 L78 64" stroke-width="6"/></g></svg><span class="long">PHL</span>&nbsp;<span>Points</span></a>
     <nav class="mainnav" id="mainnav" aria-label="Main">
       <ul class="navlist">
-        <li class="has-sub" data-group="deals flights strategies europe-gear italki status-france dining-101 puglia-pizza gold-italy gold-philly hotel-loop london-kimpton partner-airline">
-          <button class="nav-link sub-btn deals-link" type="button" aria-expanded="false" aria-controls="sub-philly">PHL Deals<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
-          <ul class="sub" id="sub-philly" hidden><li class="sub-head" aria-hidden="true">Updated every day</li><li><a href="/deals/" data-link="deals"><span class="m-code">DLS</span><span class="m-name">Today's Deals</span></a></li><li><a href="/strategies/" data-link="strategies"><span class="m-code">STR</span><span class="m-name">Strategies</span></a></li></ul>
+        <li><a class="nav-link" href="/deals/" data-link="deals">Deals</a></li>
+        <li class="has-sub" data-group="overview mvlp bonus loyalty fly hotels shopping dining">
+          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn">Earn<span class="cw"> Miles</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <ul class="sub" id="sub-earn" hidden><li class="sub-head" aria-hidden="true">How AAdvantage works</li><li><a href="/overview/" data-link="overview"><span class="m-name">American Airlines at PHL</span></a></li><li><a href="/miles-vs-loyalty-points/" data-link="mvlp"><span class="m-name">Miles vs. Loyalty Points</span></a></li><li class="sub-head" aria-hidden="true">Where you earn the most</li><li><a href="/aa-hotels/" data-link="hotels"><span class="m-name">AA Hotels</span></a></li><li><a href="/aa-shopping/" data-link="shopping"><span class="m-name">AA Shopping</span></a></li><li><a href="/aa-dining/" data-link="dining"><span class="m-name">AA Dining</span></a></li><li class="sub-head" aria-hidden="true">Use your miles</li><li><a href="/aa-miles/" data-link="fly"><span class="m-name">Redeem AA Miles</span></a></li></ul>
         </li>
-        <li class="has-sub" data-group="overview mvlp bonus loyalty fly">
-          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-earn"><span class="cw">Miles </span>Guide<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
-          <ul class="sub" id="sub-earn" hidden><li class="sub-head" aria-hidden="true">How AAdvantage works</li><li><a href="/overview/" data-link="overview"><span class="m-code">PHL</span><span class="m-name">AA at PHL</span></a></li><li><a href="/miles-vs-loyalty-points/" data-link="mvlp"><span class="m-code">MVL</span><span class="m-name">Miles vs. Loyalty Points</span></a></li><li><a href="/aa-miles/" data-link="fly"><span class="m-code">RDM</span><span class="m-name">Redeem AA Miles</span></a></li></ul>
-        </li>
-        <li class="has-sub" data-group="hotels shopping dining">
-          <button class="nav-link sub-btn" type="button" aria-expanded="false" aria-controls="sub-portals"><span class="cw">AA </span>Portals<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 4l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
-          <ul class="sub" id="sub-portals" hidden><li class="sub-head" aria-hidden="true">Where you earn the most</li><li><a href="/aa-hotels/" data-link="hotels"><span class="m-code">HTL</span><span class="m-name">AA Hotels</span></a></li><li><a href="/aa-shopping/" data-link="shopping"><span class="m-code">SHP</span><span class="m-name">AA Shopping</span></a></li><li><a href="/aa-dining/" data-link="dining"><span class="m-code">DIN</span><span class="m-name">AA Dining</span></a></li></ul>
-        </li>
-        <li><a class="nav-link" href="/status/" data-link="status">AA Status</a></li>
-        <li><a class="nav-link" href="/philly-lounges/" data-link="lounges"><span class="cw">PHL </span>Lounges</a></li>
-        <li><a class="nav-link" href="/cards/" data-link="cards"><span class="cw">PHL </span>Cards</a></li>
+        <li><a class="nav-link" href="/status/" data-link="status">Status</a></li>
+        <li><a class="nav-link" href="/philly-lounges/" data-link="lounges">Lounges</a></li>
+        <li><a class="nav-link" href="/cards/" data-link="cards">Cards</a></li>
+        <li><a class="nav-link" href="/strategies/" data-link="strategies">Strategies</a></li>
       </ul>
     </nav>
-    <div class="philly-btns"><a class="pbtn" href="/deals/" data-link="deals"><span class="pk">DLS</span>Today's Deals</a><a class="pbtn" href="/strategies/" data-link="strategies"><span class="pk">STR</span>Strategies</a></div>
     <a class="ig-top news-top" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=header" target="_blank" rel="noopener" aria-label="Free weekly email: my 5 best PHL award deals and 1 strategy" title="Free weekly email: my 5 best PHL award deals and 1 strategy, every Friday" data-goatcounter-click="newsletter-header" data-goatcounter-title="Newsletter signup (header)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><span>Newsletter</span></a>
     <a class="ig-top" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener" aria-label="PHL Points on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg><span>@phlpoints</span></a>
   </div>
@@ -764,22 +787,46 @@ footer p { max-width: 80ch; }
       <div class="wrap">
         <div class="hero-grid hero-solo">
           <div>
-            <div class="eyebrow">An independent guide for PHL-based flyers · Updated Oct 30, 2026</div>
+            <div class="eyebrow">An independent guide for Philadelphia flyers</div>
             <h1>Philly’s Guide to <em>Flights and Status</em></h1>
-            <div class="lede">
-              <p>I am a husband and father of two who has lived in Philadelphia for over 20 years. Throughout that time, I have utilized almost every major Credit Card Mileage Program to obtain free or discounted flights. It all started with a free Bank of America Travel Card that I used to get statement credits for airline purchases. Then I utilized the Chase Sapphire Reserve, Capital One Venture X, and the American Express Platinum cards. All of these cards were great for accruing points (and two of them have or had good lounges in PHL) but, because none are transfer partners with American Airlines, none could provide the trifecta of accruing miles for the best flights out of Philadelphia with American Airlines status.</p>
-              <p>Finally, I found the American Airlines Credit Cards through Citi and discovered that not only could I get free flights but I could also obtain the highest levels of American Airlines status without spending any additional money. I have used these cards to fly my family of four around the world multiple times a year with the highest level of status without spending a single extra dollar. I am able to do this not because I am spending more money but because I make strategic choices to maximize American Airlines miles on every dollar I spend. Moreover, because American Airlines allows you to simultaneously earn status while earning miles, I have accrued hundreds of thousands of miles while achieving Executive Platinum Status with American Airlines. Through this program, we have flown in luxury with routine upgrades, preferred seats, almost unlimited baggage on flights, and the highest levels of service. Through this website, I will teach you how I utilize the American Airlines Credit Cards and their Loyalty Program. Along the way, I will also update the best Philadelphia flights, shopping, dining, and hotel deals I can find. I hope you all find this website helpful on your journeys.</p>
-            </div>
-            <div class="hero-cta"><a class="btn" href="/overview/">Start at stop 01 →</a><a class="btn ghost" href="/aa-hotels/">Jump to AA Hotels</a><a class="btn ghost ig-btn" href="https://www.instagram.com/phlpoints/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg> Follow @phlpoints</a><a class="btn ghost ig-btn" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=hero" target="_blank" rel="noopener" data-goatcounter-click="newsletter-hero" data-goatcounter-title="Newsletter signup (hero)"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg> Get the weekly email</a></div>
+            <p class="hero-sum">I live in Philly and fly American Airlines out of PHL. Here I share the award flights I find, how I earn miles and status without extra spending, and how to get around the airport.</p>
+            <div class="hero-cta"><a class="btn" href="/deals/">See This Week’s Award Flights →</a><a class="btn ghost" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=home-hero" target="_blank" rel="noopener" data-goatcounter-click="newsletter-home-hero">Get the Newsletter</a></div>
           </div>
         </div>
       </div>
     </div>
     <div class="wrap">
+      <div class="section-title"><h2>Latest Award Flights</h2><a class="see-all" href="/deals/">See all award flights →</a></div>
+      <div class="hp-picks" id="home-picks"></div>
+      <div class="section-title"><h2>What You Will Find Here</h2></div>
+      <div class="paths">
+        <a class="path" href="/deals/"><span class="path-ico">✈</span><h3>Find Award Flights From PHL</h3><p>Real award prices I find out of Philadelphia, with the cash fare next to them so you can see the value.</p><span class="path-go">See award flights →</span></a>
+        <div class="path"><span class="path-ico">★</span><h3>Earn Miles and Status</h3><p>How I earn American Airlines miles and Loyalty Points without spending more.</p><ul class="path-links"><li><a href="/miles-vs-loyalty-points/">Miles vs. Loyalty Points</a></li><li><a href="/aa-hotels/">AA Hotels</a></li><li><a href="/aa-dining/">AA Dining</a></li><li><a href="/aa-shopping/">AA Shopping</a></li><li><a href="/cards/">PHL Cards</a></li><li><a href="/status/">Status</a></li></ul></div>
+        <a class="path" href="/philly-lounges/"><span class="path-ico">☕</span><h3>Fly Better From PHL</h3><p>Every lounge at PHL, where it is, and how to get in, plus a map of the airport.</p><span class="path-go">See the lounges →</span></a>
+      </div>
+      <div class="section-title"><h2>Latest Strategies</h2><a class="see-all" href="/strategies/">All strategies →</a></div>
+      <div class="strat-grid">
+<a class="strat-card" href="/strategies/europe-travel-essentials/">
+<img src="/img/strat-gear-ess2.jpg" alt="Illustration of a carry-on suitcase, backpack, earbuds and plug adapter" loading="lazy">
+<div class="sc-body"><div class="sc-meta">Nov 8, 2026 · Gear</div>
+<h3>6 essentials for European travel</h3>
+<p>The carry-on, backpack, travel pillow, plug adapter and noise-cancelling earbuds I bring on every flight to Europe, plus the camera that lets me check on my house.</p><span class="sc-go">Read the strategy →</span></div></a>
+<a class="strat-card" href="/strategies/learn-italian-italki/">
+<img src="/img/strat-italki.jpg" alt="The Colosseum in Rome at sunrise" loading="lazy">
+<div class="sc-body"><div class="sc-meta">Nov 18, 2026 · Travel prep</div>
+<h3>Next Level Travel: Language Learning</h3>
+<p>How I learned Italian for Rome with a tutor from Venice on italki.</p><span class="sc-go">Read the strategy →</span></div></a>
+<a class="strat-card" href="/strategies/partner-airline-fees/">
+<img src="/img/strat-partner.jpg" alt="An American Airlines plane climbing through the clouds" loading="lazy">
+<div class="sc-body"><div class="sc-meta">Nov 16, 2026 · Booking tip</div>
+<h3>Booking A Partner Airline? Fewer Miles, More Money</h3>
+<p>Flying home from London on British Airways saves 7,500 Bonus Miles but costs $283.30 more. Here is how to check before you book.</p><span class="sc-go">Read the strategy →</span></div></a>
+      </div>
       <a class="portal-link news-pill" data-goatcounter-click="newsletter-home" data-goatcounter-title="Newsletter signup (home)" href="https://phlpoints.beehiiv.com/?utm_source=phlpoints&amp;utm_campaign=home" target="_blank" rel="noopener"><span class="pl-ico" aria-hidden="true">✉️</span><span><b>Weekly email</b><small>Every Friday I send this week&#39;s top five deals and one strategy.</small></span><span class="pl-go">Sign up →</span></a>
-      <div class="section-title"><h2>Choose your destination</h2><span class="muted">12 stops. Go in order, or jump to any one.</span></div>
-      <div class="dest"><a class="mini" href="/overview/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>WHY</b></span><span class="mini-name">AA at PHL</span><span class="mini-best">Everyone. Start here</span><span class="mini-stop">Stop 01</span></a>
-<a class="mini" href="/miles-vs-loyalty-points/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>MVL</b></span><span class="mini-name">Miles vs. Loyalty Points</span><span class="mini-best">The two kinds of miles</span><span class="mini-stop">Stop 02</span></a><a class="mini" href="/aa-hotels/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>HTL</b></span><span class="mini-name">AA Hotels</span><span class="mini-best">Closing a status gap</span><span class="mini-stop">Stop 03</span></a><a class="mini" href="/aa-shopping/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>SHP</b></span><span class="mini-name">AA Shopping</span><span class="mini-best">Online shoppers</span><span class="mini-stop">Stop 04</span></a><a class="mini" href="/aa-dining/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>DIN</b></span><span class="mini-name">AA Dining</span><span class="mini-best">Eating out in Philly</span><span class="mini-stop">Stop 05</span></a><a class="mini" href="/aa-miles/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>RDM</b></span><span class="mini-name">Redeem AA Miles</span><span class="mini-best">Booking awards from PHL</span><span class="mini-stop">Stop 06</span></a><a class="mini" href="/status/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>STS</b></span><span class="mini-name">AA Status</span><span class="mini-best">Status chasers</span><span class="mini-stop">Stop 07</span></a><a class="mini" href="/philly-lounges/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>LNG</b></span><span class="mini-name">PHL Lounges</span><span class="mini-best">Early arrivals and layovers</span><span class="mini-stop">Stop 08</span></a><a class="mini" href="/cards/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>CRD</b></span><span class="mini-name">PHL Cards</span><span class="mini-best">Choosing a card</span><span class="mini-stop">Stop 09</span></a><a class="mini" href="/deals/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>DLS</b></span><span class="mini-name">Today's Deals</span><span class="mini-best">Checking in every day</span><span class="mini-stop">Stop 10</span></a><a class="mini" href="/strategies/"><span class="mini-route"><b>PHL</b><i aria-hidden="true">✈</i><b>STR</b></span><span class="mini-name">Strategies</span><span class="mini-best">Real trips, real numbers</span><span class="mini-stop">Stop 11</span></a></div>
+      <section class="about"><h2>About Me</h2><div class="about-text">
+              <p>I am a husband and father of two who has lived in Philadelphia for over 20 years. Throughout that time, I have utilized almost every major Credit Card Mileage Program to obtain free or discounted flights. It all started with a free Bank of America Travel Card that I used to get statement credits for airline purchases. Then I utilized the Chase Sapphire Reserve, Capital One Venture X, and the American Express Platinum cards. All of these cards were great for accruing points (and two of them have or had good lounges in PHL) but, because none are transfer partners with American Airlines, none could provide the trifecta of accruing miles for the best flights out of Philadelphia with American Airlines status.</p>
+              <p>Finally, I found the American Airlines Credit Cards through Citi and discovered that not only could I get free flights but I could also obtain the highest levels of American Airlines status without spending any additional money. I have used these cards to fly my family of four around the world multiple times a year with the highest level of status without spending a single extra dollar. I am able to do this not because I am spending more money but because I make strategic choices to maximize American Airlines miles on every dollar I spend. Moreover, because American Airlines allows you to simultaneously earn status while earning miles, I have accrued hundreds of thousands of miles while achieving Executive Platinum Status with American Airlines. Through this program, we have flown in luxury with routine upgrades, preferred seats, almost unlimited baggage on flights, and the highest levels of service. Through this website, I will teach you how I utilize the American Airlines Credit Cards and their Loyalty Program. Along the way, I will also update the best Philadelphia flights, shopping, dining, and hotel deals I can find. I hope you all find this website helpful on your journeys.</p>
+            </div></section>
 <section class="page-faq" style="margin-top:40px">
         <h2 style="font-size:1.6rem;margin:0 0 14px">PHL Points FAQ</h2>
         <details class="faq"><summary>Why should Philadelphia flyers focus on American Airlines miles?</summary><p>PHL is dominated by American Airlines, and none of the big transferable credit cards (American Express Platinum, Chase Sapphire Reserve, Capital One Venture X) can transfer points to American. Earning AAdvantage miles directly is the way to fly the airline that actually serves PHL.</p></details>
@@ -1928,5 +1975,17 @@ footer p { max-width: 80ch; }
   });
 </script>
 <script data-goatcounter="https://phlpoints.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){var el=document.getElementById('picks-data'),box=document.getElementById('home-picks');if(!el||!box)return;
+var p;try{p=JSON.parse(el.textContent)||[]}catch(e){p=[]}
+function d(s){var q=String(s||'').split('-');return q.length===3?new Date(+q[0],+q[1]-1,+q[2]):null}
+function n(s){return parseFloat(String(s||'').replace(/[^0-9.]/g,''))||0}
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var t=new Date();t.setHours(0,0,0,0);
+var live=p.filter(function(k){var x=d(k.depart);return !x||x>=t}).sort(function(a,b){return(d(b.spotted)||0)-(d(a.spotted)||0)}).slice(0,3);
+if(!live.length){box.outerHTML='<p class="muted">New award flights are posted as soon as I find them.</p>';return}
+box.innerHTML=live.map(function(k){var m=n(k.miles),v=m?((n(k.fare)-n(k.cash))/m*100):0;
+return '<a class="hp-pick" href="/deals/"><span class="r">'+e(k.route)+'</span><span class="c">'+e(k.city)+'</span><span class="d">'+e(k.dates)+'</span><span class="m">'+e(k.miles)+' '+e(k.cash)+'</span><span class="f">Cash fare '+e(k.fare)+' · '+e(k.cabin)+'</span>'+(v?'<span class="v">About '+v.toFixed(1)+'¢ per mile</span>':'')+'</a>'}).join('')})();
+</script>
 </body>
 </html>
