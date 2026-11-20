@@ -725,7 +725,7 @@ footer p { max-width: 80ch; }
 .foot-about b { color: #fff; }
 .faq{border-bottom:1px solid rgba(0,0,0,.12);padding:12px 0}.faq summary{cursor:pointer;font-weight:700}.faq p{margin:8px 0 0}
 
-.hero-sum{font-size:1.25rem;line-height:1.5;color:#dbe6f3;max-width:none;margin:14px 0 0;hyphens:none}
+.hero-sum{font-size:1.25rem;line-height:1.5;color:#dbe6f3;max-width:none;margin:14px 0 0;hyphens:none!important;-webkit-hyphens:none!important}
 .see-all{font-weight:700;color:var(--horizon);text-decoration:none}
 .hp-picks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .hp-pick{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:4px;text-decoration:none;color:var(--ink)}
@@ -757,6 +757,19 @@ a.path:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(14,42,71,.12
 .sub a{grid-template-columns:1fr}
 .topbar .news-top{margin-left:auto}
 @media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
+.hero-picks{margin-top:28px}.hero-picks-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#f6c372;font-weight:600}.hero-picks-head a{color:#fff;text-decoration:none;letter-spacing:.06em}.sky .hp-pick{box-shadow:0 10px 26px rgba(8,20,36,.25)}
+.sky .path{box-shadow:0 10px 26px rgba(8,20,36,.25)}
+.paths{align-items:stretch}.sky .path{padding:18px 20px;gap:6px;border-radius:14px}
+.path-top{display:flex;align-items:center;gap:10px}.path-top h3{margin:0;font-size:1.15rem}
+.path .path-ico{width:32px;height:32px;font-size:.95rem;flex:none}
+.path p{font-size:.92rem}
+.path-list{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line)}
+.path-list a{display:flex;justify-content:space-between;align-items:center;padding:9px 2px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem}
+.path-list li:last-child a{border-bottom:0}
+.path-list a span{color:var(--sun);font-weight:700}.path-list a:hover{color:var(--horizon)}
+.sky .path{padding:14px 16px;gap:4px}.path-top h3{font-size:1.05rem}.path .path-ico{width:28px;height:28px;font-size:.85rem}
+.path p{font-size:.86rem;line-height:1.4}.path-list{margin-top:4px}.path-list a{padding:6px 2px;font-size:.88rem}
+.paths{gap:12px}
 </style>
 <meta name="impact-site-verification" value="a5431f1f-4d34-41f9-9aa1-87e5e3ec1e27">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why should Philadelphia flyers focus on American Airlines miles?", "acceptedAnswer": {"@type": "Answer", "text": "PHL is dominated by American Airlines, and none of the big transferable credit cards (American Express Platinum, Chase Sapphire Reserve, Capital One Venture X) can transfer points to American. Earning AAdvantage miles directly is the way to fly the airline that actually serves PHL."}}, {"@type": "Question", "name": "What is the difference between AAdvantage miles and Loyalty Points?", "acceptedAnswer": {"@type": "Answer", "text": "Loyalty Points earn you status with American Airlines. Bonus miles are what you use to book award flights. You need both to get free flights and the highest level of service."}}, {"@type": "Question", "name": "How can I earn American Airlines miles without flying?", "acceptedAnswer": {"@type": "Answer", "text": "Through the AA Hotels portal (up to 12x miles per dollar with the Citi AAdvantage Executive card plus a Loyalty Point award per stay), AA Dining (up to 7 miles and 6 Loyalty Points per dollar as a VIP with an AA card), AA Shopping (2-8x at many stores) and the Citi AAdvantage cards."}}, {"@type": "Question", "name": "Is PHL Points affiliated with American Airlines?", "acceptedAnswer": {"@type": "Answer", "text": "No. PHL Points is an independent guide for Philadelphia flyers and is not affiliated with American Airlines."}}]}</script>
@@ -793,19 +806,13 @@ a.path:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(14,42,71,.12
             <div class="eyebrow">An independent guide for Philadelphia flyers</div>
             <h1>Philly’s Guide to <em>Flights and Status</em></h1>
             <p class="hero-sum">PHL is dominated by American Airlines and the only way to accrue miles or status with American Airlines is through their line of Credit Cards. No other credit card can transfer points or miles to American Airlines which means American Express Platinum, Chase Sapphire Reserve, Capital One Venture X (I have had them all) are wasted at PHL. This website guides you through the American Airlines Credit Cards, the AAdvantage Loyalty Program, and PHL so that you can accrue thousands of miles and the highest levels of status.</p>
+            <div class="hero-picks"><div class="hero-picks-head"><span>What You Will Find Here</span></div><div class="paths"><div class="path"><div class="path-top"><span class="path-ico">✈</span><h3>Find Award Flights</h3></div><p>Award flights I find out of PHL, with the cash fare next to them.</p><ul class="path-list"><li><a href="/deals/">Today’s Deals<span aria-hidden="true">→</span></a></li><li><a href="/aa-miles/">Redeem AA Miles<span aria-hidden="true">→</span></a></li><li><a href="/strategies/">Strategies<span aria-hidden="true">→</span></a></li></ul></div><div class="path"><div class="path-top"><span class="path-ico">★</span><h3>Earn Miles</h3></div><p>Earn AA miles and Loyalty Points on purchases you already make.</p><ul class="path-list"><li><a href="/miles-vs-loyalty-points/">Miles vs. Loyalty Points<span aria-hidden="true">→</span></a></li><li><a href="/aa-hotels/">AA Hotels<span aria-hidden="true">→</span></a></li><li><a href="/aa-dining/">AA Dining<span aria-hidden="true">→</span></a></li><li><a href="/aa-shopping/">AA Shopping<span aria-hidden="true">→</span></a></li></ul></div><div class="path"><div class="path-top"><span class="path-ico">☕</span><h3>Fly Better From PHL</h3></div><p>Status, lounges, and the cards that get you there.</p><ul class="path-list"><li><a href="/status/">Status<span aria-hidden="true">→</span></a></li><li><a href="/philly-lounges/">PHL Lounges and Map<span aria-hidden="true">→</span></a></li><li><a href="/cards/">PHL Cards<span aria-hidden="true">→</span></a></li></ul></div></div></div>
+            <div class="hero-picks"><div class="hero-picks-head"><span>Latest Award Flights</span><a href="/deals/">See all →</a></div><div class="hp-picks" id="home-picks"></div></div>
           </div>
         </div>
       </div>
     </div>
     <div class="wrap">
-      <div class="section-title"><h2>Latest Award Flights</h2><a class="see-all" href="/deals/">See all award flights →</a></div>
-      <div class="hp-picks" id="home-picks"></div>
-      <div class="section-title"><h2>What You Will Find Here</h2></div>
-      <div class="paths">
-        <a class="path" href="/deals/"><span class="path-ico">✈</span><h3>Find Award Flights From PHL</h3><p>Real award prices I find out of Philadelphia, with the cash fare next to them so you can see the value.</p><span class="path-go">See award flights →</span></a>
-        <div class="path"><span class="path-ico">★</span><h3>Earn Miles and Status</h3><p>How I earn American Airlines miles and Loyalty Points without spending more.</p><ul class="path-links"><li><a href="/miles-vs-loyalty-points/">Miles vs. Loyalty Points</a></li><li><a href="/aa-hotels/">AA Hotels</a></li><li><a href="/aa-dining/">AA Dining</a></li><li><a href="/aa-shopping/">AA Shopping</a></li><li><a href="/cards/">PHL Cards</a></li><li><a href="/status/">Status</a></li></ul></div>
-        <a class="path" href="/philly-lounges/"><span class="path-ico">☕</span><h3>Fly Better From PHL</h3><p>Every lounge at PHL, where it is, and how to get in, plus a map of the airport.</p><span class="path-go">See the lounges →</span></a>
-      </div>
       <div class="section-title"><h2>Latest Strategies</h2><a class="see-all" href="/strategies/">All strategies →</a></div>
       <div class="strat-grid">
 <a class="strat-card" href="/strategies/europe-travel-essentials/">
