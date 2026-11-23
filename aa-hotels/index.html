@@ -731,7 +731,7 @@ footer p { max-width: 80ch; }
 @media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
 .page[data-page="hotels"] .trips{align-items:stretch}
 .trip-more{display:block;margin:auto 20px 20px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-weight:700;color:var(--horizon);text-decoration:none;text-align:center}.trip-more:hover{border-color:var(--sun)}
-.howstart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:6px 0 8px}
+.howstart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:0 0 8px}
 .howstart h3{margin:0 0 16px;font-size:1.25rem}
 .howstart ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .howstart li{position:relative}
@@ -782,8 +782,11 @@ footer p { max-width: 80ch; }
         
       </header>
       <div class="page-body">
-      <section class="howstart" style="margin:6px 0 8px">
-        <h3>How to Get Started</h3>
+      <div class="sec-head">
+        <div class="sec-num">Steps</div>
+        <div><h3>How to Get Started</h3></div>
+      </div>
+      <section class="howstart">
         <ol class="hs3"><li><span class="hs-n">1</span><h4>Book on the AA Hotels Portal</h4><p>Search for and choose your hotels on the AAdvantage Hotels website. This portal does not offer the cheapest rooms and is usually slightly more expensive than other sites, but you must use this site to receive the maximum return.</p></li><li><span class="hs-n">2</span><h4>Pay with Your AA Executive Card</h4><p>Paying with the Citi AAdvantage Executive card earns 12x miles per dollar. The Globe card earns 6x. The Platinum Select card earns 3x starting Jan 24, 2027.</p></li><li><span class="hs-n">3</span><h4>Maximize Your Loyalty Point Award</h4><p>This is what makes the AA Hotels portal worth it. On top of the 12x bonus miles, you're awarded Loyalty Points once your hotel stay is complete. If you log in and pay with an AA credit card, the award is usually 15,000 Loyalty Points, and you can often pay a slight upcharge for a larger award.</p></li></ol>
         <div class="hs-foot"><a class="hs-join" href="https://www.aadvantagehotels.com/" target="_blank" rel="noopener">Go to AA Hotels →</a><small>Log in with your AAdvantage number and pay with your AA card.</small></div>
       </section>
