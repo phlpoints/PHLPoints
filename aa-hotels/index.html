@@ -2082,5 +2082,14 @@ footer p { max-width: 80ch; }
   });
 </script>
 <script data-goatcounter="https://phlpoints.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){function eq(){var cards=[].slice.call(document.querySelectorAll('.page[data-page="hotels"] .trips .trip'));if(cards.length<2)return;
+var rows=cards.map(function(c){return [c.querySelector('.trip-route')].concat([].slice.call(c.querySelectorAll('.trip-lines > div')))});
+rows.forEach(function(r){r.forEach(function(e){if(e)e.style.minHeight=''})});
+var side=cards.every(function(c){return Math.abs(c.offsetTop-cards[0].offsetTop)<5});if(!side)return;
+var n=Math.max.apply(null,rows.map(function(r){return r.length}));
+for(var i=0;i<n;i++){var m=0;rows.forEach(function(r){if(r[i])m=Math.max(m,r[i].offsetHeight)});rows.forEach(function(r){if(r[i])r[i].style.minHeight=m+'px'})}}
+eq();window.addEventListener('resize',eq);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(eq);})();
+</script>
 </body>
 </html>
