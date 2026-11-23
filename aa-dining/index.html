@@ -728,6 +728,8 @@ footer p { max-width: 80ch; }
 .sub a{grid-template-columns:1fr}
 .topbar .news-top{margin-left:auto}
 @media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
+.lv4{grid-template-columns:repeat(4,1fr)!important}.lv-best{outline:3px solid var(--sun);outline-offset:-1px}.lv4 .trip{display:flex;flex-direction:column}.lv4 .trip-more{margin:4px 16px 16px;padding:10px 12px}.lv4 .trip-lines{flex:0 0 auto}.lv4 .trip-lines>div{display:block!important}.lv4 .trip-lines dd{text-align:left!important;max-width:none!important;margin-top:2px}@media (max-width:900px){.lv4{grid-template-columns:1fr 1fr!important}}@media (max-width:560px){.lv4{grid-template-columns:1fr!important}}.page[data-page="dining"] .sec-head{margin-top:26px}
+.trip-more{display:block;margin:auto 20px 20px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-weight:700;color:var(--horizon);text-decoration:none;text-align:center}.trip-more:hover{border-color:var(--sun)}
 </style>
 <meta name="impact-site-verification" value="a5431f1f-4d34-41f9-9aa1-87e5e3ec1e27">
 </head>
@@ -765,53 +767,67 @@ footer p { max-width: 80ch; }
       <div class="page-body">
       <a class="ref-card" data-goatcounter-click="aa-dining-referral-card" data-goatcounter-title="AA Dining referral (yellow card)" href="https://www.aadvantagedining.com/join?utm_source=accountcenter&amp;utm_medium=website&amp;utm_campaign=2023_referral&amp;referrer=2EA8147E-EFDA-4833-A5D9-801FC722EECF" target="_blank" rel="noopener"><span class="rc-ico" aria-hidden="true">🍽️</span><span class="rc-txt"><b>New to AA Dining? Join with my link</b><small>Register your cards, opt in to emails and start earning. I may earn bonus miles if you join and dine.</small></span><span class="rc-go">Join <span aria-hidden="true">→</span></span></a>
 
-      <div class="steps stack">
-        <div class="step" data-n="One">
-          <h3>Join and link your cards</h3>
-          <p>Sign up on the AAdvantage Dining website with your AAdvantage number and register the credit and debit cards you use to eat out. Any card works, not just AA cards. A meal only tracks if you pay with a registered card, so add your partner's cards too and re-register any card that gets replaced.</p>
-        </div>
-        <div class="step" data-n="Two">
-          <h3>Opt in to emails</h3>
-          <p>This one setting triples what you earn, from 1 to 3 miles per dollar. There's no reason to skip it.</p>
-        </div>
-        <div class="step" data-n="Three">
-          <h3>Eat at participating restaurants</h3>
-          <p>Search the site or app for participating places near you, from Center City to the suburbs. Pay with a registered card and the visit tracks on its own, with nothing to show the server. Paying with the Platinum Select or Globe card adds another 2 miles per dollar at restaurants.</p>
-        </div>
-        <div class="step" data-n="Four">
-          <h3>Reach VIP</h3>
-          <p>After 11 qualifying visits in a calendar year, you become VIP and earn 5 miles per dollar starting with your 12th. VIP counts visits, not dollars, so a few cheap lunches or coffees early in the year unlock 5x for every bigger dinner after. VIP lasts through the next full calendar year.</p>
-        </div>
-      </div>
-
       <div class="sec-head">
         <div class="sec-num">Levels</div>
         <div><h3>What you earn at each level</h3></div>
       </div>
-      <div class="trips" style="align-items:stretch">
+      <div class="trips lv4" style="align-items:stretch">
         <article class="trip">
           <div class="trip-route"><b>Basic</b><em>No email opt-in</em></div>
           <dl class="trip-lines">
-            <div><dt>Requirement</dt><dd>Join and register a card</dd></div>
-            <div class="total"><dt>Miles + LP per $1</dt><dd>1</dd></div>
+            <div><dt>Requirement</dt><dd>Register a card</dd></div>
+            <div><dt>A $100 dinner</dt><dd>100 miles</dd></div>
+            <div class="total"><dt>Miles per $1</dt><dd>1</dd></div>
           </dl>
         </article>
         <article class="trip">
           <div class="trip-route"><b>Select</b><em>Opted in to emails</em></div>
           <dl class="trip-lines">
             <div><dt>Requirement</dt><dd>Opt in to emails</dd></div>
-            <div class="total"><dt>Miles + LP per $1</dt><dd>3</dd></div>
+            <div><dt>A $100 dinner</dt><dd>300 miles</dd></div>
+            <div class="total"><dt>Miles per $1</dt><dd>3</dd></div>
           </dl>
         </article>
         <article class="trip">
-          <div class="trip-route"><b>VIP</b><em>Emails + 11 visits in a year</em></div>
+          <div class="trip-route"><b>VIP</b><em>Emails + 11 visits</em></div>
           <dl class="trip-lines">
             <div><dt>Requirement</dt><dd>11 visits a year</dd></div>
-            <div class="total"><dt>Miles + LP per $1</dt><dd>5</dd></div>
+            <div><dt>A $100 dinner</dt><dd>500 miles</dd></div>
+            <div class="total"><dt>Miles per $1</dt><dd>5</dd></div>
           </dl>
+        </article>
+        <article class="trip lv-best">
+          <div class="trip-route"><b>VIP + Card</b><em>My strategy</em></div>
+          <dl class="trip-lines">
+            <div><dt>Requirement</dt><dd>VIP + AA card</dd></div>
+            <div><dt>A $100 dinner</dt><dd>700 miles</dd></div>
+            <div class="total"><dt>Miles per $1</dt><dd>7</dd></div>
+          </dl>
+          <a class="trip-more" href="/strategies/aa-dining-philly/">Read the full strategy →</a>
         </article>
       </div>
       <p class="note">A VIP diner paying with the Platinum Select or Globe card earns 7 miles and 6 Loyalty Points per dollar.</p>
+
+      <div class="steps stack" style="margin-top:28px">
+        <div class="step" data-n="One">
+          <h3>Join and Register Your Cards</h3>
+          <p>Sign up at aadvantagedining.com with your AAdvantage number and register the cards you use to eat out. Any card works, not just AA cards.</p>
+        </div>
+        <div class="step" data-n="Two">
+          <h3>Opt In to Emails</h3>
+          <p>This one setting triples what you earn, from 1 to 3 miles per dollar.</p>
+        </div>
+        <div class="step" data-n="Three">
+          <h3>Eat at Participating Restaurants</h3>
+          <p>There are 527 participating restaurants within 30 miles of Philadelphia. Pay with a registered card and the visit tracks on its own.</p>
+        </div>
+        <div class="step" data-n="Four">
+          <h3>Reach VIP</h3>
+          <p>After 11 visits in a calendar year, you earn 5 miles per dollar. Cheap lunches and coffees count as visits, so they unlock 5x for the bigger dinners later.</p>
+        </div>
+      </div>
+
+
 
 
       </div>
