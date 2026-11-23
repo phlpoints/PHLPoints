@@ -731,6 +731,20 @@ footer p { max-width: 80ch; }
 @media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
 .page[data-page="hotels"] .trips{align-items:stretch}
 .trip-more{display:block;margin:auto 20px 20px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-weight:700;color:var(--horizon);text-decoration:none;text-align:center}.trip-more:hover{border-color:var(--sun)}
+.howstart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:6px 0 8px}
+.howstart h3{margin:0 0 16px;font-size:1.25rem}
+.howstart ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.howstart li{position:relative}
+.hs-n{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--sky);color:#f6c372;font-weight:800;font-family:var(--font-display)}
+.howstart h4{margin:10px 0 4px;font-size:1rem;text-align:left!important;hyphens:none}
+.howstart li p{margin:0;font-size:.92rem;color:var(--muted);line-height:1.5;text-align:left!important;hyphens:none}
+.hs-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.hs-join{background:var(--sun);color:#12223a;font-weight:800;text-decoration:none;padding:12px 20px;border-radius:999px}
+.hs-join:hover{filter:brightness(1.05)}
+.hs-foot small{color:var(--muted)}
+@media (max-width:900px){.howstart ol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.howstart ol{grid-template-columns:1fr}.howstart{padding:20px}}
+.howstart ol.hs3{grid-template-columns:repeat(3,1fr)}@media (max-width:900px){.howstart ol.hs3{grid-template-columns:1fr}}
 </style>
 <meta name="impact-site-verification" value="a5431f1f-4d34-41f9-9aa1-87e5e3ec1e27">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many miles does the AA Hotels portal earn?", "acceptedAnswer": {"@type": "Answer", "text": "Paying with the Citi AAdvantage Executive card earns 12x miles per dollar. The Globe card earns 6x. The Platinum Select card earns 3x starting Jan 24, 2027."}}, {"@type": "Question", "name": "How many Loyalty Points do I get for a hotel stay?", "acceptedAnswer": {"@type": "Answer", "text": "Once your stay is complete, you receive a Loyalty Point award. If you log in and pay with an AA credit card, it is usually 15,000 Loyalty Points, and you can often pay a slight upcharge for a larger award."}}, {"@type": "Question", "name": "Is the AA Hotels portal the cheapest place to book?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is usually slightly more expensive than other sites, but you must book there to receive the maximum miles and Loyalty Points."}}, {"@type": "Question", "name": "What does a real trip look like?", "acceptedAnswer": {"@type": "Answer", "text": "A $4,000, 5-night hotel stay in Rome earned 48,000 bonus miles ($4,000 × 12) plus a 23,000 Loyalty Point award, for 71,000 total. The two round-trip tickets to Rome cost 35,000 miles."}}]}</script>
@@ -809,26 +823,12 @@ footer p { max-width: 80ch; }
 </article>
       </div>
 
-      <a class="portal-link" href="https://www.aadvantagehotels.com/" target="_blank" rel="noopener">
-        <span class="pl-ico" aria-hidden="true">🏨</span>
-        <span><b>Go to AA Hotels</b><small>Log in with your AAdvantage number and pay with your AA card.</small></span>
-        <span class="pl-go">Open →</span>
-      </a>
 
-      <div class="steps stack" style="margin-top:34px">
-        <div class="step" data-n="One">
-          <h3>Book on the AA Hotels portal</h3>
-          <p>Search for and choose your hotels on the AAdvantage Hotels website. This portal does not offer the cheapest rooms and is usually slightly more expensive than other sites, but you must use this site to receive the maximum return.</p>
-        </div>
-        <div class="step" data-n="Two">
-          <h3>Pay with your AA Executive card</h3>
-          <p>Paying with the Citi AAdvantage Executive card earns 12x miles per dollar. The Globe card earns 6x. The Platinum Select card earns 3x starting Jan 24, 2027.</p>
-        </div>
-        <div class="step" data-n="Three">
-          <h3>Maximize your Loyalty Point award</h3>
-          <p>This is what makes the AA Hotels portal worth it. On top of the 12x bonus miles, you're awarded Loyalty Points once your hotel stay is complete. If you log in and pay with an AA credit card, the award is usually 15,000 Loyalty Points, and you can often pay a slight upcharge for a larger award.</p>
-        </div>
-      </div>
+      <section class="howstart" style="margin-top:28px">
+        <h3>How to Get Started</h3>
+        <ol class="hs3"><li><span class="hs-n">1</span><h4>Book on the AA Hotels Portal</h4><p>Search for and choose your hotels on the AAdvantage Hotels website. This portal does not offer the cheapest rooms and is usually slightly more expensive than other sites, but you must use this site to receive the maximum return.</p></li><li><span class="hs-n">2</span><h4>Pay with Your AA Executive Card</h4><p>Paying with the Citi AAdvantage Executive card earns 12x miles per dollar. The Globe card earns 6x. The Platinum Select card earns 3x starting Jan 24, 2027.</p></li><li><span class="hs-n">3</span><h4>Maximize Your Loyalty Point Award</h4><p>This is what makes the AA Hotels portal worth it. On top of the 12x bonus miles, you're awarded Loyalty Points once your hotel stay is complete. If you log in and pay with an AA credit card, the award is usually 15,000 Loyalty Points, and you can often pay a slight upcharge for a larger award.</p></li></ol>
+        <div class="hs-foot"><a class="hs-join" href="https://www.aadvantagehotels.com/" target="_blank" rel="noopener">Go to AA Hotels →</a><small>Log in with your AAdvantage number and pay with your AA card.</small></div>
+      </section>
 
 <section class="page-faq" style="margin-top:40px">
         <h2 style="font-size:1.6rem;margin:0 0 14px">AA Hotels FAQ</h2>

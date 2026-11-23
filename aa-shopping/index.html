@@ -728,6 +728,20 @@ footer p { max-width: 80ch; }
 .sub a{grid-template-columns:1fr}
 .topbar .news-top{margin-left:auto}
 @media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
+.howstart{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px 26px;margin:6px 0 8px}
+.howstart h3{margin:0 0 16px;font-size:1.25rem}
+.howstart ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.howstart li{position:relative}
+.hs-n{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--sky);color:#f6c372;font-weight:800;font-family:var(--font-display)}
+.howstart h4{margin:10px 0 4px;font-size:1rem;text-align:left!important;hyphens:none}
+.howstart li p{margin:0;font-size:.92rem;color:var(--muted);line-height:1.5;text-align:left!important;hyphens:none}
+.hs-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.hs-join{background:var(--sun);color:#12223a;font-weight:800;text-decoration:none;padding:12px 20px;border-radius:999px}
+.hs-join:hover{filter:brightness(1.05)}
+.hs-foot small{color:var(--muted)}
+@media (max-width:900px){.howstart ol{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.howstart ol{grid-template-columns:1fr}.howstart{padding:20px}}
+.howstart ol.hs3{grid-template-columns:repeat(3,1fr)}@media (max-width:900px){.howstart ol.hs3{grid-template-columns:1fr}}
 </style>
 <meta name="impact-site-verification" value="a5431f1f-4d34-41f9-9aa1-87e5e3ec1e27">
 </head>
@@ -764,30 +778,12 @@ footer p { max-width: 80ch; }
         <p class="intro">If you follow the steps below, everyday online purchases turn into a steady stream of miles and Loyalty Points.</p>
       </header>
       <div class="page-body">
-      <div class="steps stack">
-        <div class="step" data-n="One">
-          <h3>Log in to the AA Shopping portal</h3>
-          <p>Go to the AAdvantage eShopping website and sign in with your AAdvantage number. More than 1,200 online stores take part, from department stores to Apple and travel sites. The free Chrome browser button can remind you when a site you're on pays miles.</p>
-        </div>
-        <div class="step" data-n="Two">
-          <h3>Click through to the store</h3>
-          <p>Find the store and check its rate, typically 1 to 10 miles per dollar. Clicking through sends you to the store's own site with a tracking link. Start every order from the portal, and avoid coupon codes the store doesn't list, or the order may not track.</p>
-        </div>
-        <div class="step" data-n="Three">
-          <h3>Pay with your AA credit card</h3>
-          <p>Check out as usual in the same browser session. Paying with an AAdvantage card adds the card's miles and 1 Loyalty Point per dollar on top of the portal miles. If SimplyMiles has a matching offer, activate it first and the same purchase pays a third time.</p>
-        </div>
-        <div class="step" data-n="Four">
-          <h3>Watch for the confirmation emails</h3>
-          <p>The portal emails you when it tracks the order. Miles usually post within a few days but can take up to 15 business days. If they're still missing after that, file a claim with eShopping customer service.</p>
-        </div>
-      </div>
+      <section class="howstart">
+        <h3>How to Get Started</h3>
+        <ol><li><span class="hs-n">1</span><h4>Log in to the AA Shopping Portal</h4><p>Go to the AAdvantage eShopping website and sign in with your AAdvantage number. More than 1,200 online stores take part, from department stores to Apple and travel sites. The free Chrome browser button can remind you when a site you're on pays miles.</p></li><li><span class="hs-n">2</span><h4>Click Through to the Store</h4><p>Find the store and check its rate, typically 1 to 10 miles per dollar. Clicking through sends you to the store's own site with a tracking link. Start every order from the portal, and avoid coupon codes the store doesn't list, or the order may not track.</p></li><li><span class="hs-n">3</span><h4>Pay with Your AA Credit Card</h4><p>Check out as usual in the same browser session. Paying with an AAdvantage card adds the card's miles and 1 Loyalty Point per dollar on top of the portal miles. If SimplyMiles has a matching offer, activate it first and the same purchase pays a third time.</p></li><li><span class="hs-n">4</span><h4>Watch for the Confirmation Emails</h4><p>The portal emails you when it tracks the order. Miles usually post within a few days but can take up to 15 business days. If they're still missing after that, file a claim with eShopping customer service.</p></li></ol>
+        <div class="hs-foot"><a class="hs-join" href="https://www.aadvantageeshopping.com/" target="_blank" rel="noopener">Go to AA Shopping →</a><small>Log in with your AAdvantage number, then click through to the store.</small></div>
+      </section>
 
-      <a class="portal-link" href="https://www.aadvantageeshopping.com/" target="_blank" rel="noopener">
-        <span class="pl-ico" aria-hidden="true">🛍️</span>
-        <span><b>Go to AA Shopping</b><small>Log in with your AAdvantage number, then click through to the store.</small></span>
-        <span class="pl-go">Open →</span>
-      </a>
       </div>
       <nav class="hops" aria-label="Page navigation"><a class="hop prev" href="/aa-dining/"><span>Previous</span>AA Dining</a><a class="hop next" href="/aa-miles/"><span>Next stop</span>Redeem AA Miles</a></nav>
     </div>
