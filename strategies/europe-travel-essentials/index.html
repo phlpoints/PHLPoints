@@ -730,6 +730,8 @@ footer p { max-width: 80ch; }
 .topbar .news-top{margin-left:auto}
 @media (max-width:640px){.mainnav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.mainnav::-webkit-scrollbar{display:none}.navlist{flex-wrap:nowrap}}
 .alt-pick{border-left:4px solid var(--sun);background:var(--paper);border-radius:0 12px 12px 0;padding:14px 18px 4px;margin:6px 0 28px}.alt-label{font-weight:800;margin-bottom:6px}.alt-details{font-size:.92rem;color:var(--muted)}
+@media (min-width:900px){footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);column-gap:56px;align-items:start}footer .wrap>*{grid-column:1}footer .wrap>p:last-child{grid-column:2;grid-row:1 / span 3;max-width:none;line-height:1.75;margin:0;padding-left:36px;border-left:1px solid rgba(255,255,255,.14);align-self:center}}
+footer .wrap>p:last-child{line-height:1.7}
 </style>
 <meta name="impact-site-verification" value="a5431f1f-4d34-41f9-9aa1-87e5e3ec1e27">
 </head>
